@@ -65,6 +65,28 @@ rg -n "box-shadow" src                                             # every shado
 rg -c "from .*/Button" src                                         # how reused is the Button primitive
 ```
 
+### Optional accelerator — a code knowledge-graph
+
+On a genuinely large repo, this mapping step can be made even cheaper if the user has a **code
+knowledge-graph tool** installed — a separate, locally-run utility that parses the project once
+into queryable nodes (files, components, functions) and edges (imports, calls, depends-on). The
+agent then *queries the graph* ("what imports `Button`?", "where are the theme tokens defined?",
+"what depends on this file?") instead of grepping and reading — which can sharply cut cross-file
+navigation cost on big codebases.
+
+Treat it as **optional infrastructure, never a DesignSoul dependency:**
+- It's the user's choice to install; DesignSoul stays zero-dep and framework-agnostic and never
+  bundles or auto-installs it.
+- It accelerates **navigation and understanding** — not the design work. The token-layer-first
+  conversion below is still what actually does the restyling; the graph just helps you find the
+  token layer and the high-reuse primitives faster.
+- The graph **goes stale** when code changes and must be re-indexed; don't trust an old one.
+- It's **overkill on small/medium projects** — plain grep (above) is enough there.
+
+If such a tool is present in the user's setup, use it for this Phase-1 inventory and the
+"which primitives are most reused" question. If not, grep does the job — don't add a dependency
+just to map a codebase.
+
 ---
 
 ## Phase 2 — Find or create the single source of truth
