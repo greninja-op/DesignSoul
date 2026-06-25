@@ -252,6 +252,24 @@ slop signal. Build the simplest version first; add only when the user asks or th
 
 ---
 
+## Craft / Detail Anti-Patterns
+
+The small things that read as "off" even when the system is right (full guide in `polish.md`):
+
+- ❌ **Same border-radius on a nested element and its parent** — inner corner looks pinched.
+  Fix: concentric radius, outer = inner + padding.
+- ❌ **`transition: all`** — animates properties you didn't intend and blocks optimization.
+  Fix: name exact properties (`transition-property: scale, opacity`).
+- ❌ **Tinted image outline / border** (slate/zinc/accent) — reads as dirt on the edge.
+  Fix: pure black/white at ~10%, inset.
+- ❌ **Numbers that shift layout as they update** — Fix: `font-variant-numeric: tabular-nums`.
+- ❌ **Keyframe animations on interactive toggles** — snap/restart when interrupted.
+  Fix: CSS transitions for anything a user can reverse mid-flight.
+- ❌ **`scale` smaller than 0.95 on press** — feels exaggerated. Fix: `scale(0.96)`.
+- ❌ **Tiny tap targets** — Fix: extend to 44px with a pseudo-element.
+
+---
+
 ## Forbidden Default Zones (override only on explicit brand request)
 
 - ❌ **GitHub-dark lazy solution:** a uniform deep-blue-black (`#0D1117`) background + generic

@@ -87,6 +87,7 @@ DesignSoul/
     ├── typography.md               ← Font pairing logic and type scale
     ├── color-theory.md             ← Deriving a palette with intent (oklch, borrow-don't-invent)
     ├── modern-css.md               ← Craft toolkit: text-wrap, :has(), container queries, color-mix
+    ├── polish.md                   ← Micro-craft details that separate built UI from slop
     ├── verification.md             ← Visual feedback loop (render → critique → fix)
     └── styles/
         ├── _index.md               ← Style selection & combination guide
@@ -136,9 +137,10 @@ When triggered, the AI:
 4. **Checks anti-patterns** — kills every AI-default decision, including the deeper content slop
 5. **Applies professional component standards** — per-component UX knowledge for 20+ component types, plus a 9-pass design method that reaches the same bar for *any* component (listed or not, new or rebuilt)
 6. **Runs a global motion pass** — consistent animation system across everything
-7. **Visually verifies** — with a browser tool, it renders the result, screenshots at mobile/tablet/desktop, critiques against a rubric, and fixes what it finds
-8. **Scores a critique** — reviews the result like a senior designer across five dimensions before finishing
-9. **Runs the completion checklist** — doesn't stop until every item is checked
+7. **Runs a polish pass** — concentric radii, optical alignment, shadow-as-border, interruptible animations, scale-on-press, tabular numbers, and the other micro-details that separate built UI from slop
+8. **Visually verifies** — with a browser tool, it renders the result, screenshots at mobile/tablet/desktop, critiques against a rubric, and fixes what it finds
+9. **Scores a critique** — reviews the result like a senior designer across five dimensions before finishing
+10. **Runs the completion checklist** — doesn't stop until every item is checked
 
 ---
 

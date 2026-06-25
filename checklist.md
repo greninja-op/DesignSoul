@@ -114,6 +114,24 @@ SKIPPED and tell the user the output is unverified — do not silently pass it.)
 
 ---
 
+## Phase 4c: Micro-Craft / Polish
+
+(Full guide in `references/polish.md`.)
+
+- [ ] Nested rounded elements use concentric radius (outer = inner + padding)
+- [ ] Icons optically aligned (icon-side padding −2px; play triangle nudged right)
+- [ ] Depth uses layered shadow-as-border; dividers/inputs stay real borders
+- [ ] Images have a pure-black/white 10% inset outline (never tinted)
+- [ ] Interactive motion uses transitions (interruptible); keyframes only for one-shots
+- [ ] Entrances split + staggered with opacity/translateY/blur; exits subtle (ease-in)
+- [ ] Contextual icon swaps animate (scale .25→1, opacity, blur), bounce 0
+- [ ] Buttons scale to 0.96 on press (with a `static` opt-out)
+- [ ] Dynamic numbers use tabular-nums; font smoothing applied at root
+- [ ] No `transition: all`; `will-change` only on transform/opacity/filter when needed
+- [ ] Small controls extended to a 44px hit area; no overlapping hit areas
+
+---
+
 ## Phase 5: Accessibility
 
 - [ ] All interactive elements have visible focus states (custom, not browser default)

@@ -69,6 +69,7 @@ Before writing a single line of CSS or JSX, read these core reference files in o
 Then, conditionally:
 - If deriving colors from scratch → `references/color-theory.md`
 - When writing real CSS → `references/modern-css.md` (the craft touches that read as hand-made)
+- Polishing components / final craft pass → `references/polish.md` (the micro-details that beat slop)
 - If any component loads async / needs loading states → `references/skeleton.md`
 - If a style is named → the matching file (see Trigger table); if unsure which style,
   read `references/styles/_index.md` and recommend one
@@ -185,6 +186,12 @@ Rules:
 - No element has a duration that differs by more than one step from its neighbours
 - Scroll-triggered animations use the same entrance pattern throughout
 - You are not done until the page feels like one coherent thing moving, not 10 separate things
+
+After the motion pass, do a **polish pass** with `references/polish.md`: concentric radii,
+optical alignment, shadow-as-border, image outlines, interruptible transitions, split/stagger
+entrances, subtle exits, contextual icon swaps, scale-on-press, tabular numbers, font smoothing,
+no `transition: all`, and 44px hit areas. These micro-details are what most separates crafted
+UI from AI-default output.
 
 ---
 
