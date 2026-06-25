@@ -1,0 +1,18 @@
+{
+  "name": "designsoul-skeleton",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "DesignSoul Skeletons — capture pixel-accurate loading skeletons from your real UI.",
+  "bin": {
+    "designsoul-skeleton": "skeleton-gen.mjs"
+  },
+  "scripts": {
+    "gen": "node skeleton-gen.mjs",
+    "test": "node render-test.mjs",
+    "setup": "npm install && npx playwright install chromium"
+  },
+  "devDependencies": {
+    "playwright": "^1.49.0"
+  }
+}

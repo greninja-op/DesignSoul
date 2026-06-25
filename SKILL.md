@@ -67,6 +67,7 @@ Before writing a single line of CSS or JSX, read these core reference files in o
 
 Then, conditionally:
 - If deriving colors from scratch → `references/color-theory.md`
+- If any component loads async / needs loading states → `references/skeleton.md`
 - If a style is named → the matching file (see Trigger table); if unsure which style,
   read `references/styles/_index.md` and recommend one
 - If a browser tool is or can be available → `references/verification.md`

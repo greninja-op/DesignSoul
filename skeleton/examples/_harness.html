@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skeleton runtime harness</title>
+  <link rel="stylesheet" href="../skeleton.css" />
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; background: #f5f6f8; margin: 0; padding: 24px; }
+    .frame { width: 420px; margin: 0 auto; }
+    #direct { width: 420px; }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <!-- direct renderSkeleton target -->
+    <div id="direct"></div>
+    <!-- web component path -->
+    <ds-skeleton id="wc" name="profile-card" loading style="display:block;width:420px" stagger="80" animate="shimmer">
+      <div class="real">Real content goes here</div>
+    </ds-skeleton>
+  </div>
+
+  <script type="module">
+    import { renderSkeleton, registerSkeletons, getSkeleton } from '../skeleton.js';
+
+    const spec = window.__SPEC || await fetch('./profile-card.skeleton.json').then(r => r.json());
+    registerSkeletons({ 'profile-card': spec });
+
+    // Direct render path
+    const el = renderSkeleton(spec, { width: 420, animate: 'pulse', stagger: 80, transition: 300 });
+    document.getElementById('direct').appendChild(el);
+
+    // Expose results for the test runner
+    window.__skelTest = {
+      registered: !!getSkeleton('profile-card'),
+      specBlocks: spec.breakpoints['375'].blocks.filter(b => !b.c).length,
+      renderedBlocks: el.querySelectorAll('.ds-skel-block').length,
+      blockGeom: Array.from(el.querySelectorAll('.ds-skel-block')).map(b => ({
+        left: parseFloat(b.style.left),
+        width: parseFloat(b.style.width),
+        top: parseFloat(b.style.top),
+        height: parseFloat(b.style.height),
+      })),
+      containerHeight: parseFloat(el.style.height),
+    };
+    window.__ready = true;
+  </script>
+</body>
+</html>

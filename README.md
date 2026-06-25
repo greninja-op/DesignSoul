@@ -68,12 +68,18 @@ DesignSoul/
 ├── SKILL.md                        ← Main skill file (drop this into Claude Code)
 ├── checklist.md                    ← Completion checklist (AI runs this before finishing)
 ├── mcp.example.json                ← Browser-tool config for visual verification
+├── skeleton/                       ← DesignSoul Skeletons — loading skeletons from real UI
+│   ├── skeleton.css                ← runtime styles (pulse/shimmer/solid, dark, reduced-motion)
+│   ├── skeleton.js                 ← zero-dep runtime: <ds-skeleton> + renderSkeleton()
+│   ├── skeleton-gen.mjs            ← generator: snapshots real UI → .skeleton.json specs
+│   └── examples/                   ← worked source component + generated spec
 ├── test-cases/                     ← Before/after fixtures that validate the skill
 │   └── generic-card/               ← Worked reference example (before, after, notes)
 └── references/
     ├── anti-patterns.md            ← Every AI-default habit, with fixes
     ├── components.md               ← Professional UX standards per component
     ├── component-method.md         ← How to design/rebuild ANY component like a pro
+    ├── skeleton.md                 ← How the skill uses the skeleton system for loading states
     ├── motion.md                   ← Global animation system
     ├── typography.md               ← Font pairing logic and type scale
     ├── color-theory.md             ← Deriving a palette with intent
@@ -140,6 +146,20 @@ page. DesignSoul closes that loop with a browser tool (Playwright MCP):
 
 Without a browser tool the skill still works, but it will tell you the output was **not
 visually verified** rather than pretend it looks right.
+
+---
+
+## Loading Skeletons (built in)
+
+DesignSoul has its own skeleton system in `skeleton/` — so when a design needs a loading
+state, the skeleton is generated *from your real component*, not hand-guessed boxes:
+
+1. Mark a component with `data-skeleton="name"`
+2. Run the generator — it snapshots the real layout into a `.skeleton.json` spec at multiple breakpoints
+3. Render it with `<ds-skeleton name="name" loading>` — animated blocks (pulse/shimmer/solid),
+   dark mode, stagger, and a fade to content
+
+Zero runtime dependencies, works in any framework. See `skeleton/README.md`.
 
 ---
 

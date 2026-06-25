@@ -1,0 +1,79 @@
+/* ============================================================================
+   DesignSoul Skeletons — runtime styles
+   Renders loading skeletons from a layout spec captured from your real UI.
+   Zero dependencies. Framework-agnostic. Pairs with the DesignSoul motion system.
+   ============================================================================ */
+
+ds-skeleton {
+  display: block;
+  position: relative;
+}
+
+/* The generated skeleton surface */
+.ds-skeleton {
+  position: relative;
+  width: 100%;
+}
+
+/* A single skeleton block (one rectangle of the captured layout) */
+.ds-skel-block {
+  position: absolute;
+  background: var(--ds-skel-color, rgba(0, 0, 0, 0.08));
+  will-change: opacity, background-position, transform;
+}
+
+/* Dark mode: controlled by a `.dark` class on <html> or any ancestor,
+   never prefers-color-scheme — the app developer stays in control. */
+.dark .ds-skel-block,
+.ds-skeleton[data-dark="true"] .ds-skel-block {
+  background: var(--ds-skel-color-dark, rgba(255, 255, 255, 0.07));
+}
+
+/* ---- Animation: pulse (default) ---- */
+.ds-skeleton[data-animate="pulse"] .ds-skel-block {
+  animation: ds-skel-pulse 1.5s var(--ds-skel-ease, cubic-bezier(0.4, 0, 0.6, 1)) infinite;
+  animation-delay: var(--ds-skel-delay, 0ms);
+}
+
+@keyframes ds-skel-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.45; }
+}
+
+/* ---- Animation: shimmer ---- */
+.ds-skeleton[data-animate="shimmer"] .ds-skel-block {
+  background-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--ds-skel-shimmer, rgba(255, 255, 255, 0.55)) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  background-repeat: no-repeat;
+  animation: ds-skel-shimmer 1.5s linear infinite;
+  animation-delay: var(--ds-skel-delay, 0ms);
+}
+.dark .ds-skeleton[data-animate="shimmer"] .ds-skel-block {
+  --ds-skel-shimmer: rgba(255, 255, 255, 0.10);
+}
+
+@keyframes ds-skel-shimmer {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+/* ---- Animation: solid (no motion) ---- */
+.ds-skeleton[data-animate="solid"] .ds-skel-block {
+  animation: none;
+}
+
+/* ---- Fade-out when content arrives ---- */
+.ds-skeleton[data-leaving="true"] {
+  opacity: 0;
+  transition: opacity var(--ds-skel-transition, 300ms) cubic-bezier(0, 0, 0.2, 1);
+}
+
+/* ---- Accessibility: respect reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  .ds-skel-block { animation: none !important; }
+}

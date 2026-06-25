@@ -226,6 +226,12 @@ default → hover → active (pressed) → loading → disabled
 - Animated shimmer: `background: linear-gradient(90deg, ...)` moving right
 - Never use grey boxes that don't represent the real layout
 
+> **Use DesignSoul's own skeleton system — see `skeleton.md`.** Don't hand-write placeholder
+> boxes or add an external skeleton library. The system captures the skeleton from the REAL
+> component (`data-skeleton` + the generator) so it matches exactly, and renders it with the
+> `<ds-skeleton>` runtime (pulse/shimmer/solid, dark mode, stagger, fade). Every async
+> component with layout gets one.
+
 ### Spinners (for actions, not page content)
 - Size: 20px for inline, 40px for overlay
 - Color: primary or white depending on background

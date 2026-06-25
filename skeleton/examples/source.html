@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skeleton source — real component to capture</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: #f5f6f8; margin: 0; padding: 24px; }
+    .profile-card {
+      width: 100%; max-width: 420px; margin: 0 auto;
+      background: #fff; border: 1px solid #e6e8ec; border-radius: 16px; padding: 20px;
+    }
+    .head { display: flex; align-items: center; gap: 14px; }
+    .avatar { width: 56px; height: 56px; border-radius: 50%; background: #d8dbe0; flex: none; }
+    .who { flex: 1; min-width: 0; }
+    .name { font-size: 1.05rem; font-weight: 700; color: #1a1d23; margin: 0 0 6px; }
+    .role { font-size: 0.85rem; color: #6b7280; margin: 0; }
+    .bio { margin: 16px 0 0; color: #374151; line-height: 1.6; }
+    .stats { display: flex; gap: 12px; margin-top: 18px; }
+    .stat { flex: 1; background: #f3f4f6; border-radius: 10px; padding: 12px; text-align: center; }
+    .stat b { display: block; font-size: 1.1rem; color: #111; }
+    .stat span { font-size: 0.72rem; color: #6b7280; }
+    .actions { display: flex; gap: 10px; margin-top: 18px; }
+    .btn { flex: 1; height: 40px; border: none; border-radius: 10px; background: #2f7; font-weight: 600; }
+    .btn.ghost { background: #eef0f3; }
+  </style>
+</head>
+<body>
+  <!-- This is the real, rendered component. The generator snapshots its layout. -->
+  <div class="profile-card" data-skeleton="profile-card">
+    <div class="head">
+      <div class="avatar"></div>
+      <div class="who">
+        <p class="name">Dana Okafor</p>
+        <p class="role">Principal Product Designer</p>
+      </div>
+    </div>
+    <p class="bio">Designing calm, considered interfaces for teams that ship fast. Previously at three startups you've probably used.</p>
+    <div class="stats">
+      <div class="stat"><b>248</b><span>Projects</span></div>
+      <div class="stat"><b>18k</b><span>Followers</span></div>
+      <div class="stat"><b>4.9</b><span>Rating</span></div>
+    </div>
+    <div class="actions">
+      <button class="btn">Follow</button>
+      <button class="btn ghost">Message</button>
+    </div>
+  </div>
+</body>
+</html>

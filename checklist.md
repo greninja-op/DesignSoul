@@ -57,7 +57,7 @@ Check that EVERY component present in the codebase has been addressed:
 - [ ] Radio buttons — custom styled
 
 ### Feedback
-- [ ] Loading states (skeleton or spinner)
+- [ ] Loading states (DesignSoul skeleton for content, spinner for actions — see `references/skeleton.md`)
 - [ ] Error states
 - [ ] Empty states
 - [ ] Toast/notification system
