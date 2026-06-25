@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>After — DesignSoul Component Method (upload dropzone)</title>
+  <style>
+    /* ----- DESIGN TOKENS (color-theory.md: derived palette, tinted neutrals) ----- */
+    :root {
+      /* Seed: a "files/storage" product → calm teal, not default blue */
+      --primary:        hsl(190, 70%, 38%);
+      --primary-hover:  hsl(190, 72%, 31%);
+      --primary-muted:  hsl(190, 60%, 94%);
+      --primary-text:   hsl(190, 70%, 24%);
+
+      --bg:             hsl(200, 18%, 97%);
+      --surface:        #ffffff;
+      --border:         hsl(200, 16%, 86%);
+      --text-primary:   hsl(200, 20%, 14%);
+      --text-secondary: hsl(200, 10%, 40%);
+      --text-muted:     hsl(200, 8%, 56%);
+      --success:        hsl(150, 55%, 38%);
+      --success-muted:  hsl(150, 50%, 94%);
+      --error:          hsl(2, 68%, 50%);
+      --error-muted:    hsl(2, 70%, 96%);
+
+      /* spacing (4px base), radius, motion */
+      --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px; --sp-6: 32px;
+      --radius: 14px;
+      --duration-fast: 150ms; --duration-normal: 250ms;
+      --ease-out: cubic-bezier(0,0,0.2,1);
+      --ease-spring: cubic-bezier(0.34,1.56,0.64,1);
+
+      --font: 'Inter', system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: var(--font); background: var(--bg); color: var(--text-primary);
+      margin: 0; padding: var(--sp-6) var(--sp-4);
+      display: flex; flex-direction: column; align-items: center; gap: var(--sp-5);
+    }
+    h1 { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.01em; margin: 0; }
+    .state-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--text-muted); margin: 0 0 var(--sp-2); }
+    .stack { width: 100%; max-width: 420px; }
+
+    /* ----- THE DROPZONE (anatomy: surface · icon · prompt · action · meta) ----- */
+    .dz {
+      width: 100%;
+      background: var(--surface);
+      border: 1.5px dashed var(--border);
+      border-radius: var(--radius);
+      padding: var(--sp-6) var(--sp-5);
+      text-align: center;
+      transition: border-color var(--duration-normal) var(--ease-out),
+                  background var(--duration-normal) var(--ease-out),
+                  transform var(--duration-fast) var(--ease-out);
+    }
+    .dz__icon { width: 40px; height: 40px; margin: 0 auto var(--sp-3);
+      color: var(--primary); display: grid; place-items: center; }
+    .dz__title { font-size: 1rem; font-weight: 600; margin: 0 0 var(--sp-1); }
+    .dz__hint { font-size: 0.8125rem; color: var(--text-secondary); margin: 0 0 var(--sp-4); line-height: 1.5; }
+    .dz__meta { font-size: 0.6875rem; color: var(--text-muted); margin: var(--sp-3) 0 0; }
+
+    .btn {
+      background: var(--primary); color: #fff; border: none;
+      border-radius: 10px; padding: 10px 18px; font: inherit; font-weight: 600;
+      font-size: 0.875rem; cursor: pointer;
+      transition: background var(--duration-fast) var(--ease-out);
+    }
+    .btn:hover { background: var(--primary-hover); }
+    .btn:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--primary-muted); }
+
+    /* STATE: drag-over (the most important interaction feedback) */
+    .dz--dragover {
+      border-color: var(--primary);
+      border-style: solid;
+      background: var(--primary-muted);
+      transform: scale(1.01);
+    }
+
+    /* STATE: uploading (progress, not a frozen spinner) */
+    .dz--uploading { border-style: solid; border-color: var(--border); text-align: left; }
+    .file-row { display: flex; align-items: center; gap: var(--sp-3); }
+    .file-icon { width: 36px; height: 36px; flex: none; border-radius: 8px;
+      background: var(--primary-muted); color: var(--primary-text);
+      display: grid; place-items: center; font-size: 0.7rem; font-weight: 700; }
+    .file-info { flex: 1; min-width: 0; }
+    .file-name { font-size: 0.8125rem; font-weight: 600; white-space: nowrap;
+      overflow: hidden; text-overflow: ellipsis; }      /* edge case: long filename clamps */
+    .file-sub { font-size: 0.6875rem; color: var(--text-muted); }
+    .progress { height: 6px; border-radius: 999px; background: var(--border);
+      margin-top: var(--sp-2); overflow: hidden; }
+    .progress__fill { height: 100%; width: 62%; border-radius: 999px;
+      background: var(--primary); transition: width var(--duration-normal) var(--ease-out); }
+
+    /* STATE: success */
+    .dz--success { border-style: solid; border-color: var(--success); background: var(--success-muted); }
+    .dz--success .dz__icon { color: var(--success); }
+    .dz--success .dz__title { color: var(--success); }
+
+    /* STATE: error (file too big) — color + icon + text, never color alone */
+    .dz--error { border-style: solid; border-color: var(--error); background: var(--error-muted); }
+    .dz--error .dz__icon { color: var(--error); }
+    .dz--error .dz__title { color: var(--error); }
+    .link { background: none; border: none; color: var(--primary); font: inherit;
+      font-weight: 600; cursor: pointer; text-decoration: underline; padding: 0; }
+
+    /* responsive: comfortable down to 320px, no overflow */
+    @media (max-width: 380px) { .dz { padding: var(--sp-5) var(--sp-4); } }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Upload dropzone — full state matrix</h1>
+
+  <!-- STATE 1: IDLE / DEFAULT -->
+  <div class="stack">
+    <p class="state-label">Idle</p>
+    <div class="dz" role="button" tabindex="0" aria-label="Upload files. Drag and drop, or browse.">
+      <div class="dz__icon" aria-hidden="true">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M12 4l-4 4M12 4l4 4"/><path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+      </div>
+      <p class="dz__title">Drop files to upload</p>
+      <p class="dz__hint">or click to browse from your device</p>
+      <button class="btn">Browse files</button>
+      <p class="dz__meta">PNG, JPG or PDF · up to 10 MB each</p>
+    </div>
+  </div>
+
+  <!-- STATE 2: DRAG-OVER -->
+  <div class="stack">
+    <p class="state-label">Drag-over</p>
+    <div class="dz dz--dragover" aria-label="Release to upload">
+      <div class="dz__icon" aria-hidden="true">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M12 4l-4 4M12 4l4 4"/><path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+      </div>
+      <p class="dz__title">Release to upload</p>
+      <p class="dz__hint">3 files ready</p>
+    </div>
+  </div>
+
+  <!-- STATE 3: UPLOADING -->
+  <div class="stack">
+    <p class="state-label">Uploading</p>
+    <div class="dz dz--uploading">
+      <div class="file-row">
+        <div class="file-icon">PDF</div>
+        <div class="file-info">
+          <div class="file-name">quarterly-report-final-v3-really-final.pdf</div>
+          <div class="file-sub">4.2 MB · 62%</div>
+          <div class="progress"><div class="progress__fill"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATE 4: SUCCESS -->
+  <div class="stack">
+    <p class="state-label">Success</p>
+    <div class="dz dz--success">
+      <div class="dz__icon" aria-hidden="true">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      </div>
+      <p class="dz__title">3 files uploaded</p>
+      <p class="dz__hint">All files were uploaded successfully.</p>
+      <button class="btn">Upload more</button>
+    </div>
+  </div>
+
+  <!-- STATE 5: ERROR (file too big) -->
+  <div class="stack">
+    <p class="state-label">Error · file too large</p>
+    <div class="dz dz--error" role="alert">
+      <div class="dz__icon" aria-hidden="true">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+      </div>
+      <p class="dz__title">File is too large</p>
+      <p class="dz__hint">“video.mp4” is 24 MB. The limit is 10 MB per file.</p>
+      <button class="link">Choose a different file</button>
+    </div>
+  </div>
+</body>
+</html>

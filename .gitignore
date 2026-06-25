@@ -1,0 +1,9 @@
+# Node / Playwright test runner
+node_modules/
+test-cases/_runner/node_modules/
+test-cases/_runner/artifacts/
+test-cases/_runner/package-lock.json
+
+# Editor / OS
+.DS_Store
+Thumbs.db

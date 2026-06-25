@@ -1,0 +1,16 @@
+{
+  "name": "designsoul-test-runner",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Validates DesignSoul: markdown link consistency + live browser verification of fixtures.",
+  "scripts": {
+    "check": "node check-links.mjs",
+    "verify": "node verify.mjs",
+    "test": "node check-links.mjs && node verify.mjs",
+    "setup": "npm install && npx playwright install chromium"
+  },
+  "devDependencies": {
+    "playwright": "^1.49.0"
+  }
+}

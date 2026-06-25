@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Before — AI-default dropzone</title>
+  <style>
+    /* AI-default: dashed box, default blue, one state only, no feedback, no edge cases. */
+    body { font-family: 'Inter', sans-serif; background: #F9FAFB; display: grid; place-items: center; min-height: 100vh; margin: 0; }
+    .dropzone {
+      width: 360px;
+      border: 2px dashed #3B82F6;
+      border-radius: 8px;
+      background: #EFF6FF;
+      padding: 40px;
+      text-align: center;
+      color: #6B7280;
+    }
+    .dropzone button {
+      background: #3B82F6; color: #fff; border: none; border-radius: 8px;
+      padding: 10px 16px; margin-top: 12px; cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="dropzone">
+    <p>Drag and drop files here</p>
+    <button>Browse files</button>
+  </div>
+</body>
+</html>

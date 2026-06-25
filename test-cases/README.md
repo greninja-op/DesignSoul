@@ -38,6 +38,7 @@ directly in a browser and works with the Playwright verification loop.
 | Case | before | after | notes | Status |
 |---|---|---|---|---|
 | generic-card | ✅ | ✅ | ✅ | Done (reference example) |
+| upload-dropzone | ✅ | ✅ | ✅ | Done (proves the Component Method on an unlisted component) |
 | order-tracker (food delivery, moving scooter) | ⬜ | ⬜ | ⬜ | Pending |
 | flight-tracker | ⬜ | ⬜ | ⬜ | Pending |
 | navbar (default → scrolled → mobile) | ⬜ | ⬜ | ⬜ | Pending |
@@ -47,5 +48,8 @@ directly in a browser and works with the Playwright verification loop.
 | data table (sort/empty/loading) | ⬜ | ⬜ | ⬜ | Pending |
 | empty + error states | ⬜ | ⬜ | ⬜ | Pending |
 | pricing/bento feature section | ⬜ | ⬜ | ⬜ | Pending |
+
+A test runner in `_runner/` validates link consistency and renders fixtures in a real
+browser (Playwright). See `_runner/README.md`.
 
 Contributions: add a new `<case-name>/` folder following the structure above and update this table.
