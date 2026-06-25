@@ -89,6 +89,22 @@ Check that EVERY component present in the codebase has been addressed:
 
 ---
 
+## Phase 4b: Visual Verification
+
+(See `references/verification.md`. If no browser tool is available, mark this phase
+SKIPPED and tell the user the output is unverified — do not silently pass it.)
+
+- [ ] Rendered in a real browser (dev server started with the user's command)
+- [ ] Screenshotted at 375px, 768px, and 1440px
+- [ ] No horizontal overflow at 375px
+- [ ] No clipped, overlapping, or edge-touching text at any viewport
+- [ ] Visual hierarchy readable within 1 second on each screen
+- [ ] Named style is recognizably that style (not a generic approximation)
+- [ ] Grep sweep done — zero hardcoded transitions; all motion uses tokens
+- [ ] Stated to the user exactly what was verified vs not
+
+---
+
 ## Phase 5: Accessibility
 
 - [ ] All interactive elements have visible focus states (custom, not browser default)
@@ -153,3 +169,53 @@ If the answer is **no** — ship it.
 - [ ] Bottom offset shadow for 3D depth
 - [ ] Spring easing on all interactions
 - [ ] Colors are saturated pastels, not neon
+
+### Liquid Glass (refractive variant)
+- [ ] SVG `feDisplacementMap` filter used only on cards/bars/pills, not full screens
+- [ ] FPS checked while scrolling; falls back to pure-CSS glass if it janks
+- [ ] Specular `box-shadow` layers kept (refraction alone isn't enough)
+
+### Material You
+- [ ] Whole palette derived from one seed color
+- [ ] Elevation is tonal (lighter = higher), shadow only supporting
+- [ ] Hover/press use translucent state-layer overlays
+- [ ] Pill/large rounded shapes; emphasized/spring motion
+
+### Aurora / Mesh
+- [ ] Soft blurred radial blobs (40–80px), restrained opacity (0.4–0.65)
+- [ ] 2–4 analogous/brand hues only
+- [ ] Content surfaces calm; text passes contrast over busiest area
+- [ ] Any motion drifts slowly (20–40s)
+
+### Bento Grid
+- [ ] Tiles vary in size deliberately; one hero tile per section
+- [ ] One idea per tile; one consistent gap and radius
+- [ ] Reflows 4→2→1 column without overflow
+- [ ] Clickable tiles lift; static tiles have no hover affordance
+
+### Minimal / Swiss
+- [ ] Strict grid alignment; generous intentional whitespace
+- [ ] Palette is black + white + ≤1 accent + 2 grays
+- [ ] Hierarchy from type, not boxes/color; body measure ~60–70ch
+- [ ] Motion quiet — short fades, no bounce/scale
+
+### Neo-Brutalism
+- [ ] Hard offset shadows (zero blur); thick near-black borders
+- [ ] Flat saturated fills; small radius (4–8px)
+- [ ] Press collapses the shadow; text passes contrast on every fill
+
+### Skeuomorphism
+- [ ] Single consistent (top) light source across all elements
+- [ ] Raised = highlight + inner/contact shadow; pressed = inset
+- [ ] Subtle material texture, not flat plastic
+- [ ] Used intentionally for a physical-metaphor product
+
+### Retro / Y2K
+- [ ] Saturated gradient atmosphere; glow/bloom on accents
+- [ ] Pixel/retro fonts for accents only; body stays clean sans
+- [ ] Despite loudness, body text passes 4.5:1; motion respects reduced-motion
+
+### Dark Mode (any style)
+- [ ] No pure-black surfaces; elevation goes lighter not darker
+- [ ] Accents desaturated/lifted; text off-white not pure `#fff`
+- [ ] All contrast re-verified; system preference + manual toggle

@@ -22,19 +22,55 @@ UI stop looking AI-generated.
 
 ---
 
+## What This Skill Can and Cannot Do (Read First — Be Honest)
+
+**It does well:** convert an existing UI to a named visual style, kill AI-default habits,
+enforce a coherent design token + motion system, and apply professional per-component UX
+standards. With a browser tool (see Step 5) it can also *see* the rendered result and self-correct.
+
+**Its real limits — state these to the user, never pretend otherwise:**
+- You **cannot see pixels without a browser tool.** If no browser MCP is available, you are
+  styling blind — say so and treat the output as unverified (see `references/verification.md`).
+- For **large codebases**, you can't hold everything in context at once. Work system-first,
+  then component-by-component, and tell the user if scope exceeds what one pass can guarantee.
+- For **data-driven components** (live delivery/flight trackers, real maps), you build the
+  *UI + animation layer* against placeholder data. You cannot invent the user's backend/data
+  pipeline — scaffold it and mark the integration points clearly.
+- Output quality scales with the underlying model. This skill raises the floor and guarantees
+  consistency; it is not a substitute for human design review on high-stakes work.
+
+Set expectations honestly up front. An accurate "here's what I verified and what I didn't"
+beats a confident "it's perfect."
+
+---
+
+## Progressive Disclosure (How to Read the References)
+
+Do not read every file every time. Load what the task needs:
+- **Always** read the four core references in Step 0.
+- Read a **style file only when** that style is named (or after recommending one).
+- Read `references/verification.md` when you have (or can install) a browser tool.
+- Read `references/color-theory.md` when deriving a palette from scratch.
+Keeps context lean; load deeper files on demand.
+
+---
+
 ## Step 0 — Read Before Touching Anything
 
-Before writing a single line of CSS or JSX, read these reference files in order:
+Before writing a single line of CSS or JSX, read these core reference files in order:
 
 1. `references/anti-patterns.md` — The AI default habits you must break
 2. `references/components.md` — Professional standards for every component type
 3. `references/motion.md` — The animation system (read this before adding ANY animation)
 4. `references/typography.md` — Font pairing and type scale logic
 
-If the user has named a specific style (glassmorphism, liquid glass, etc.), also read:
-5. `references/styles/<style-name>.md`
+Then, conditionally:
+- If deriving colors from scratch → `references/color-theory.md`
+- If a style is named → the matching file (see Trigger table); if unsure which style,
+  read `references/styles/_index.md` and recommend one
+- If a browser tool is or can be available → `references/verification.md`
 
-Do not skip any of these. They are short. Reading them takes less time than fixing a broken output.
+Do not skip the core four. They are short. Reading them takes less time than fixing a broken output.
 
 ---
 
@@ -65,7 +101,7 @@ Before writing any component code, define:
 
 ```
 COLORS:
-  primary:        (derived from product context — see typography.md for logic)
+  primary:        (derived from product context — see references/color-theory.md for logic)
   primary-muted:
   surface:
   surface-elevated:
@@ -133,7 +169,29 @@ Rules:
 
 ---
 
-## Step 5 — The Completion Checklist
+## Step 5 — Visual Verification Loop (Look At What You Made)
+
+Read `references/verification.md` for the full procedure. This is the step that closes the
+gap between "I think the CSS is right" and "I confirmed it renders correctly."
+
+If a browser tool (Playwright MCP or equivalent) is available:
+1. Start the dev server (ask the user for the command — never guess the port)
+2. Navigate each primary page; screenshot at 375px / 768px / 1440px
+3. Critique each screenshot against the rubric in `verification.md`
+4. Fix any issue in code, re-render the affected page, repeat
+5. Stop only when a full pass produces zero violations
+
+For motion specifically: grep the codebase for hardcoded transitions
+(`0.3s`, `ease-in-out`, `transition: all`) — every hit is a consistency bug. All motion must
+route through the tokens in `motion.md`. This grep sweep is how you guarantee the whole page
+shares one "smoothness," not just the part you were asked about.
+
+If no browser tool is available: apply everything, then **tell the user the output was not
+visually verified** and offer to install a browser MCP. Never claim a look you didn't see.
+
+---
+
+## Step 6 — The Completion Checklist
 
 Do not hand back the code until you can check every item:
 
@@ -161,6 +219,12 @@ Do not hand back the code until you can check every item:
 ### Anti-Pattern Check
 - [ ] Open `references/anti-patterns.md` and verify none apply to this output
 
+### Visual Verification
+- [ ] Rendered in a browser and screenshotted at 375px / 768px / 1440px (or user told it was skipped)
+- [ ] No horizontal overflow at 375px; no clipped/overlapping text
+- [ ] Grep confirms zero hardcoded transitions — all motion routes through tokens
+- [ ] Stated clearly to the user what was visually verified vs not
+
 ### Style-Specific (if a named style was requested)
 - [ ] Open `references/styles/<style-name>.md` and verify every rule is met
 
@@ -174,10 +238,18 @@ If the user says any of these, load the corresponding style reference:
 |---|---|
 | glassmorphism, frosted glass, blur card | `references/styles/glassmorphism.md` |
 | liquid glass, Apple glass, iOS 26, visionOS | `references/styles/liquid-glass.md` |
+| material you, material design, material 3, android | `references/styles/material-you.md` |
+| aurora, mesh gradient, glow background, gradient hero | `references/styles/aurora.md` |
+| bento, bento grid, modular tiles, dashboard grid | `references/styles/bento.md` |
+| minimal, swiss, typographic, editorial minimal, clean | `references/styles/minimal-swiss.md` |
 | neumorphism, soft UI, embossed | `references/styles/neumorphism.md` |
-| brutalism, brutal, raw, bold, editorial | `references/styles/brutalism.md` |
 | claymorphism, clay, 3D soft, inflated | `references/styles/claymorphism.md` |
-| dark mode + any style | Apply dark token set from the style file |
+| brutalism, brutal, raw, austere | `references/styles/brutalism.md` |
+| neo-brutalism, neubrutalism, hard shadow, bold color blocks | `references/styles/neo-brutalism.md` |
+| skeuomorphism, realistic, material, tactile, physical | `references/styles/skeuomorphism.md` |
+| retro, y2k, vaporwave, chrome, holographic, neon | `references/styles/retro-y2k.md` |
+| dark mode + any style | `references/styles/dark-mode.md` (layer onto the named style) |
+| not sure / "you pick" | `references/styles/_index.md` then recommend |
 
 ---
 

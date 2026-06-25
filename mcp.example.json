@@ -1,0 +1,20 @@
+{
+  "//": "DesignSoul — browser tool for the visual verification loop.",
+  "//setup": "Copy the 'playwright' block into your editor's MCP config. For Kiro: .kiro/settings/mcp.json (workspace) or ~/.kiro/settings/mcp.json (user). For Claude Code/Cursor: their MCP settings. Requires Node.js (npx).",
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"],
+      "disabled": false,
+      "autoApprove": [
+        "browser_navigate",
+        "browser_take_screenshot",
+        "browser_snapshot",
+        "browser_resize",
+        "browser_console_messages",
+        "browser_click",
+        "browser_hover"
+      ]
+    }
+  }
+}

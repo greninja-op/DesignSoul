@@ -366,3 +366,67 @@ body    { letter-spacing: -0.01em; font-weight: 400; }
 - [ ] Typography uses tight letter-spacing (`-0.02em` to `-0.03em`)
 - [ ] `@supports` fallback for browsers without backdrop-filter
 - [ ] `-webkit-backdrop-filter` present for Safari
+
+---
+
+## Advanced: Real Refraction with SVG Displacement (Optional, High-Fidelity)
+
+The CSS above gives a convincing liquid-glass *look*. True Apple Liquid Glass also **bends
+the content behind it** (lensing/refraction). The browser has no native API for this, but an
+SVG `feDisplacementMap` filter approximates it — the same approach used in production web
+recreations of iOS 26 glass.
+
+> Use this only when the user wants maximum fidelity. It's heavier (an SVG filter +
+> backdrop-filter) and needs a performance/fallback check. The pure-CSS version above is
+> the safe default.
+
+### 1. Define the displacement filter once (inline SVG in the DOM)
+
+```html
+<svg width="0" height="0" style="position:absolute">
+  <filter id="liquid-refraction" x="-20%" y="-20%" width="140%" height="140%">
+    <!-- noise drives how light bends -->
+    <feTurbulence type="fractalNoise" baseFrequency="0.008 0.008"
+                  numOctaves="2" seed="7" result="noise"/>
+    <feGaussianBlur in="noise" stdDeviation="2" result="softNoise"/>
+    <!-- displace the backdrop using the noise = the refraction -->
+    <feDisplacementMap in="SourceGraphic" in2="softNoise"
+                       scale="40" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+```
+
+### 2. Apply it alongside blur + saturate
+
+```css
+.liquid-glass--refractive {
+  backdrop-filter: blur(8px) saturate(180%) url(#liquid-refraction);
+  -webkit-backdrop-filter: blur(8px) saturate(180%);
+}
+```
+
+### 3. Edge-only refraction (more accurate to Apple)
+
+Real glass bends light most at the **rim**. Apply stronger displacement at the edges using
+a thin pseudo-element border-ring with its own heavier filter, while the center stays clear.
+Keep `scale` modest (20–50) — high values look like water, not glass.
+
+### Performance & Fallback
+
+```css
+/* SVG-filter backdrop is GPU-heavy; gate it behind support + a class */
+@supports not (backdrop-filter: blur(0)) {
+  .liquid-glass--refractive { background: rgba(30,30,60,0.85); backdrop-filter: none; }
+}
+/* Respect reduced motion / data: drop the live filter on low-power hints */
+@media (prefers-reduced-motion: reduce) {
+  .liquid-glass--refractive { backdrop-filter: blur(12px) saturate(160%); }
+}
+```
+
+**Rules for the refractive variant:**
+- Test FPS while scrolling — if it janks, fall back to the pure-CSS glass.
+- Never apply the displacement filter to large full-screen surfaces; reserve it for
+  cards, bars, and pills.
+- Always keep the specular `box-shadow` layers from the standard surface — refraction
+  alone isn't enough; the highlight sells the glass.

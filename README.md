@@ -38,13 +38,25 @@ Drop this skill into your project and tell your AI editor:
 
 ## Supported Styles
 
+13 styles, each with a full token system, core components, and a verification checklist.
+
 | Style | Description |
 |---|---|
 | **Glassmorphism** | Frosted glass, backdrop-blur, translucent cards |
-| **Liquid Glass** | Apple iOS 26 style — specular highlights, chromatic refraction, spring physics |
+| **Liquid Glass** | Apple iOS 26 — specular highlights, SVG refraction, spring physics |
+| **Material You** | Material Design 3 — dynamic color, tonal elevation, state layers |
+| **Aurora / Mesh** | Soft glowing gradient fields (Stripe/Linear/Vercel-style) |
+| **Bento Grid** | Modular tile layout system — pairs with any surface skin |
+| **Minimal / Swiss** | Restraint, strict grid, typography-led hierarchy |
 | **Neumorphism** | Soft shadows, embossed surfaces, single-tone depth |
-| **Brutalism** | Raw, bold, offset shadows, zero decoration |
 | **Claymorphism** | Soft 3D, inflated shapes, saturated pastels |
+| **Brutalism** | Raw, austere, offset shadows, zero decoration |
+| **Neo-Brutalism** | Loud color blocks, thick borders, hard offset shadows |
+| **Skeuomorphism** | Real-material cues, tactile depth, physical controls |
+| **Retro / Y2K** | Chrome, holographic, neon glow, nostalgic energy |
+| **Dark Mode** | Cross-cutting — a tuned dark variant for any style above |
+
+See `references/styles/_index.md` for a selection guide and how to combine styles.
 
 ---
 
@@ -55,17 +67,31 @@ DesignSoul/
 ├── README.md                       ← This file (human-facing guide)
 ├── SKILL.md                        ← Main skill file (drop this into Claude Code)
 ├── checklist.md                    ← Completion checklist (AI runs this before finishing)
+├── mcp.example.json                ← Browser-tool config for visual verification
+├── test-cases/                     ← Before/after fixtures that validate the skill
+│   └── generic-card/               ← Worked reference example (before, after, notes)
 └── references/
     ├── anti-patterns.md            ← Every AI-default habit, with fixes
     ├── components.md               ← Professional UX standards per component
     ├── motion.md                   ← Global animation system
     ├── typography.md               ← Font pairing logic and type scale
+    ├── color-theory.md             ← Deriving a palette with intent
+    ├── verification.md             ← Visual feedback loop (render → critique → fix)
     └── styles/
+        ├── _index.md               ← Style selection & combination guide
         ├── glassmorphism.md
         ├── liquid-glass.md
+        ├── material-you.md
+        ├── aurora.md
+        ├── bento.md
+        ├── minimal-swiss.md
         ├── neumorphism.md
+        ├── claymorphism.md
         ├── brutalism.md
-        └── claymorphism.md
+        ├── neo-brutalism.md
+        ├── skeuomorphism.md
+        ├── retro-y2k.md
+        └── dark-mode.md
 ```
 
 ---
@@ -97,7 +123,37 @@ When triggered, the AI:
 3. **Checks anti-patterns** — kills every AI-default decision
 4. **Applies professional component standards** — per-component UX knowledge for 20+ component types
 5. **Runs a global motion pass** — consistent animation system across everything
-6. **Runs the completion checklist** — doesn't stop until every item is checked
+6. **Visually verifies** — with a browser tool, it renders the result, screenshots at mobile/tablet/desktop, critiques against a rubric, and fixes what it finds
+7. **Runs the completion checklist** — doesn't stop until every item is checked
+
+---
+
+## Visual Verification (the part that makes it actually work)
+
+An AI editing CSS is normally *blind* — it reasons about code but never sees the rendered
+page. DesignSoul closes that loop with a browser tool (Playwright MCP):
+
+1. Copy the `playwright` block from `mcp.example.json` into your editor's MCP config
+2. The AI then renders your pages, screenshots them at 375 / 768 / 1440px, and self-corrects
+   until they pass the rubric in `references/verification.md`
+
+Without a browser tool the skill still works, but it will tell you the output was **not
+visually verified** rather than pretend it looks right.
+
+---
+
+## Honest Scope — What It Can and Can't Do
+
+**Does well:** style conversion, killing AI-default habits, enforcing a coherent token +
+motion system, professional per-component UX, and (with a browser tool) seeing and fixing results.
+
+**Real limits, stated plainly:**
+- Without a browser MCP, it styles blind and says so.
+- Very large codebases exceed one context window — it works system-first then component-by-component.
+- Data-driven components (live delivery/flight trackers, real maps) get a polished UI +
+  animation layer wired to placeholder data; it can't invent your backend.
+- Output quality scales with the underlying model. The skill raises the floor and guarantees
+  consistency — it's not a replacement for human review on high-stakes work.
 
 ---
 
@@ -113,7 +169,8 @@ If yes, the skill keeps working. That's the bar. Not "looks decent." Not "client
 
 ## Status
 
-This is v0.1 — a working draft being tested across real projects.
+This is v0.2 — significantly expanded with a visual verification loop, color theory,
+13 styles, and a test-case framework. Still a working draft being tested across real projects.
 
 **What's tested:**
 - [ ] React / Next.js projects
@@ -129,11 +186,16 @@ Open an issue with a before/after example. That's the most useful contribution.
 
 ## Roadmap
 
+- [x] Visual verification loop (Playwright MCP)
+- [x] Color-theory reference for intentional palettes
+- [x] Dark mode strategy (cross-cutting)
+- [x] Expanded style library (13 styles)
+- [x] Test-cases directory (framework + first worked example)
+- [ ] Complete the remaining test-case fixtures (trackers, forms, chat, calendar, table)
 - [ ] Before/after example screenshots
-- [ ] Test cases directory with real-world UI patterns
-- [ ] Dark mode variant for each style
 - [ ] Tailwind-specific token mappings
-- [ ] Additional styles: Aurora UI, Skeuomorphism, Flat 2.0
+- [ ] Framework adapters (React/Vue component output conventions)
+- [ ] Additional styles: Flat 2.0, Memphis, Cyberpunk
 
 ---
 

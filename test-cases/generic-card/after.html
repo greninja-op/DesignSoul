@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>After — DesignSoul (glassmorphism)</title>
+  <style>
+    /* DesignSoul target: intentional palette, real type scale, motion tokens,
+       glass surface with depth behind it, purposeful entrance, button hierarchy. */
+    :root {
+      /* Motion tokens (from references/motion.md) */
+      --duration-fast: 150ms;
+      --duration-normal: 250ms;
+      --duration-slow: 400ms;
+      --ease-out: cubic-bezier(0.0, 0.0, 0.2, 1);
+
+      /* Glass tokens (from references/styles/glassmorphism.md) */
+      --glass-bg: rgba(255, 255, 255, 0.15);
+      --glass-bg-hover: rgba(255, 255, 255, 0.22);
+      --glass-border: rgba(255, 255, 255, 0.30);
+      --glass-border-inner: rgba(255, 255, 255, 0.60);
+      --glass-text: rgba(255, 255, 255, 0.95);
+      --glass-text-muted: rgba(255, 255, 255, 0.68);
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Outfit', 'Inter', system-ui, sans-serif;
+      /* Background has depth — glass needs something to blur */
+      background:
+        radial-gradient(at 20% 20%, hsl(265, 80%, 60%) 0%, transparent 50%),
+        radial-gradient(at 80% 10%, hsl(220, 85%, 58%) 0%, transparent 50%),
+        radial-gradient(at 50% 85%, hsl(320, 70%, 58%) 0%, transparent 55%),
+        hsl(245, 55%, 16%);
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;            /* meaningful radius, not uniform 8px */
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.18),
+        inset 0 1px 0 var(--glass-border-inner),
+        inset 1px 0 0 rgba(255,255,255,0.15);
+      padding: 28px 28px 24px;        /* intentional asymmetric padding */
+      width: 340px;
+      color: var(--glass-text);
+      /* Purposeful entrance: fade UP, not just fade */
+      animation: fadeUp var(--duration-slow) var(--ease-out) both;
+      transition: background var(--duration-normal) var(--ease-out),
+                  box-shadow var(--duration-normal) var(--ease-out),
+                  transform var(--duration-normal) var(--ease-out);
+    }
+    .card:hover {
+      background: var(--glass-bg-hover);
+      transform: translateY(-4px);    /* lift, not scale */
+      box-shadow:
+        0 16px 48px rgba(0, 0, 0, 0.24),
+        inset 0 1px 0 var(--glass-border-inner);
+    }
+    .eyebrow {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--glass-text-muted); margin: 0 0 6px;
+    }
+    h2 {
+      font-size: 1.75rem; font-weight: 700; line-height: 1.1;
+      letter-spacing: -0.02em; margin: 0 0 10px;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    }
+    p { font-size: 1rem; line-height: 1.6; color: var(--glass-text-muted); margin: 0 0 20px; }
+
+    /* Primary button — opaque over glass (hierarchy), not more glass */
+    .btn-primary {
+      background: rgba(255, 255, 255, 0.92);
+      color: hsl(245, 55%, 22%);
+      border: none; border-radius: 12px;
+      padding: 12px 20px; font-size: 1rem; font-weight: 600;
+      cursor: pointer; width: 100%;
+      transition: background var(--duration-fast) var(--ease-out),
+                  transform var(--duration-fast) var(--ease-out);
+    }
+    .btn-primary:hover { background: #fff; transform: translateY(-2px); }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:focus-visible {
+      outline: none; box-shadow: 0 0 0 3px rgba(255,255,255,0.45);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+    /* Fallback for browsers without backdrop-filter */
+    @supports not (backdrop-filter: blur(0)) {
+      .card { background: rgba(40, 30, 80, 0.85); }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <p class="eyebrow">Most popular</p>
+    <h2>Pro Plan</h2>
+    <p>Everything you need to scale your team, with priority support and unlimited projects.</p>
+    <button class="btn-primary">Get started</button>
+  </div>
+</body>
+</html>
