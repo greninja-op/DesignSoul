@@ -13,6 +13,10 @@ skeleton/*.tgz
 _tmp_skeleton/
 _tmp_huashu/
 _tmp_*/
+_tmp_*
+
+# Source material (read for research, not part of the skill)
+*.pdf
 
 # Editor / OS
 .DS_Store

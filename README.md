@@ -81,9 +81,13 @@ DesignSoul/
     ├── design-system-doc.md        ← The DESIGN.md artifact: a project's design system of record
     ├── brand-design-languages.md   ← Offline brand library index + category patterns ("like Apple", "a car site")
     ├── brands/                      ← 73 per-brand design languages (Apple, BMW, Stripe, Spotify, …)
-    ├── anti-patterns.md            ← Every AI-default habit + the deeper content slop, with fixes
-    ├── components.md               ← Professional UX standards per component
+    ├── anti-patterns.md            ← Every AI-default habit, content slop, dark patterns, with fixes
+    ├── components.md               ← Professional UX standards per component + disclosure-pattern picker
     ├── component-method.md         ← How to design/rebuild ANY component like a pro
+    ├── ux-laws.md                  ← The designer brain: heuristics, cognitive load, affordance, disclosure
+    ├── accessibility.md            ← WCAG AA, ARIA, keyboard/focus, contrast, screen readers, RTL
+    ├── microcopy.md                ← UX writing: labels, buttons, errors, empty states, tone
+    ├── i18n.md                     ← Internationalization, localization, text expansion, RTL/bidi
     ├── critique.md                 ← Scored expert-review rubric (score it before shipping)
     ├── code-audit.md               ← Static source-code design review (no browser needed)
     ├── skeleton.md                 ← How the skill uses the skeleton system for loading states
@@ -139,7 +143,7 @@ When triggered, the AI:
 2. **Audits** your existing frontend — maps every component, color, font, animation
 3. **Defines a design system** — tokens for color, typography, spacing, motion, written to a `DESIGN.md` source of truth
 4. **Checks anti-patterns** — kills every AI-default decision, including the deeper content slop
-5. **Applies professional component standards** — per-component UX knowledge for 20+ component types, plus a 9-pass design method that reaches the same bar for *any* component (listed or not, new or rebuilt)
+5. **Applies professional component standards** — per-component UX knowledge for 20+ component types, plus a 9-pass design method that reaches the same bar for *any* component (listed or not, new or rebuilt). Applies usability heuristics, real microcopy, and WCAG-AA accessibility (keyboard, focus, contrast, ARIA) as it goes
 6. **Runs a global motion pass** — consistent animation system across everything
 7. **Runs a polish pass** — concentric radii, optical alignment, shadow-as-border, interruptible animations, scale-on-press, tabular numbers, and the other micro-details that separate built UI from slop
 8. **Visually verifies** — with a browser tool, it renders the result, screenshots at mobile/tablet/desktop, critiques against a rubric, and fixes what it finds

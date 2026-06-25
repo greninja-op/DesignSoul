@@ -47,7 +47,7 @@ beats a confident "it's perfect."
 ## Progressive Disclosure (How to Read the References)
 
 Do not read every file every time. Load what the task needs:
-- **Always** read the four core references in Step 0.
+- **Always** read the core references in Step 0.
 - Read a **style file only when** that style is named (or after recommending one).
 - Read `references/verification.md` when you have (or can install) a browser tool.
 - Read `references/color-theory.md` when deriving a palette from scratch.
@@ -63,11 +63,16 @@ Before writing a single line of CSS or JSX, read these core reference files in o
 2. `references/anti-patterns.md` — The AI default habits you must break
 3. `references/components.md` — Professional standards for every component type
 4. `references/component-method.md` — How to design/rebuild ANY component like a pro
-5. `references/motion.md` — The animation system (read this before adding ANY animation)
-6. `references/typography.md` — Font pairing and type scale logic
+5. `references/ux-laws.md` — The designer brain: heuristics, cognitive load, affordance, disclosure
+6. `references/motion.md` — The animation system (read this before adding ANY animation)
+7. `references/typography.md` — Font pairing and type scale logic
 
 Then, conditionally:
 - If deriving colors from scratch → `references/color-theory.md`
+- Building or reviewing real interactive UI (nearly always) → `references/accessibility.md`
+  (keyboard, focus, ARIA, contrast, screen readers — AI-default UI fails this by default)
+- Writing any user-facing text — labels, buttons, errors, empty states → `references/microcopy.md`
+- If the product targets multiple languages/regions, or uses RTL → `references/i18n.md`
 - Establishing or reading the project's design system → `references/design-system-doc.md` (the `DESIGN.md` artifact)
 - If the user names a real company/brand to emulate, OR a product category ("a car-selling
   site", "a music app") → `references/brand-design-languages.md` (index + category patterns),
@@ -81,7 +86,7 @@ Then, conditionally:
 - If a browser tool is or can be available → `references/verification.md`
 - Before handing work back → `references/critique.md` (score it like a senior reviewer)
 
-Do not skip the core four. They are short. Reading them takes less time than fixing a broken output.
+Do not skip the core reads. They are short. Reading them takes less time than fixing a broken output.
 
 ---
 
@@ -169,7 +174,14 @@ Work through the component list from your audit. For each component:
    If it's NOT listed, the Component Method is how you reach the same professional bar anyway.
 3. Apply the design tokens
 4. Apply the motion system (see `references/motion.md`)
-5. Check against `references/anti-patterns.md` — are you doing anything on that list?
+5. Write its real text well — labels, buttons, errors, empty states (`references/microcopy.md`)
+6. Make it accessible — semantics, keyboard, focus, contrast, ARIA (`references/accessibility.md`)
+7. Check against `references/anti-patterns.md` — are you doing anything on that list?
+
+For any container that reveals/hides content (tabs, accordion, drawer, wizard, tree), pick the
+**right disclosure pattern** using the decision table in `components.md` — don't reach for tabs by
+reflex. The reasoning behind these choices (cognitive load, progressive disclosure, affordance)
+lives in `references/ux-laws.md`; run its ten heuristics against each screen as you go.
 
 > Building from scratch: run the 9 passes forward.
 > Rebuilding an existing component: first run the "Rebuilding" audit in
@@ -304,6 +316,15 @@ If the user says any of these, load the corresponding style reference:
 | a real company/brand ("like Apple/Stripe/Linear") | `brand-design-languages.md` → `brands/<brand>.md` (exact-brand mode) |
 | a product category ("car site", "music app", "fintech") | `brand-design-languages.md` category patterns → 2–4 `brands/` files (inspiration mode) |
 | not sure / "you pick" | `references/styles/_index.md` then recommend |
+
+### Other Task Triggers (not styles)
+
+| User Says | Load File |
+|---|---|
+| "make it accessible", "a11y", "WCAG", "screen reader", "keyboard nav", "contrast" | `references/accessibility.md` |
+| "fix the copy", "the wording", "error messages", "empty state text", "button labels", "tone" | `references/microcopy.md` |
+| "multiple languages", "translate", "RTL", "Arabic/Hebrew", "localize", "internationalize" | `references/i18n.md` |
+| "the UX feels off", "too cluttered", "confusing", "hard to use", "which pattern (tabs/accordion/…)" | `references/ux-laws.md` (+ disclosure table in `components.md`) |
 
 ---
 

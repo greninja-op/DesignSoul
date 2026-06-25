@@ -136,13 +136,60 @@ SKIPPED and tell the user the output is unverified — do not silently pass it.)
 
 ## Phase 5: Accessibility
 
-- [ ] All interactive elements have visible focus states (custom, not browser default)
-- [ ] Color contrast: 4.5:1 for body text
-- [ ] Color contrast: 3:1 for large text and UI components
-- [ ] Touch targets: 44x44px minimum
-- [ ] Icon-only buttons have `aria-label`
-- [ ] Form inputs have associated labels
-- [ ] Error messages are programmatically associated with inputs
+(Full guide in `references/accessibility.md`. Design to WCAG **AA**.)
+
+- [ ] Semantic HTML used (`<button>`/`<a>`/headings/landmarks) before any custom `<div>` control
+- [ ] Custom widgets have correct ARIA roles + states, kept in sync as the user interacts
+- [ ] Full keyboard operation: everything reachable, logical focus order, no traps
+- [ ] Focus managed in overlays (moves in on open, returns to trigger on close)
+- [ ] All interactive elements have a visible custom `:focus-visible` ring (never bare `outline: none`)
+- [ ] Color contrast: 4.5:1 body text; 3:1 large text / UI components — re-checked in dark mode and over glass/gradient
+- [ ] No meaning conveyed by color alone (icon/shape/text added)
+- [ ] Touch targets: 44x44px minimum; no hover-only essential actions
+- [ ] Icon-only buttons have `aria-label`; decorative icons `aria-hidden`
+- [ ] Form inputs have persistent visible labels; errors linked (`aria-describedby`) and announced
+- [ ] Meaningful images have alt; decorative images have `alt=""`
+- [ ] `prefers-reduced-motion` respected; nothing flashes >3×/second
+- [ ] Stated honestly what was verified (keyboard/SR pass) vs not
+
+---
+
+## Phase 5b: UX Soundness
+
+(See `references/ux-laws.md`.)
+
+- [ ] Ran the ten usability heuristics on each screen — all hold
+- [ ] System status always visible (loading/saving/success/error — no silent actions)
+- [ ] One clear primary action per screen; extraneous cognitive load removed
+- [ ] Right disclosure pattern chosen (tabs vs accordion vs drawer vs wizard — see `components.md`)
+- [ ] Affordances match: clickable things look clickable; static things don't
+- [ ] Reversible escape from every flow (cancel/back/undo); destructive actions confirmed or undoable
+- [ ] No dark patterns (forced continuity, sneak-into-basket, fake urgency, confirmshaming — see `anti-patterns.md`)
+
+---
+
+## Phase 5c: Microcopy
+
+(See `references/microcopy.md`.)
+
+- [ ] Buttons/CTAs name the outcome ("Create account", not "Submit")
+- [ ] Errors follow what-happened → why → how-to-fix; specific and blame-free
+- [ ] Empty states explain the space and offer the first action (not "No items found")
+- [ ] Labels and terms consistent across the app; tone matches the stakes
+- [ ] No placeholder/lorem copy, no fabricated stats or quotes shipped as real content
+- [ ] Numbers/dates pluralized and formatted for humans
+
+---
+
+## Phase 5d: Internationalization (if multi-locale or RTL)
+
+(See `references/i18n.md`. Skip only if single-locale and confirmed so.)
+
+- [ ] No hardcoded user-facing strings; no sentence concatenation
+- [ ] Layout survives ~40% text expansion (containers wrap/grow, don't clip)
+- [ ] Logical CSS properties used (`inline-start/end`, `text-align: start`) — flips for RTL
+- [ ] Directional icons mirror in RTL; non-directional (logos, play, clocks) don't
+- [ ] Dates/numbers/currency via locale formatting; fonts cover target scripts
 
 ---
 

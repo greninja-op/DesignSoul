@@ -283,6 +283,55 @@ The small things that read as "off" even when the system is right (full guide in
 
 ---
 
+## Dark Patterns (Never Build These — Even If Asked Casually)
+
+Dark patterns are deceptive designs that trick users into actions against their interest. They
+exploit cognitive biases for short-term metrics and destroy trust. They are unethical, increasingly
+illegal, and never part of a DesignSoul output. If a request would produce one, name it and offer
+the honest alternative instead.
+
+- ❌ **Forced continuity** — silent auto-renew after a trial, with cancellation buried.
+  ✅ Remind before charging; make canceling as easy as subscribing.
+- ❌ **Roach motel** — easy to get in (sign up, subscribe), deliberately hard to get out.
+  ✅ Symmetrical effort: if signup is one click, so is cancellation/deletion.
+- ❌ **Sneak into basket** — adding items/insurance/donations the user didn't choose.
+  ✅ Opt-in, never opt-out, for anything that costs money.
+- ❌ **Hidden costs** — fees revealed only at the final checkout step.
+  ✅ Show the full price (incl. fees/shipping) as early as possible.
+- ❌ **Confirmshaming** — guilt-tripping decline text ("No thanks, I hate saving money").
+  ✅ Neutral, respectful decline options.
+- ❌ **Misdirection / false hierarchy** — styling the manipulative choice as the obvious one,
+  hiding the user-friendly option in low-contrast text.
+  ✅ Give the user's interest equal or greater visual weight.
+- ❌ **Fake urgency / scarcity** — countdowns that reset, "Only 2 left!" when untrue.
+  ✅ Only show urgency/scarcity that is real.
+- ❌ **Friend spam** — harvesting contacts or posting on the user's behalf without clear consent.
+  ✅ Explicit, scoped, revocable consent.
+- ❌ **Trick questions / preselected consent** — double negatives, pre-ticked marketing boxes.
+  ✅ Plain language, unchecked by default for anything optional.
+
+The rule: a default or a flow should serve the user at least as much as the business. If it only
+works *because* the user doesn't notice, it's a dark pattern.
+
+---
+
+## Paper-Cut Bugs (the small things that quietly erode quality)
+
+Individually trivial, collectively they make a UI feel cheap and unfinished. Sweep for these on
+the final pass — they're the gap between "styled" and "cared about":
+
+- Misaligned or inconsistent elements (a button 1px off, a stray margin).
+- Inconsistent typography across sections (a heading that didn't get the system).
+- A click/tap with no visual feedback — reads as broken (see `ux-laws.md` → visibility of status).
+- Vague or ambiguous labels (see `microcopy.md`).
+- Form validation that fires at the wrong time or doesn't explain the fix.
+- One component on the page that didn't get the same treatment as the rest.
+- A mobile touch target that's slightly too small or too close to its neighbor.
+
+No single one is a blocker. Shipping a pile of them is exactly what AI-default output does.
+
+---
+
 ## The Final Check
 
 Read this list one more time before submitting.

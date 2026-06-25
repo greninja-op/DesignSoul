@@ -290,7 +290,41 @@ This component deserves special attention because it carries high user anxiety �
 
 ---
 
+## Disclosure & Navigation Patterns — Which to Choose
+
+Before styling a container, pick the *right* pattern for revealing content. AI-default UI reaches
+for tabs or a giant scroll by reflex; a pro matches the pattern to the content's structure and the
+user's task. (The principle behind this is progressive disclosure — see `ux-laws.md`.)
+
+| Pattern | Use when | Avoid when |
+|---|---|---|
+| **Accordion** | Many stacked sections, user wants a few at a time, vertical space matters (FAQs, settings groups, mobile filters) | Content needs side-by-side comparison; only 2–3 short items (just show them) |
+| **Tabs** | A few peer views of the *same* object, frequent switching, only one relevant at once (Overview / Reviews / Specs) | More than ~6 tabs; sequential steps (use a wizard); content users compare simultaneously |
+| **Drawer / sheet** | Secondary nav or contextual tools that shouldn't occupy the main canvas; mobile menus, filters, detail panels | It holds the *primary* task — that belongs on the page, not hidden behind a swipe |
+| **Wizard / stepper** | A long or unfamiliar task split into ordered steps with a clear end (onboarding, checkout, setup) | A short task (don't add steps to a 3-field form); steps users need to jump between freely |
+| **Tree** | Genuinely hierarchical, nested data (file explorer, org chart, category nav) | Flat lists; mobile (deep trees are painful on touch) |
+| **"Show more" / detail-on-demand** | A long tail of optional/advanced content; collapse it, reveal on intent | The hidden content is essential to the decision |
+| **Modal / dialog** | A focused, must-resolve task that interrupts the flow (confirm, quick edit) | Long content or multi-step flows (use a page/route); anything users may want to reference alongside |
+| **Tooltip / popover** | Just-in-time, non-essential help or extra detail | Essential info or actions (no hover on touch — see `accessibility.md`) |
+
+**Shared rules for all disclosure components:**
+- The trigger must signal its state: chevron rotation, `aria-expanded`, a clear open/closed cue.
+- Animate the open/close (height/opacity/transform) — never an instant snap. Keep it interruptible.
+- Keyboard + screen-reader operable: correct roles/states, focus moves sensibly (see `accessibility.md`).
+- Don't nest disclosure inside disclosure (accordion-in-tabs-in-drawer) — that's a cognitive-load
+  smell; restructure the information architecture instead.
+
+### Affordance check (applies to every interactive container)
+If it expands, collapses, slides, or navigates, it must *look* like it does (cursor, hover, focus,
+a state-change cue) — and static containers must *not* borrow those cues. Mismatched affordances
+are a top reason a UI "feels" wrong even when it's pretty (see `ux-laws.md` → affordances).
+
+---
+
 ## Accessibility Minimums (Non-Negotiable)
+
+> These are the per-component floor. The full guide — POUR, ARIA, keyboard/focus management,
+> contrast, screen readers, RTL — is in `accessibility.md`.
 
 - All interactive elements: visible focus state (not browser default outline — a custom one)
 - Color contrast: 4.5:1 for body text, 3:1 for large text and UI components
