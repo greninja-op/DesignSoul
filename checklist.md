@@ -5,6 +5,15 @@ Every unchecked item is a reason to keep working.
 
 ---
 
+## Phase 0: Context Gathered
+
+- [ ] Looked for existing design context (design system, codebase tokens, live product, brand)
+- [ ] Lifted exact values from code where available (not redrawn from memory)
+- [ ] Vocalized the extracted system and confirmed direction with the user
+- [ ] If no context existed, told the user quality would drop and picked a deliberate direction
+
+---
+
 ## Phase 1: Design System Defined
 
 - [ ] Color tokens defined — primary, surface, border, text hierarchy, accent, error, success
@@ -119,7 +128,8 @@ SKIPPED and tell the user the output is unverified — do not silently pass it.)
 
 ## Phase 6: The Final Question
 
-Look at the complete output and answer honestly:
+Run the scored critique in `references/critique.md` (five dimensions, fix anything below ~7),
+then answer honestly:
 
 > Would a senior designer at Stripe, Linear, Vercel, Apple, or Notion look at this
 > and say "an AI made this"?
@@ -198,6 +208,13 @@ If the answer is **no** — ship it.
 - [ ] Palette is black + white + ≤1 accent + 2 grays
 - [ ] Hierarchy from type, not boxes/color; body measure ~60–70ch
 - [ ] Motion quiet — short fades, no bounce/scale
+
+### Warm Editorial
+- [ ] Background is warm cream, never pure white
+- [ ] One earthy accent (terracotta/clay), used sparingly
+- [ ] Serif display + clean sans body (open-source fonts)
+- [ ] Controlled measure (~65–70ch), generous line-height (~1.7)
+- [ ] Near-black warm text; hairline rules; no heavy decoration
 
 ### Neo-Brutalism
 - [ ] Hard offset shadows (zero blur); thick near-black borders

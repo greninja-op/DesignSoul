@@ -9,8 +9,10 @@ skeleton/examples/artifacts/
 skeleton/.packtest/
 skeleton/*.tgz
 
-# Temp clone (study only, never committed)
+# Temp clones (study only, never committed)
 _tmp_skeleton/
+_tmp_huashu/
+_tmp_*/
 
 # Editor / OS
 .DS_Store

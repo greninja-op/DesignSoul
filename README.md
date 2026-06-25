@@ -38,8 +38,7 @@ Drop this skill into your project and tell your AI editor:
 
 ## Supported Styles
 
-13 styles, each with a full token system, core components, and a verification checklist.
-
+14 styles, each with a full token system, core components, and a verification checklist.
 | Style | Description |
 |---|---|
 | **Glassmorphism** | Frosted glass, backdrop-blur, translucent cards |
@@ -48,6 +47,7 @@ Drop this skill into your project and tell your AI editor:
 | **Aurora / Mesh** | Soft glowing gradient fields (Stripe/Linear/Vercel-style) |
 | **Bento Grid** | Modular tile layout system — pairs with any surface skin |
 | **Minimal / Swiss** | Restraint, strict grid, typography-led hierarchy |
+| **Warm Editorial** | Cream paper, terracotta accent, serif/sans — human and readable |
 | **Neumorphism** | Soft shadows, embossed surfaces, single-tone depth |
 | **Claymorphism** | Soft 3D, inflated shapes, saturated pastels |
 | **Brutalism** | Raw, austere, offset shadows, zero decoration |
@@ -77,13 +77,16 @@ DesignSoul/
 ├── test-cases/                     ← Before/after fixtures that validate the skill
 │   └── generic-card/               ← Worked reference example (before, after, notes)
 └── references/
-    ├── anti-patterns.md            ← Every AI-default habit, with fixes
+    ├── design-context.md           ← Start from existing context (the most important idea)
+    ├── anti-patterns.md            ← Every AI-default habit + the deeper content slop, with fixes
     ├── components.md               ← Professional UX standards per component
     ├── component-method.md         ← How to design/rebuild ANY component like a pro
+    ├── critique.md                 ← Scored expert-review rubric (score it before shipping)
     ├── skeleton.md                 ← How the skill uses the skeleton system for loading states
     ├── motion.md                   ← Global animation system
     ├── typography.md               ← Font pairing logic and type scale
-    ├── color-theory.md             ← Deriving a palette with intent
+    ├── color-theory.md             ← Deriving a palette with intent (oklch, borrow-don't-invent)
+    ├── modern-css.md               ← Craft toolkit: text-wrap, :has(), container queries, color-mix
     ├── verification.md             ← Visual feedback loop (render → critique → fix)
     └── styles/
         ├── _index.md               ← Style selection & combination guide
@@ -93,6 +96,7 @@ DesignSoul/
         ├── aurora.md
         ├── bento.md
         ├── minimal-swiss.md
+        ├── warm-editorial.md
         ├── neumorphism.md
         ├── claymorphism.md
         ├── brutalism.md
@@ -126,13 +130,15 @@ DesignSoul/
 
 When triggered, the AI:
 
-1. **Audits** your existing frontend — maps every component, color, font, animation
-2. **Defines a design system** — tokens for color, typography, spacing, motion
-3. **Checks anti-patterns** — kills every AI-default decision
-4. **Applies professional component standards** — per-component UX knowledge for 20+ component types, plus a 9-pass design method that reaches the same bar for *any* component (listed or not, new or rebuilt)
-5. **Runs a global motion pass** — consistent animation system across everything
-6. **Visually verifies** — with a browser tool, it renders the result, screenshots at mobile/tablet/desktop, critiques against a rubric, and fixes what it finds
-7. **Runs the completion checklist** — doesn't stop until every item is checked
+1. **Gathers context first** — reads your design system, codebase tokens, live product, or brand, and lifts exact values (designing from scratch is a last resort)
+2. **Audits** your existing frontend — maps every component, color, font, animation
+3. **Defines a design system** — tokens for color, typography, spacing, motion
+4. **Checks anti-patterns** — kills every AI-default decision, including the deeper content slop
+5. **Applies professional component standards** — per-component UX knowledge for 20+ component types, plus a 9-pass design method that reaches the same bar for *any* component (listed or not, new or rebuilt)
+6. **Runs a global motion pass** — consistent animation system across everything
+7. **Visually verifies** — with a browser tool, it renders the result, screenshots at mobile/tablet/desktop, critiques against a rubric, and fixes what it finds
+8. **Scores a critique** — reviews the result like a senior designer across five dimensions before finishing
+9. **Runs the completion checklist** — doesn't stop until every item is checked
 
 ---
 

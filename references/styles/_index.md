@@ -12,6 +12,7 @@ DesignSoul ships these visual styles. Load ONLY the file for the style the user 
 | Aurora / Mesh | `aurora.md` | SaaS landing, AI products, hero sections | Soft glow, premium calm |
 | Bento Grid | `bento.md` | Feature sections, dashboards, portfolios (LAYOUT, pairs with any skin) | Modular, scannable |
 | Minimal / Swiss | `minimal-swiss.md` | Editorial, agencies, luxury, confident brands | Restrained, typographic |
+| Warm Editorial | `warm-editorial.md` | AI products, long-form, brand sites, docs | Cream paper, terracotta, human |
 | Neumorphism | `neumorphism.md` | Niche UI, music/audio controls, single-surface apps | Soft, embossed, calm |
 | Claymorphism | `claymorphism.md` | Playful consumer, education, kids | Puffy, friendly, 3D |
 | Brutalism | `brutalism.md` | Editorial, statements, anti-corporate | Raw, austere, bold |
@@ -30,6 +31,7 @@ Ask one question if it's genuinely unclear, otherwise infer from the product:
 - **Modern SaaS that should look current** → Aurora + Bento layout
 - **Friendly consumer / app** → Material You or Claymorphism
 - **Serious / editorial / luxury** → Minimal-Swiss or Brutalism
+- **Warm / human / readable (AI product, docs, long-form)** → Warm Editorial
 - **Playful indie / standout** → Neo-Brutalism
 - **Physical-metaphor product** → Skeuomorphism
 - **Creative / music / event** → Retro-Y2K

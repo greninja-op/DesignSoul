@@ -211,6 +211,60 @@ Every element the same size, same weight, same contrast.
 
 ---
 
+## Content & Asset Anti-Patterns (the deeper slop)
+
+These are the slop sources that survive even after the visual tokens are fixed. They're the
+difference between "styled nicely" and "made by someone who cares."
+
+### ❌ Data slop
+Fabricated stats used as decoration: "10,000+ happy customers," "99.9% uptime," rows of
+made-up metric cards, mock tables dressed up with fake numbers.
+**Fix:** if there's no real data, use a clearly-labelled placeholder or ask the user. Never invent numbers to fill space.
+
+### ❌ Quote slop
+Invented testimonials or famous-person quotes to pad a page.
+**Fix:** placeholder + ask the user for real quotes.
+
+### ❌ SVG-imagery slop
+Trying to hand-draw people, scenes, devices, or "abstract art" in SVG. AI-drawn SVG imagery
+reads as cheap and juvenile instantly.
+**Fix:** a plain grey rectangle labelled "illustration 1200×800" beats a bad SVG hero a
+hundred times over. Reserve SVG for real icons (16–32px), geometric decoration, and data-viz charts.
+
+### ❌ Over-iconography
+An icon on every heading, feature, and section. It makes the UI look like a toy.
+**Fix:** icons earn their place; most headings don't need one. Use a real icon set
+(Lucide/Heroicons/Phosphor), never emoji as icons.
+
+### ❌ Filler content
+Adding paragraphs/sections/elements to make a page "feel less empty." Emptiness is a
+composition problem, solved with contrast/rhythm/whitespace — not with more stuff.
+**Fix:** for every element ask "if I delete this, does the design get worse?" If no, delete it.
+"One thousand no's for every yes."
+
+### ❌ Adding without asking
+Unilaterally deciding the page needs one more section/page/feature.
+**Fix:** the user knows their audience better than you. Propose additions; don't silently add them.
+
+### 🚩 The slop tell
+The moment you think *"adding this would make it look better"* — that thought is usually the
+slop signal. Build the simplest version first; add only when the user asks or the content demands it.
+
+---
+
+## Forbidden Default Zones (override only on explicit brand request)
+
+- ❌ **GitHub-dark lazy solution:** a uniform deep-blue-black (`#0D1117`) background + generic
+  cyan/purple neon glow. This one specific combination is banned as a default — not "dark mode
+  in general." Intentional, authored dark palettes (cinematic, warm-cyber, the dark styles in
+  the style library) are fine.
+- ❌ The all-purpose aggressive purple gradient formula.
+- ❌ Emoji used as icons.
+- ❌ Rounded card + left-colored-border accent (unless the brand genuinely uses it).
+- ❌ A signature/watermark on a cover.
+
+---
+
 ## The Final Check
 
 Read this list one more time before submitting.

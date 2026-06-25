@@ -59,26 +59,34 @@ Keeps context lean; load deeper files on demand.
 
 Before writing a single line of CSS or JSX, read these core reference files in order:
 
-1. `references/anti-patterns.md` — The AI default habits you must break
-2. `references/components.md` — Professional standards for every component type
-3. `references/component-method.md` — How to design/rebuild ANY component like a pro
-4. `references/motion.md` — The animation system (read this before adding ANY animation)
-5. `references/typography.md` — Font pairing and type scale logic
+1. `references/design-context.md` — Gather existing context FIRST (the most important idea)
+2. `references/anti-patterns.md` — The AI default habits you must break
+3. `references/components.md` — Professional standards for every component type
+4. `references/component-method.md` — How to design/rebuild ANY component like a pro
+5. `references/motion.md` — The animation system (read this before adding ANY animation)
+6. `references/typography.md` — Font pairing and type scale logic
 
 Then, conditionally:
 - If deriving colors from scratch → `references/color-theory.md`
+- When writing real CSS → `references/modern-css.md` (the craft touches that read as hand-made)
 - If any component loads async / needs loading states → `references/skeleton.md`
 - If a style is named → the matching file (see Trigger table); if unsure which style,
   read `references/styles/_index.md` and recommend one
 - If a browser tool is or can be available → `references/verification.md`
+- Before handing work back → `references/critique.md` (score it like a senior reviewer)
 
 Do not skip the core four. They are short. Reading them takes less time than fixing a broken output.
 
 ---
 
-## Step 1 — Audit First, Touch Second
+## Step 1 — Gather Context, Then Audit
 
-Before changing anything, audit the existing codebase:
+**First, gather design context** (`references/design-context.md`): the user's design system,
+codebase tokens, live product, or brand. Read the code and lift exact values. Designing from
+scratch is the last resort and produces generic work — anchor to what exists, and vocalize the
+system you extracted before building.
+
+Then audit the existing codebase:
 
 ### Codebase Scan Checklist
 - [ ] List every unique component present (navbar, cards, forms, buttons, modals, etc.)
@@ -202,6 +210,18 @@ visually verified** and offer to install a browser MCP. Never claim a look you d
 
 ---
 
+## Step 5b — Critique Pass (Score It Like a Senior Reviewer)
+
+Read `references/critique.md` and score the result across the five dimensions (style fidelity,
+hierarchy, craft, functionality, originality). Fix anything below ~7 before finishing. Run the
+**squint test** — blur your eyes; if the hierarchy isn't still obvious, the hierarchy is wrong.
+
+**Bold-bias correction:** models drift toward safe, minimal, samey output. Counteract it. When
+offering directions, make at least one genuinely bold/characterful — don't let every option be
+"cream background + whitespace + one accent." Good design is distinctive, not just inoffensive.
+
+---
+
 ## Step 6 — The Completion Checklist
 
 Do not hand back the code until you can check every item:
@@ -253,6 +273,7 @@ If the user says any of these, load the corresponding style reference:
 | aurora, mesh gradient, glow background, gradient hero | `references/styles/aurora.md` |
 | bento, bento grid, modular tiles, dashboard grid | `references/styles/bento.md` |
 | minimal, swiss, typographic, editorial minimal, clean | `references/styles/minimal-swiss.md` |
+| warm editorial, cream, terracotta, paper, book-like, anthropic-style | `references/styles/warm-editorial.md` |
 | neumorphism, soft UI, embossed | `references/styles/neumorphism.md` |
 | claymorphism, clay, 3D soft, inflated | `references/styles/claymorphism.md` |
 | brutalism, brutal, raw, austere | `references/styles/brutalism.md` |

@@ -124,6 +124,27 @@ short version:
 
 ---
 
+## Don't Invent a Palette From Scratch
+
+Designing a whole unfamiliar color system from zero usually produces disharmony. Prefer, in order:
+
+1. **Brand colors exist** → use them; fill missing tokens by interpolating in oklch.
+2. **A reference product exists** → sample the palette from its screenshots.
+3. **Truly from zero** → adopt a known system (Radix Colors, Tailwind's default palette, a
+   documented brand system) rather than hand-mixing. Say which one you used.
+
+Derive hover/active/tint states with `color-mix` instead of inventing new hex values
+(see `modern-css.md`):
+
+```css
+.button:hover { background: color-mix(in oklch, var(--primary) 88%, black); }
+.tint        { background: color-mix(in oklch, var(--primary) 12%, transparent); }
+```
+
+Working in oklch keeps hue stable as you change lightness — the modern, reliable choice.
+
+---
+
 ## The Palette Checklist
 
 - [ ] Primary hue derived from product context, not a default
