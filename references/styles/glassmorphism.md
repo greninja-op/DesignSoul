@@ -7,16 +7,26 @@ Done wrong: blurry grey boxes on a gradient. Done right: a UI that feels like it
 
 ## The Core Principles
 
-1. **Background matters as much as the glass** — glass only works if there's something interesting behind it to blur
-2. **Layering creates depth** — foreground glass, midground content, background gradient/image
-3. **Light edges, not dark** — the frosted edge of glass catches light, it doesn't cast shadow
-4. **Restraint** — not every element is glass. Ground elements exist to contrast with floating glass elements
+1. **The background carries the effect — it's the single biggest factor, more than the glass itself.**
+   Frosted/clear glass only reads when there's a **rich, saturated, *varied*** background behind it
+   to refract. A pale, low-saturation, or near-uniform background = no glass: the cards just look
+   like flat translucent panels. Spend your color budget on the background; the glass is only the lens.
+2. **Vary the color *across* the background** so different glass panels sit over different hues —
+   that local contrast through the blur is what sells real glass. A single flat fill behind every
+   card looks dead.
+3. **Layering creates depth** — foreground glass, midground content, background gradient/image
+4. **Light edges, not dark** — the frosted edge of glass catches light, it doesn't cast shadow
+5. **Restraint on the glass, not the background** — not every element is glass; ground elements
+   contrast with floating glass. But never hold back on background richness.
 
 ---
 
 ## Required Background
 
-Glass without a background is invisible. Before any glass component, define the background:
+Glass without a rich background is invisible — **this is where the look lives, so make it bold and
+varied, not a pale wash.** The background must have real saturation and color *variation* across the
+viewport (multiple hues, glows, or an image) so each glass panel refracts something different.
+Before any glass component, define the background:
 
 ```css
 .glass-background {
@@ -39,6 +49,13 @@ Glass without a background is invisible. Before any glass component, define the 
   background: url('...') center/cover no-repeat;
 }
 ```
+
+> **What kills the glass (the #1 mistake):** a pale, washed-out, or single-flat-color background.
+> If the background is low-saturation or uniform, the blur has nothing to work with and your "glass"
+> reads as flat frosted plastic. Tells: lavender-on-white, one barely-there gradient, a dark mode
+> that's a uniform near-black. **Fix:** push saturation up, add 3–4 distinct color zones / glows
+> (or an image), and make sure adjacent glass cards visibly sit over *different* colors. Test the
+> glass over the **most colorful and most varied** part of the background, not just the calm corner.
 
 ---
 

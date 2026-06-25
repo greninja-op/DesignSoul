@@ -252,7 +252,8 @@ If the answer is **no** — ship it.
 ## Style-Specific Final Checks
 
 ### Glassmorphism
-- [ ] Background has depth (gradient/mesh/image)
+- [ ] Background is rich, saturated, and *varied* (3–4 color zones/glows or image) — NOT pale/uniform
+- [ ] Adjacent glass panels visibly sit over different background colors (glass actually refracts)
 - [ ] All surfaces have `backdrop-filter` + `-webkit-backdrop-filter`
 - [ ] Inner top-left highlight present
 - [ ] `@supports` fallback written

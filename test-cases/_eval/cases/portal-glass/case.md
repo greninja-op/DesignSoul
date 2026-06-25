@@ -182,3 +182,13 @@ back to offer a restructure.
 **Next test to actually exercise the skill:** a *redesign* prompt (restructure permitted) on a
 project with room — ideally not already in the target style — to see if it can cross the human bar
 when allowed to change layout/hierarchy, not just skin.
+
+## Learning — glassmorphism background (owner insight)
+The glass read weak because the **backgrounds were pale / near-uniform** (lavender-on-white in light,
+flat near-black in dark). In glassmorphism the **background is the dominant factor** — a rich,
+saturated, *varied* background is what the blur refracts; a washed-out one makes glass look like flat
+frosted plastic. Folded into the skill:
+- `styles/glassmorphism.md`: Core Principle #1 rewritten to "the background carries the effect";
+  added a "what kills the glass" callout (no pale/uniform/single-flat backgrounds; 3–4 color zones,
+  adjacent panels over different hues; test over the most colorful area).
+- `checklist.md`: glassmorphism checks now require a rich/varied background + visible refraction.
