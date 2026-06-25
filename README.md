@@ -96,6 +96,7 @@ DesignSoul/
     ├── i18n.md                     ← Internationalization, localization, text expansion, RTL/bidi
     ├── critique.md                 ← Scored expert-review rubric (score it before shipping)
     ├── code-audit.md               ← Static source-code design review (no browser needed)
+    ├── large-codebases.md          ← Context-efficient whole-frontend conversion (system-first, not file-by-file)
     ├── skeleton.md                 ← How the skill uses the skeleton system for loading states
     ├── motion.md                   ← Global animation system
     ├── typography.md               ← Font pairing logic and type scale
@@ -200,7 +201,8 @@ motion system, professional per-component UX, and (with a browser tool) seeing a
 
 **Real limits, stated plainly:**
 - Without a browser MCP, it styles blind and says so.
-- Very large codebases exceed one context window — it works system-first then component-by-component.
+- Very large codebases exceed one context window — it works system-first (converts the token layer
+  and shared primitives, not every file), then component-by-component. Method: `references/large-codebases.md`.
 - Data-driven components (live delivery/flight trackers, real maps) get a polished UI +
   animation layer wired to placeholder data; it can't invent your backend.
 - Output quality scales with the underlying model. The skill raises the floor and guarantees

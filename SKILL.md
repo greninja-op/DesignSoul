@@ -31,8 +31,10 @@ standards. With a browser tool (see Step 5) it can also *see* the rendered resul
 **Its real limits — state these to the user, never pretend otherwise:**
 - You **cannot see pixels without a browser tool.** If no browser MCP is available, you are
   styling blind — say so and treat the output as unverified (see `references/verification.md`).
-- For **large codebases**, you can't hold everything in context at once. Work system-first,
-  then component-by-component, and tell the user if scope exceeds what one pass can guarantee.
+- For **large codebases**, you can't hold everything in context at once. Work system-first
+  (convert the token layer + shared primitives, not every file), then component-by-component, and
+  tell the user if scope exceeds what one pass can guarantee. The cost-efficient method is in
+  `references/large-codebases.md` — read it before converting any multi-file frontend.
 - For **data-driven components** (live delivery/flight trackers, real maps), you build the
   *UI + animation layer* against placeholder data. You cannot invent the user's backend/data
   pipeline — scaffold it and mark the integration points clearly.
@@ -87,6 +89,8 @@ Then, conditionally:
   site", "a music app") → `references/brand-design-languages.md` (index + category patterns),
   then read the specific brand file(s) in `references/brands/`
 - Reviewing a diff / existing frontend without a browser → `references/code-audit.md` (static source scan)
+- Converting/redesigning an existing multi-file frontend → `references/large-codebases.md`
+  (the context-efficient, system-first method — convert tokens + primitives, not every file)
 - When writing real CSS → `references/modern-css.md` (the craft touches that read as hand-made)
 - Polishing components / final craft pass → `references/polish.md` (the micro-details that beat slop)
 - If any component loads async / needs loading states → `references/skeleton.md`
@@ -124,6 +128,12 @@ Then audit the existing codebase:
 
 Write a short audit summary (internal — you don't need to show the user unless they ask).
 This summary becomes your checklist. You are not done until every item on it is addressed.
+
+> **On a large, multi-file codebase, do this scan with grep — not by reading every file.** Inventory
+> where tokens live, what's hardcoded, and which primitives are most reused, then convert
+> system-first (token layer + shared primitives) rather than file-by-file. Full method:
+> `references/large-codebases.md`. This is what keeps a whole-frontend conversion inside the
+> context budget.
 
 ---
 
