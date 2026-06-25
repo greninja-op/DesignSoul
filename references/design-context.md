@@ -22,8 +22,9 @@ every design task starts with one question: *is there anything to anchor this to
 3. **The user's live product** — if shipped but no code given, screenshot it (Playwright) or
    ask for screenshots to read the real visual vocabulary.
 4. **Brand guidelines / logo / assets** — brand colors, marketing material, logo style.
-5. **Competitor / reference products** — "make it like X" → ask for the URL or a screenshot.
-   Never work from a fuzzy memory of what X looks like.
+5. **Competitor / reference products** — "make it like X" → check `brand-design-languages.md`
+   first (offline brand library); if X isn't there, ask for the URL or a screenshot. **Never**
+   work from a fuzzy memory of what X looks like.
 6. **A known design system (fallback)** — Apple HIG, Material 3, Radix Colors, shadcn/ui,
    Tailwind defaults. State clearly which one you're using as the starting point.
 

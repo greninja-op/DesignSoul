@@ -69,6 +69,7 @@ Before writing a single line of CSS or JSX, read these core reference files in o
 Then, conditionally:
 - If deriving colors from scratch → `references/color-theory.md`
 - Establishing or reading the project's design system → `references/design-system-doc.md` (the `DESIGN.md` artifact)
+- If the user names a real company/brand to emulate ("like Apple's site") → `references/brand-design-languages.md` (read only that brand's section)
 - Reviewing a diff / existing frontend without a browser → `references/code-audit.md` (static source scan)
 - When writing real CSS → `references/modern-css.md` (the craft touches that read as hand-made)
 - Polishing components / final craft pass → `references/polish.md` (the micro-details that beat slop)
@@ -298,6 +299,7 @@ If the user says any of these, load the corresponding style reference:
 | skeuomorphism, realistic, material, tactile, physical | `references/styles/skeuomorphism.md` |
 | retro, y2k, vaporwave, chrome, holographic, neon | `references/styles/retro-y2k.md` |
 | dark mode + any style | `references/styles/dark-mode.md` (layer onto the named style) |
+| a real company/brand ("like Apple/Stripe/Linear") | `references/brand-design-languages.md` (that brand's section) |
 | not sure / "you pick" | `references/styles/_index.md` then recommend |
 
 ---
