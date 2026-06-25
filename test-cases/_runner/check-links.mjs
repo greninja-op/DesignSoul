@@ -21,9 +21,11 @@ function walk(dir) {
 
 function checkFile(file) {
   const raw = readFileSync(file, "utf8");
-  // Ignore fenced code blocks — they contain illustrative snippets/example paths,
-  // not document links to validate.
-  const text = raw.replace(/```[\s\S]*?```/g, "");
+  // Ignore fenced code blocks and the agent-setup bootstrap region — both contain illustrative
+  // snippets / target install paths (in the user's project), not document links to validate.
+  const text = raw
+    .replace(/```[\s\S]*?```/g, "")
+    .replace(/<!--\s*AGENT SETUP: BEGIN\s*-->[\s\S]*?<!--\s*AGENT SETUP: END\s*-->/g, "");
   // backtick-wrapped references/...md  OR  styles/<x>.md
   const re = /`([a-zA-Z0-9_./-]+\.md)`/g;
   let m;
