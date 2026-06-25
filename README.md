@@ -73,6 +73,7 @@ DesignSoul/
 └── references/
     ├── anti-patterns.md            ← Every AI-default habit, with fixes
     ├── components.md               ← Professional UX standards per component
+    ├── component-method.md         ← How to design/rebuild ANY component like a pro
     ├── motion.md                   ← Global animation system
     ├── typography.md               ← Font pairing logic and type scale
     ├── color-theory.md             ← Deriving a palette with intent
@@ -121,7 +122,7 @@ When triggered, the AI:
 1. **Audits** your existing frontend — maps every component, color, font, animation
 2. **Defines a design system** — tokens for color, typography, spacing, motion
 3. **Checks anti-patterns** — kills every AI-default decision
-4. **Applies professional component standards** — per-component UX knowledge for 20+ component types
+4. **Applies professional component standards** — per-component UX knowledge for 20+ component types, plus a 9-pass design method that reaches the same bar for *any* component (listed or not, new or rebuilt)
 5. **Runs a global motion pass** — consistent animation system across everything
 6. **Visually verifies** — with a browser tool, it renders the result, screenshots at mobile/tablet/desktop, critiques against a rubric, and fixes what it finds
 7. **Runs the completion checklist** — doesn't stop until every item is checked

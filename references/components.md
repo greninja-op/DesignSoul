@@ -3,6 +3,11 @@
 For every component listed here, this is the professional standard.
 Not the minimum. The standard. What a real product team ships.
 
+> This file is the **lookup table** of known components. For a component that ISN'T listed
+> here — or when building one from scratch or rebuilding an existing one — use
+> `component-method.md`, the 9-pass thinking process that reaches this same bar for anything.
+> The standards below are what that method *produces* for these common cases.
+
 ---
 
 ## Navigation

@@ -61,8 +61,9 @@ Before writing a single line of CSS or JSX, read these core reference files in o
 
 1. `references/anti-patterns.md` — The AI default habits you must break
 2. `references/components.md` — Professional standards for every component type
-3. `references/motion.md` — The animation system (read this before adding ANY animation)
-4. `references/typography.md` — Font pairing and type scale logic
+3. `references/component-method.md` — How to design/rebuild ANY component like a pro
+4. `references/motion.md` — The animation system (read this before adding ANY animation)
+5. `references/typography.md` — Font pairing and type scale logic
 
 Then, conditionally:
 - If deriving colors from scratch → `references/color-theory.md`
@@ -140,10 +141,19 @@ These tokens are LAW. Every component uses them. Nothing is hardcoded.
 
 Work through the component list from your audit. For each component:
 
-1. Check `references/components.md` for the professional standard for that type
-2. Apply the design tokens
-3. Apply the motion system (see `references/motion.md`)
-4. Check against `references/anti-patterns.md` — are you doing anything on that list?
+1. Run the **9-pass Component Method** in `references/component-method.md` — this is the
+   professional thinking process: job → content hierarchy → anatomy → full state matrix →
+   behavior → layout/weight → responsive → accessibility → tokenize & critique.
+2. Check `references/components.md` for the known standard for that type (if it's listed).
+   If it's NOT listed, the Component Method is how you reach the same professional bar anyway.
+3. Apply the design tokens
+4. Apply the motion system (see `references/motion.md`)
+5. Check against `references/anti-patterns.md` — are you doing anything on that list?
+
+> Building from scratch: run the 9 passes forward.
+> Rebuilding an existing component: first run the "Rebuilding" audit in
+> `component-method.md` (recover the job, find missing states, decide restyle vs. restructure)
+> — never reskin a structurally broken component.
 
 **Order of priority:**
 1. Navigation (sets the tone for everything)
