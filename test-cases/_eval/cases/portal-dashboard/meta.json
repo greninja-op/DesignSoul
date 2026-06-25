@@ -1,0 +1,20 @@
+{
+  "id": "portal-dashboard",
+  "createdAt": "2026-06-25",
+  "editor": "kiro",
+  "model": "(record the model used)",
+  "stack": "react-vite-tailwind",
+  "style": "DE-SLOP REDESIGN (restructure permitted) — single page: Student Dashboard",
+  "prompt": "This UI looks AI-generated. Don't just restyle it — REDESIGN the student dashboard page like a senior product designer: rethink the layout, hierarchy, spacing, composition, and copy so it looks like a real human-made product. You may restructure components, not just reskin. Only change the student dashboard page. Pick a fitting personality and tell me your design decisions.",
+  "mentionedSkill": false,
+  "agentConsultedSkill": null,
+  "scope": "single page: student dashboard only",
+
+  "repoUrl": "https://github.com/greninja-op/integrated-campus-portal-test.git",
+  "branch": "dev",
+  "subdir": "frontend",
+  "beforeCommit": "f830bdc",
+  "afterRef": "origin/dev",
+
+  "notes": "Tests the REDESIGN path (structure may change), unlike portal-glass which was a reskin. before = f830bdc (current glass state of the dashboard); after = the redesigned dashboard. Judge by the student-dashboard before/after screenshots specifically. Run: node sync-case.mjs portal-dashboard after they push."
+}
