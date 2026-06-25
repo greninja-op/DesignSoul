@@ -86,6 +86,7 @@ DesignSoul/
     ├── components.md               ← Professional UX standards per component + disclosure-pattern picker
     ├── component-method.md         ← How to design/rebuild ANY component like a pro
     ├── visual-hierarchy.md         ← Perception & Gestalt: how the eye ranks and groups a screen
+    ├── spacing.md                  ← The spacing system: 4pt base, 9-token scale, gap rules (the senior tell)
     ├── layout-grids.md             ← Column grids, 8pt spacing, alignment, responsive structure
     ├── depth.md                    ← Craft of shadows & gradients (kills the default flat card shadow)
     ├── imagery.md                  ← Photos, illustrations & icons: selection and treatment

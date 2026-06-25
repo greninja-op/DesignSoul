@@ -20,7 +20,7 @@ Every unchecked item is a reason to keep working.
 
 - [ ] Color tokens defined — primary, surface, border, text hierarchy, accent, error, success
 - [ ] Typography system defined — display font, body font, type scale
-- [ ] Spacing scale defined — 4px base unit, named steps
+- [ ] Spacing scale defined — 4pt base, finite 9-token scale, every gap from it (see `spacing.md`)
 - [ ] Grid/layout system defined — column grid for the page, 8pt/4pt soft spacing (see `layout-grids.md`)
 - [ ] Radius scale defined — sm, md, lg, full
 - [ ] Elevation scale defined — 5 levels, using soft/tinted/layered shadows (see `depth.md`)
@@ -94,6 +94,8 @@ Check that EVERY component present in the codebase has been addressed:
 
 - [ ] Each screen has one clear focal point; ≤3 competing levels; one primary action per view
 - [ ] Related elements grouped by proximity/region; intra-group spacing tighter than inter-group
+- [ ] Bigger gap above a heading than below it; section gaps 2–3× within-section gaps (`spacing.md`)
+- [ ] Padding (inside) vs margin (outside) kept distinct; every gap from the 9-token scale
 - [ ] Everything aligns to the grid; background stays soft so foreground wins
 - [ ] Passes the **squint test** (hierarchy obvious with detail blurred)
 - [ ] No default `0 2px 4px rgba(0,0,0,0.1)` shadow; shadows soft, tinted (not pure black), layered

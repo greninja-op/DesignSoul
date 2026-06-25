@@ -73,6 +73,8 @@ Then, conditionally:
 - Laying out any screen or ranking what matters (nearly always) → `references/visual-hierarchy.md`
   (perception, Gestalt grouping, the five hierarchy levers, the squint test)
 - Building page/component layout, grids, spacing, alignment → `references/layout-grids.md`
+- Defining or applying the spacing scale (nearly always) → `references/spacing.md`
+  (the 4pt base, 9-token scale, and the gap rules that read as senior vs junior)
 - Adding elevation, shadows, or gradients → `references/depth.md` (kills the default `0 2px 4px` shadow)
 - Using photos, illustrations, or icons → `references/imagery.md`
 - If deriving colors from scratch → `references/color-theory.md`
@@ -155,6 +157,7 @@ TYPOGRAPHY:
 
 SPACING SCALE: (4px base unit)
   xs: 4px | sm: 8px | md: 16px | lg: 24px | xl: 32px | 2xl: 48px | 3xl: 64px
+  ← full 9-token scale + per-token jobs + the gap/rhythm rules: references/spacing.md
 
 RADIUS SCALE:
   sm: | md: | lg: | full:
@@ -170,9 +173,10 @@ MOTION SYSTEM:  ← defined in references/motion.md
 
 These tokens are LAW. Every component uses them. Nothing is hardcoded.
 
-Define the **grid and spacing system** here too (`references/layout-grids.md`): column grid for
-the page (12-col web default; fixed/capped width for forms and articles), and an 8pt/4pt soft
-spacing scale that every gap, margin, and padding draws from. Define **depth** (`references/depth.md`)
+Define the **grid and spacing system** here too (`references/layout-grids.md` for the column grid;
+`references/spacing.md` for the 4pt base, 9-token scale, and gap rules): page columns (12-col web
+default; fixed/capped width for forms and articles), and a spacing scale that every gap, margin,
+and padding draws from — bigger gaps between groups than within them. Define **depth** (`references/depth.md`)
 so the elevation scale uses soft, tinted, layered shadows — never the default `0 2px 4px` — and so
 any gradients are intentional, not muddy.
 

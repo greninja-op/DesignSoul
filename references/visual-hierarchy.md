@@ -124,5 +124,6 @@ This is the single fastest design check there is — run it on every screen.
 - [ ] Bold color is reserved for what matters, not sprayed across the screen
 - [ ] Passes the squint test — hierarchy still obvious with detail blurred
 
-Pairs with: `layout-grids.md` (the structure hierarchy sits on), `typography.md` (size/weight),
-`color-theory.md` (contrast), `ux-laws.md` (cognitive load, "show less"), `critique.md` (squint test).
+Pairs with: `layout-grids.md` (the structure hierarchy sits on), `spacing.md` (proximity/grouping
+gaps), `typography.md` (size/weight), `color-theory.md` (contrast), `ux-laws.md` (cognitive load,
+"show less"), `critique.md` (squint test).

@@ -39,7 +39,9 @@ everything aligns and responsive behavior becomes predictable.
 
 ## The 8pt System (the component-level skeleton)
 
-Within and between components, space everything in multiples of a base unit. Most screens and
+Within and between components, space everything in multiples of a base unit. (The full spacing
+system — the 4pt base, the 9-token scale with a job for each token, the gap/rhythm rules, and the
+junior-vs-senior tells — lives in `spacing.md`; this section is the layout-level summary.) Most screens and
 device sizes are divisible by 8, so an **8pt system** (8, 16, 24, 32, 40, 48…) keeps spacing
 consistent and snaps cleanly to pixels. For dense mobile UI, a **4pt** base gives finer control.
 
@@ -119,5 +121,6 @@ If you need columns on mobile, use 2 (occasionally 4), not 12.
 - [ ] Body line length ~50–75 characters; type never shrunk below ~16px to fit content
 - [ ] Mobile-first with multiple breakpoints; grid reflows at content break points
 
-Pairs with: `visual-hierarchy.md` (what the structure ranks), `modern-css.md` (grid/clamp/container
-queries), `typography.md` (measure, baseline), `components.md` (per-component spacing).
+Pairs with: `spacing.md` (the gap system in depth), `visual-hierarchy.md` (what the structure ranks),
+`modern-css.md` (grid/clamp/container queries), `typography.md` (measure, baseline), `components.md`
+(per-component spacing).
