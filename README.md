@@ -402,6 +402,8 @@ Open an issue with a before/after example. That's the most useful contribution.
 - [x] Dark mode strategy (cross-cutting)
 - [x] Expanded style library (13 styles)
 - [x] Test-cases directory (framework + first worked example)
+- [x] Eval harness (`test-cases/_eval/`) — auto-records before→after code diff + slop/craft metrics + craft scorecards
+- [ ] Run a real eval batch (~8–12 cases, control vs DesignSoul) and publish the deltas
 - [ ] Complete the remaining test-case fixtures (trackers, forms, chat, calendar, table)
 - [ ] Before/after example screenshots
 - [ ] Tailwind-specific token mappings

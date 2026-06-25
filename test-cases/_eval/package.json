@@ -1,0 +1,12 @@
+{
+  "name": "designsoul-eval",
+  "private": true,
+  "type": "module",
+  "description": "Eval harness for DesignSoul: records before/after code diffs + slop metrics + craft scores.",
+  "scripts": {
+    "new": "node new-case.mjs",
+    "analyze": "node analyze.mjs",
+    "summary": "node summary.mjs",
+    "scan": "node slop-scan.mjs"
+  }
+}

@@ -18,6 +18,15 @@ _tmp_*
 # Source material (read for research, not part of the skill)
 *.pdf
 
+# Eval harness — raw case material stays local (throwaway code + screenshots, possibly private).
+# Lightweight evidence (meta.json, case.md, metrics.json, SUMMARY.md) stays tracked.
+test-cases/_eval/cases/*/before/
+test-cases/_eval/cases/*/after/
+test-cases/_eval/cases/*/control/
+test-cases/_eval/cases/*/screenshots/
+test-cases/_eval/cases/*/diff.patch
+test-cases/_eval/node_modules/
+
 # Editor / OS
 .DS_Store
 Thumbs.db

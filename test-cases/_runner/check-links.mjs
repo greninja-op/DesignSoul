@@ -11,7 +11,7 @@ let checked = 0;
 
 function walk(dir) {
   for (const name of readdirSync(dir)) {
-    if (name === ".git" || name === "node_modules" || name === "_runner") continue;
+    if (name === ".git" || name === "node_modules" || name === "_runner" || name === "_eval") continue;
     const p = join(dir, name);
     const s = statSync(p);
     if (s.isDirectory()) walk(p);
