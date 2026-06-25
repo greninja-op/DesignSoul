@@ -125,21 +125,94 @@ DesignSoul/
 
 ---
 
+## How to Install
+
+Cloning the repo into a folder is **not enough by itself** — the files have to live where your
+editor's skill/rules system looks. Pick your editor:
+
+### Claude Code
+Clone it straight into the skills directory (project-level or global), then restart:
+
+```bash
+# project-level (this repo only)
+git clone https://github.com/greninja-op/DesignSoul.git .claude/skills/designsoul
+
+# or global (available in every project)
+git clone https://github.com/greninja-op/DesignSoul.git ~/.claude/skills/designsoul
+```
+
+Claude reads the `name` + `description` in `SKILL.md`'s frontmatter automatically and pulls the
+full skill in **on demand** when a task matches. No need to mention it every time (see *Activation*
+below).
+
+### Claude.ai
+Zip the `DesignSoul/` folder and upload it under **Settings → Capabilities → Skills** (Skills /
+Code execution must be enabled). Claude invokes it automatically by description.
+
+### Cursor / Windsurf
+There's no native `SKILL.md` concept — point a rule at it. Clone the repo somewhere in your project
+(e.g. `tools/designsoul/`), then add `.cursor/rules/designsoul.mdc` (or the `.windsurf/rules/`
+equivalent):
+
+```md
+---
+description: Senior product-design judgment for any UI/styling work — apply named visual styles, kill AI-default looks, enforce tokens/spacing/motion, fix component UX.
+globs:
+alwaysApply: false
+---
+For ANY UI, styling, component, animation, or "make this look better/less AI-generated" task,
+first read `tools/designsoul/SKILL.md` and follow its Step 0 reading list, then load the
+references it points to before changing code.
+```
+
+Set `alwaysApply: true` (and remove the `globs`) if you want it enforced on **every** prompt
+instead of letting the agent decide (see *Activation*).
+
+### Kiro
+Add a steering file under `.kiro/steering/` (e.g. `designsoul.md`) pointing at the cloned skill:
+
+```md
+---
+inclusion: always
+---
+For any UI/styling/component/animation task, consult `#[[file:tools/designsoul/SKILL.md]]`
+and load the references it lists before editing.
+```
+
+Use `inclusion: manual` instead if you'd rather trigger it yourself with `#designsoul`.
+
+---
+
+## Activation — tell it once, or every time?
+
+This is the part that decides whether the skill actually gets used. There are two modes:
+
+- **Description-triggered** (Claude Code skills, Claude.ai, Cursor *Agent Requested*): you **don't**
+  re-specify each time. Only the short description stays in context; when a task matches, the agent
+  auto-loads the full skill + the relevant references — and re-triggers on the next UI request on
+  its own. It's reliable but ultimately the model's judgment, so occasionally you may nudge it with
+  *"use DesignSoul."*
+- **Always-on** (Cursor `alwaysApply: true`, Kiro `inclusion: always`, legacy `.cursorrules`): the
+  rule is injected into **every** prompt — guaranteed, no re-specifying — but you don't want all ~28
+  reference files always in context.
+
+**Recommended (most reliable) setup is the hybrid:** a *tiny* always-on rule that says "before any
+UI change, open `SKILL.md` and load the relevant references first," while `SKILL.md`'s progressive
+disclosure loads the heavy files only when needed. That forces the agent to consult the skill every
+time — even when you don't mention it — without bloating the context window. The snippets above are
+written for exactly this.
+
+> Note: the agent doesn't "remember" the skill across turns like a person. Each turn it only sees
+> what's injected (always-on rules) or what it chooses to load (description-triggered). That's why
+> the small always-on nudge is what makes "apply it without me asking again" actually reliable.
+
+---
+
 ## How to Use
 
-### In Claude Code
-1. Copy the `DesignSoul/` folder into your project root
-2. Claude Code will automatically detect it as a skill
-3. Ask Claude to apply it: *"Use DesignSoul to convert my UI to liquid glass style"*
-
-### In Cursor / Windsurf / other AI editors
-1. Copy the `DesignSoul/` folder into your project
-2. Reference it in your request: *"Using the DesignSoul skill in my project, redesign my frontend with glassmorphism"*
-3. Or add `SKILL.md` content to your `.cursorrules` / system prompt
-
-### As a Claude.ai Skill
-1. Upload the skill via Claude.ai Settings → Skills
-2. Claude will automatically use it when you ask for UI work
+Once installed, just describe the work — *"convert my UI to liquid glass,"* *"make this navbar feel
+like a real product,"* *"fix the UX of my order tracker."* With the recommended setup the agent
+reads the skill and its references before touching your UI, even if you don't name it again.
 
 ---
 

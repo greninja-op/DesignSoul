@@ -20,7 +20,10 @@ function walk(dir) {
 }
 
 function checkFile(file) {
-  const text = readFileSync(file, "utf8");
+  const raw = readFileSync(file, "utf8");
+  // Ignore fenced code blocks — they contain illustrative snippets/example paths,
+  // not document links to validate.
+  const text = raw.replace(/```[\s\S]*?```/g, "");
   // backtick-wrapped references/...md  OR  styles/<x>.md
   const re = /`([a-zA-Z0-9_./-]+\.md)`/g;
   let m;
