@@ -295,20 +295,26 @@ offering directions, make at least one genuinely bold/characterful — don't let
 
 ---
 
-## Step 5c — Tell the User How to Run It (Dependencies & Commands)
+## Step 5c — Tell the User How to Run It (Dependencies & Commands) — MANDATORY
 
-Never leave the user guessing whether the redesign actually runs. As part of the handoff, state
-explicitly:
-- **New dependencies** you introduced and the exact install command (e.g. `npm i <pkg>`), OR a
-  clear **"no new dependencies — it builds as-is."**
-- **Assets/fonts** added and how they load (CDN `<link>`, self-hosted, or a font package to install).
-- **Config touched** (Tailwind/theme/build) and whether anything must be regenerated.
-- **The command to see it** (`npm run dev`, the dev URL) and the **build/verify command** you ran
-  (and its result — "production build passes, 0 errors").
-- Any **manual follow-up** the user must do (env vars, restart the dev server, clear cache).
+**This is a hard requirement, not a courtesy. The redesign is NOT "done" until the project still
+builds/runs and the user has been told exactly how to run it. A beautiful redesign that doesn't
+run — or that the user can't start because a dependency/font/config step was never mentioned — is
+a FAILED task, no matter how good the CSS looks.**
 
-If you ran the build/dev server, say so and report the outcome. If you couldn't, say that too. The
-goal: the user knows exactly what (if anything) to install or run before the new UI works.
+Before handing back, you MUST:
+1. **Verify it still works.** Run the build and/or start the dev server. If it errors, fix it —
+   don't hand back broken code. If you genuinely cannot run it (no shell/sandbox), say so explicitly.
+2. **State every dependency you introduced** + the exact install command (e.g. `npm i <pkg>`), OR
+   a clear **"no new dependencies — it builds as-is."** Never leave this unsaid.
+3. **List assets/fonts** added and how they load (CDN `<link>`, self-hosted, or a font package).
+4. **List config touched** (Tailwind/theme/build) and whether anything must be regenerated.
+5. **Give the exact commands** to see it (`npm run dev`, the dev URL) and the build/verify command
+   you ran **with its result** ("production build passes, 0 errors").
+6. **Flag any manual follow-up** (env vars, dev-server restart, cache clear, new package install).
+
+If you skipped or couldn't do step 1, say that plainly. The user must finish reading your handoff
+knowing precisely what to install and run before the new UI works — with zero guessing.
 
 ---
 

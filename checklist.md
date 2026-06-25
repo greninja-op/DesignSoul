@@ -215,10 +215,12 @@ SKIPPED and tell the user the output is unverified — do not silently pass it.)
 
 ---
 
-## Phase 5b: Handoff — How to Run It
+## Phase 5b: Handoff — How to Run It (MANDATORY — a redesign that won't run is a failed task)
 
-(See `SKILL.md` Step 5c. Never leave the user guessing whether the redesign runs.)
+(See `SKILL.md` Step 5c. Verify it builds/runs and tell the user exactly how to run it. Do not
+hand back until these are true or you've plainly stated you couldn't run it.)
 
+- [ ] Verified the project still builds / the dev server starts (or stated plainly you couldn't run it)
 - [ ] Stated new dependencies + exact install command — OR "no new dependencies, builds as-is"
 - [ ] Noted any fonts/assets added and how they load (CDN link / self-hosted / package)
 - [ ] Noted config touched (Tailwind/theme/build) and anything to regenerate
