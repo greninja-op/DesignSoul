@@ -79,7 +79,8 @@ DesignSoul/
 └── references/
     ├── design-context.md           ← Start from existing context (the most important idea)
     ├── design-system-doc.md        ← The DESIGN.md artifact: a project's design system of record
-    ├── brand-design-languages.md   ← Offline library of real companies' design languages ("like Apple")
+    ├── brand-design-languages.md   ← Offline brand library index + category patterns ("like Apple", "a car site")
+    ├── brands/                      ← 73 per-brand design languages (Apple, BMW, Stripe, Spotify, …)
     ├── anti-patterns.md            ← Every AI-default habit + the deeper content slop, with fixes
     ├── components.md               ← Professional UX standards per component
     ├── component-method.md         ← How to design/rebuild ANY component like a pro

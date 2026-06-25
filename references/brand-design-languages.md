@@ -1,82 +1,133 @@
 # Brand Design Languages (Offline Library)
 
-A reference library of real companies' website design languages. When the user asks to make
-their UI "look like <Company>'s site" (Apple, Stripe, Linear, Vercel, Notion, Airbnb, …), the
-agent reads that brand's entry here and applies its design language — **no web lookup needed**.
+A library of real companies' website design languages, one detailed file per brand in
+`references/brands/`. Each file has the full token set (color, typography, spacing, radius),
+component specs, do's/don'ts, responsive behavior, and open-source font substitutes.
 
-> Purpose: turn "redesign my UI to feel like Apple" into a precise, repeatable conversion using
-> a documented design language, the same way the named-style files work — but for real brands.
-
----
-
-## How the skill uses this file
-
-1. The user names a real company/brand to emulate.
-2. Read **only that brand's section** below (don't load the whole file — progressive disclosure).
-3. Translate its design language into a project token set (color, type, spacing, motion, etc.),
-   exactly like Step 2 of `SKILL.md`, and apply it across the components.
-4. Calibrate against the user's content — match the *language*, never copy the brand's logo,
-   exact copy, or trademarked assets. The goal is "feels like that brand's design system,"
-   not "is a clone of that brand's page."
-5. Verify and critique as normal (`verification.md`, `critique.md`).
-
-If a requested brand isn't in this library yet, say so and fall back to asking the user for a
-screenshot/URL (per `design-context.md`).
+When the user wants their UI to look like a real brand — or like "a car-selling site" / "a music
+app" — the agent reads the relevant brand file(s) here. **No web lookup needed.**
 
 ---
 
-## Entry format (use this for every brand)
+## Two ways to use this library
 
-Keep each brand a self-contained `##` section so it can be read in isolation. Fill what's known;
-mark gaps honestly. Suggested schema:
+### 1. Exact-brand mode — "make it look like Apple / Spotify / Stripe"
+1. Open `references/brands/<brand>.md`.
+2. Lift its tokens into the project design system (Step 2 of `SKILL.md`) and apply across components.
+3. Match the *design language* — type, color, spacing, motion, component grammar. **Never** copy
+   the brand's logo, trademarked imagery, product photography, or verbatim marketing copy.
+4. Result: "feels like that brand's design system," not "a clone of their page."
 
-```markdown
-## <Brand> — <one-line essence>
-**Recognizable by:** the 2–3 cues that instantly read as this brand
-**Typography:** display / body / mono families + scale + weight notes (open-source substitutes if the brand font is proprietary)
-**Color:** palette with hex/oklch — neutrals + accent(s), light/dark
-**Spacing & density:** base unit, how generous/tight
-**Layout:** grid, max-width, hero approach, section rhythm
-**Motion:** signature easing/durations, scroll behavior, hover feel
-**Imagery:** photography / illustration / 3D / product-shot style
-**Components:** button, card, nav signatures
-**Voice/copy (optional):** tone of the words
-**Pure-HTML/CSS fidelity:** what's achievable with no proprietary assets (and what degrades)
-**Apply when user says:** trigger phrases ("like Apple", "Apple-style", …)
-```
+### 2. Category-inspiration mode — "build a website for selling cars / a music app / a fintech app"
+1. Identify the category and pull the relevant brand files (see catalog below).
+2. Read 2–4 of them and **synthesize a fresh design language** from their shared patterns
+   (see "Category Patterns") — don't copy a single brand; combine the category's DNA with the
+   user's own content and brand.
+3. This is the strongest use: the agent now designs a car site the way someone who has studied
+   BMW, Ferrari, Bugatti, and Tesla would — not from a blank page.
 
-Rules for entries:
-- Substitute open-source fonts for proprietary brand fonts (e.g. note the real font, then give a free stand-in).
-- These are **observational descriptions of public design languages**, kept approximate and
-  updated as brands evolve — not official brand guidelines.
-- Never instruct copying logos, trademarked imagery, or verbatim marketing copy.
+Either way: write the resulting system to `DESIGN.md` (`design-system-doc.md`), then verify and
+critique as normal. If a requested brand isn't in the library, say so and fall back to asking for
+a screenshot/URL (`design-context.md`).
 
 ---
 
-## Brand Index
+## Catalog (by category)
 
-(Filled in as brands are added. Each links to its section below.)
+> Read only the file(s) you need — progressive disclosure. Files live in `references/brands/`.
 
-| Brand | Essence | Trigger phrases |
-|---|---|---|
-| Apple | Calm, premium, product-as-hero | "like Apple", "Apple-style", "apple.com" |
-| _…add more…_ | | |
+### Automotive
+`bmw` · `bmw-m` · `bugatti` · `ferrari` · `lamborghini` · `renault` · `tesla`
+
+### AI / ML products
+`claude` · `cohere` · `mistral-ai` · `x-ai` · `minimax` · `together-ai` · `runwayml` ·
+`replicate` · `ollama` · `elevenlabs` · `cursor` · `lovable` · `composio` · `voltagent`
+
+### Developer tools & infrastructure
+`linear-app` · `vercel` · `warp` · `raycast` · `supabase` · `mongodb` · `clickhouse` ·
+`hashicorp` · `sentry` · `posthog` · `resend` · `expo` · `mintlify` · `sanity` ·
+`opencode-ai` · `figma` · `framer` · `webflow` · `miro` · `airtable` · `cal` · `zapier`
+
+### Fintech / crypto / payments
+`stripe` · `coinbase` · `binance` · `kraken` · `revolut` · `wise` · `mastercard`
+
+### Commerce / consumer / travel
+`shopify` · `airbnb` · `uber` · `starbucks` · `pinterest`
+
+### Communication / productivity
+`slack` · `discord` · `intercom` · `notion` · `superhuman`
+
+### Media / editorial
+`theverge` · `wired` · `spotify` *(music/streaming)*
+
+### Big tech / enterprise / hardware
+`apple` · `meta` · `ibm` · `nvidia` · `vodafone` · `spacex`
+
+### Gaming / entertainment
+`playstation` · `nintendo-2001` *(retro)*
+
+### Retro / archival (period-accurate looks)
+`dell-1996` · `nintendo-2001`
+
+### Agency / brand / other
+`clay`
 
 ---
 
-## Apple — calm, premium, product-as-hero  *(format example — refine/replace with your pasted data)*
+## Category Patterns (cross-brand DNA — use in inspiration mode)
 
-**Recognizable by:** enormous whitespace; a single product shot as the hero; huge thin headline + small subhead, center-aligned; near-silent chrome.
-**Typography:** SF Pro Display/Text (proprietary) → open-source stand-in: Inter / Geist. Very large hero headlines, tight tracking, light-to-semibold weights.
-**Color:** mostly white (#FFFFFF) and near-black (#1D1D1F) text on white or black sections; neutral grays (#F5F5F7 surface); color comes from the product imagery, not the chrome.
-**Spacing & density:** extremely generous; large vertical section padding; content breathes.
-**Layout:** centered, full-bleed sections stacked vertically; max content width with big margins; one idea per section.
-**Motion:** smooth scroll-triggered reveals (fade + subtle rise), gentle easing, restrained; occasional pinned/scroll-scrubbed product animations.
-**Imagery:** high-resolution product photography, full-bleed, often on pure black or pure white.
-**Components:** pill buttons (blue accent #0071E3), minimal nav bar that's translucent on scroll, clean rounded cards.
-**Voice/copy:** short, confident, benefit-led.
-**Pure-HTML/CSS fidelity:** layout, type scale, whitespace, scroll reveals — high. The hero *product photography/3D* is the soul and needs real assets; without them, use a clean placeholder (don't fake it with bad SVG).
-**Apply when user says:** "like Apple", "Apple-style", "apple.com look".
+Distilled from the library so the agent designs *like a category specialist*, not from scratch.
 
-> ↑ This Apple entry is an illustrative example of the format using widely-known public design
-> traits. Replace or refine it with your own pasted data; user-provided entries take precedence.
+### Automotive (BMW, Ferrari, Bugatti, Lamborghini, Tesla, Renault)
+- **Photography-first**: full-bleed vehicle renders carry the page; depth comes from photo +
+  color-block contrast, **not** drop shadows.
+- **Rectangular, 0px-radius buttons** ("engineered precision"); single brand-color accent.
+- **Heavy display weight + light body** type contrast; generous 80–96px section rhythm.
+- Light canvas with **dark hero bands** for rhythm; configurator/inventory grids for models.
+- Luxury tier (Bugatti/Ferrari/Lamborghini) → near-black, gold/red accents, cinematic, sparse.
+  Mainstream (BMW/Tesla/Renault) → cleaner, more functional, lighter.
+
+### Music / streaming (Spotify)
+- **Near-black immersive theme**; album art / content is the only real color.
+- Single functional accent (used only for play/active/CTA, never decoration).
+- **Pill + circle geometry**; compact dense type; heavy shadows for elevation on dark.
+
+### Fintech / crypto / payments (Stripe, Coinbase, Revolut, Wise, Mastercard)
+- **Trust signals**: restrained, confident palettes (deep navy/black) — or boldly branded (Revolut).
+- **Tabular numbers everywhere** for money/metrics; precise alignment.
+- Gradients used sparingly and intentionally (Stripe's angled multi-color band is the exception).
+- Rounded-but-serious components; security and clarity over decoration.
+
+### AI / ML products (Claude, Mistral, Cohere, Runway, x.ai)
+- Either **warm-editorial** (cream + serif/sans, e.g. Claude) or **dark + restrained**.
+- **Monospace accents** for technical credibility; generous whitespace; one accent.
+- Subtle gradient/aurora glows, never neon; the product demo is the hero.
+
+### Developer tools & infra (Linear, Vercel, Warp, Supabase, Sentry, Raycast)
+- **Intentional dark** (near-black, not pure `#000`; avoid the GitHub-dark `#0D1117`+neon cliché).
+- **Monospace as a personality font**; hairline grids; bento layouts; restrained accent glow.
+- Tight, negative-tracked geometric sans display; high craft, low decoration.
+
+### Commerce / consumer / travel (Shopify, Airbnb, Uber, Starbucks)
+- **Warmer and friendlier**; rounded components; lifestyle photography.
+- Clear, prominent CTAs; approachable type; generous imagery.
+
+### Media / editorial (The Verge, Wired)
+- **Dense information** with strong type hierarchy; hairline dividers; big headlines.
+- Photography framed with thin outlines; multi-column rhythm.
+
+### Retro / archival (Dell-1996, Nintendo-2001)
+- Period-accurate: system fonts, beveled/3D buttons, table-based layouts, web-safe palettes.
+- Use deliberately when the user wants a nostalgic or throwback aesthetic.
+
+---
+
+## Rules
+
+- These files are **observational descriptions of public design languages**, kept approximate and
+  evolving — not official brand guidelines.
+- Use the design *language* only. Never reproduce logos, trademarked assets, product photography,
+  or verbatim copy; never imply affiliation.
+- Substitute open-source fonts for proprietary brand fonts (each file lists a stand-in).
+- In inspiration mode, **synthesize** — combine category DNA with the user's content. Don't ship a
+  pixel-clone of one brand under a different name.
