@@ -111,7 +111,7 @@ Everything spaced 24px apart regardless of relationship.
   padding: 24px;
 }
 ```
-**Fix:** Cards need identity. What is this card FOR? A product card looks different from a stat card looks different from a user profile card. The shape, density, and visual weight should reflect the content's purpose.
+**Fix:** Cards need identity. What is this card FOR? A product card looks different from a stat card looks different from a user profile card. The shape, density, and visual weight should reflect the content's purpose. The shadow itself is also a tell — that flat `0 2px 4px rgba(0,0,0,0.1)` is the default everyone recognizes; replace it with a soft, tinted, layered shadow (see `depth.md`).
 
 ---
 

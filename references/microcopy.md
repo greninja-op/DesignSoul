@@ -31,6 +31,9 @@ afterthought.
    not both).
 7. **Honest and respectful.** No fake urgency, guilt, or manipulation — that's a dark pattern
    (see `anti-patterns.md`). Don't blame the user for errors.
+8. **Sound human.** Use contractions ("that's", "don't", "you'll") unless the product is
+   deliberately formal — they make copy feel written by a person, not a system. When an error
+   occurs, suggest the fix ("No internet connection. Try restarting your router.").
 
 ---
 
@@ -86,6 +89,11 @@ Never just "No data." An empty state should explain the space and offer the firs
   its 14 files. This can't be undone."
 - Make the confirm button name the action ("Delete project"), and don't make destructive the
   default focus (see `components.md`).
+- **Name the specific object** when you can — "Yes, remove `report-q3.pdf`" / "No, keep it" — so
+  the user is certain what they're acting on.
+- **Avoid double negatives.** "Cancel your subscription?" with **Yes / Cancel** buttons is
+  confusing (does "Cancel" cancel the subscription, or the dialog?). Use action-named buttons:
+  **"Cancel subscription" / "Keep subscription"**.
 - Prefer **Undo** over a confirm dialog where the action is reversible — less friction, safer.
 
 ### Tooltips & helper text

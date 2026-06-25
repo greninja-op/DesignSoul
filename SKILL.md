@@ -68,6 +68,13 @@ Before writing a single line of CSS or JSX, read these core reference files in o
 7. `references/typography.md` — Font pairing and type scale logic
 
 Then, conditionally:
+- Deciding the overall feel / "make it not look generic" (nearly always, do this first) → `references/personality.md`
+  (the target feeling that drives color, type, shape, motion, copy — decide it before building)
+- Laying out any screen or ranking what matters (nearly always) → `references/visual-hierarchy.md`
+  (perception, Gestalt grouping, the five hierarchy levers, the squint test)
+- Building page/component layout, grids, spacing, alignment → `references/layout-grids.md`
+- Adding elevation, shadows, or gradients → `references/depth.md` (kills the default `0 2px 4px` shadow)
+- Using photos, illustrations, or icons → `references/imagery.md`
 - If deriving colors from scratch → `references/color-theory.md`
 - Building or reviewing real interactive UI (nearly always) → `references/accessibility.md`
   (keyboard, focus, ARIA, contrast, screen readers — AI-default UI fails this by default)
@@ -96,6 +103,11 @@ Do not skip the core reads. They are short. Reading them takes less time than fi
 codebase tokens, live product, or brand. Read the code and lift exact values. Designing from
 scratch is the last resort and produces generic work — anchor to what exists, and vocalize the
 system you extracted before building.
+
+**Then decide the personality** (`references/personality.md`): what should this product *feel*
+like, based on its audience and brand? This single decision steers color, type, shape, motion,
+imagery, and copy — choosing it up front is what stops the output from feeling generic. State the
+target feeling before building.
 
 Then audit the existing codebase:
 
@@ -149,11 +161,20 @@ RADIUS SCALE:
 
 ELEVATION SCALE:
   0 (flat) | 1 (card) | 2 (dropdown) | 3 (modal) | 4 (toast)
+  ← shadow + gradient craft for these levels: references/depth.md
+
+LAYOUT / GRID:  ← column grid + 8pt spacing system: references/layout-grids.md
 
 MOTION SYSTEM:  ← defined in references/motion.md
 ```
 
 These tokens are LAW. Every component uses them. Nothing is hardcoded.
+
+Define the **grid and spacing system** here too (`references/layout-grids.md`): column grid for
+the page (12-col web default; fixed/capped width for forms and articles), and an 8pt/4pt soft
+spacing scale that every gap, margin, and padding draws from. Define **depth** (`references/depth.md`)
+so the elevation scale uses soft, tinted, layered shadows — never the default `0 2px 4px` — and so
+any gradients are intentional, not muddy.
 
 **Write the system down.** Persist it as a `DESIGN.md` at the project root using the template in
 `references/design-system-doc.md` — product context, aesthetic direction, type, color, spacing,
@@ -173,10 +194,14 @@ Work through the component list from your audit. For each component:
 2. Check `references/components.md` for the known standard for that type (if it's listed).
    If it's NOT listed, the Component Method is how you reach the same professional bar anyway.
 3. Apply the design tokens
-4. Apply the motion system (see `references/motion.md`)
-5. Write its real text well — labels, buttons, errors, empty states (`references/microcopy.md`)
-6. Make it accessible — semantics, keyboard, focus, contrast, ARIA (`references/accessibility.md`)
-7. Check against `references/anti-patterns.md` — are you doing anything on that list?
+4. Establish its **visual hierarchy** (`references/visual-hierarchy.md`) — one clear focal point,
+   group related parts by proximity/region, rank with size/weight/color/position/space
+5. Apply the motion system (see `references/motion.md`)
+6. Treat any photos, illustrations, or icons per `references/imagery.md` (one icon set, real
+   imagery, overlays for text)
+7. Write its real text well — labels, buttons, errors, empty states (`references/microcopy.md`)
+8. Make it accessible — semantics, keyboard, focus, contrast, ARIA (`references/accessibility.md`)
+9. Check against `references/anti-patterns.md` — are you doing anything on that list?
 
 For any container that reveals/hides content (tabs, accordion, drawer, wizard, tree), pick the
 **right disclosure pattern** using the decision table in `components.md` — don't reach for tabs by

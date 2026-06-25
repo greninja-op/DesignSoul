@@ -9,6 +9,7 @@ Every unchecked item is a reason to keep working.
 
 - [ ] Looked for existing design context (design system, codebase tokens, live product, brand)
 - [ ] Lifted exact values from code where available (not redrawn from memory)
+- [ ] Decided the target **personality** (playful ↔ serious) from audience + brand — see `personality.md`
 - [ ] Vocalized the extracted system and confirmed direction with the user
 - [ ] Wrote/updated the project's `DESIGN.md` (source of truth) — see `design-system-doc.md`
 - [ ] If no context existed, told the user quality would drop and picked a deliberate direction
@@ -20,9 +21,11 @@ Every unchecked item is a reason to keep working.
 - [ ] Color tokens defined — primary, surface, border, text hierarchy, accent, error, success
 - [ ] Typography system defined — display font, body font, type scale
 - [ ] Spacing scale defined — 4px base unit, named steps
+- [ ] Grid/layout system defined — column grid for the page, 8pt/4pt soft spacing (see `layout-grids.md`)
 - [ ] Radius scale defined — sm, md, lg, full
-- [ ] Elevation scale defined — 5 levels
+- [ ] Elevation scale defined — 5 levels, using soft/tinted/layered shadows (see `depth.md`)
 - [ ] Motion tokens defined — durations and easings from motion.md
+- [ ] Every design choice agrees with the chosen personality (see `personality.md`)
 - [ ] If a named style was requested — style tokens loaded from styles/ file
 
 ---
@@ -82,6 +85,23 @@ Check that EVERY component present in the codebase has been addressed:
 ### Layout
 - [ ] Footer — purposeful, not 3-column default
 - [ ] Mobile layout — tested at 375px width
+
+---
+
+## Phase 3b: Visual Hierarchy, Depth & Imagery
+
+(Guides: `visual-hierarchy.md`, `depth.md`, `imagery.md`.)
+
+- [ ] Each screen has one clear focal point; ≤3 competing levels; one primary action per view
+- [ ] Related elements grouped by proximity/region; intra-group spacing tighter than inter-group
+- [ ] Everything aligns to the grid; background stays soft so foreground wins
+- [ ] Passes the **squint test** (hierarchy obvious with detail blurred)
+- [ ] No default `0 2px 4px rgba(0,0,0,0.1)` shadow; shadows soft, tinted (not pure black), layered
+- [ ] Shadows only on interactive/elevated elements; dark mode uses lighter surfaces, not white shadows
+- [ ] Gradients (if any) use close hues / oklch (no muddy midpoint) and are reserved, not everywhere
+- [ ] Photos are real/relevant with a clear focal point; text over images has an overlay
+- [ ] Imagery is stylistically consistent; all icons from one set with consistent weight/roundness
+- [ ] Unfamiliar icons labeled; interactive icons have ≥44px hit area + `aria-label`
 
 ---
 

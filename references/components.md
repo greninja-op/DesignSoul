@@ -53,6 +53,18 @@ Not the minimum. The standard. What a real product team ships.
 - Read time or date: one piece of metadata, not both unless essential
 - Image: 16:9 ratio, covers full card width
 
+### Card content & resilience (applies to every card)
+- **A card is a shorter version of a page.** List everything you *could* show, then include only
+  what helps the user make the decision the card exists for. More is not better — extra fields
+  clutter the scan and slow the choice. (Imagery rules: `imagery.md`.)
+- **Make it look clickable if it is** — subtle shadow/lift + cursor + hover (see `depth.md`); a
+  static card must not borrow those cues.
+- **Design for real data, not the happy path.** Set a line-clamp for long titles, a min/max width,
+  and a placeholder for missing images. Cards break ugliest when a name is twice as long as your
+  mockup or a photo is missing — handle both.
+- Pick one card style (filled+shadow, bordered, or tinted-surface) and use it consistently; don't
+  mix card styles in one view.
+
 ### Progress / Status Card (order tracking, delivery)
 **This is a specialty component — read carefully**
 - Steps must be clearly numbered with current step highlighted
@@ -111,6 +123,27 @@ Not the minimum. The standard. What a real product team ships.
 - Never show all errors at once — fix the first, reveal the next
 - Success state: green checkmark appears after valid input, stays visible
 
+### Form best practices (conversion = the goal)
+- **Keep it short.** Every field is friction; if it isn't needed, cut it. Don't ask for name +
+  email + username just to log in.
+- **Single-column layout.** The eye flows straight down without zig-zagging; multi-column forms
+  cause skipped fields and confusion.
+- **Don't overstyle inputs.** A white field with only a drop shadow looks like a button or card.
+  Inputs should read as inputs — a plain rectangle with a **border**. (A search bar outside a form
+  can be more stylized.)
+- **≤4 options → radio buttons, not a dropdown.** Dropdowns hide choices behind a click; for short
+  lists, show them. Use a dropdown (with search + scrollbar) only for long lists.
+- **Break long forms into steps** with a progress indicator — the same fields feel far easier
+  across 2–3 short steps than one wall (chunking, `ux-laws.md`).
+- **Group fields into semantic sections** with a little extra space between groups (contact info /
+  address / payment). Proximity does the work (`visual-hierarchy.md`).
+- **Mark optional, not required.** When most fields are required, label the few optional ones
+  ("(optional)") instead of asterisking everything. Never leave the user guessing.
+- **Explain why you ask** for sensitive info (phone, address) with a small inline hint/“?”.
+- **Offer social / SSO login** where possible — it removes the whole form for many users.
+- **Float the label** (placeholder → label on focus) is a good pattern; never use placeholder as
+  the only label (see `accessibility.md`).
+
 ---
 
 ## Buttons
@@ -135,6 +168,22 @@ default → hover → active (pressed) → loading → disabled
 - Default: `height: 40px`, `padding: 0 16px` — general use
 - Small: `height: 32px`, `padding: 0 12px` — dense UIs, tables
 - Never mix sizes on the same row without intent
+- Height floor for tappable CTAs: ~44–48px; mobile primary buttons usually go full-width (within margins)
+- Corner radius sets the feel: sharp/0 reads elegant/serious, rounded reads friendly — pick per
+  personality (`personality.md`) and keep it consistent across all buttons
+
+### VIBs — Very Important Buttons
+When a button does something irreversible or takes something from the user (charges a card,
+deletes data, places an order), make that consequence unmistakable. Label the **outcome**, not a
+vague step: **"Complete purchase"** / **"Pay $49"**, never "Continue". Add a line of context under
+it if money or data is involved. Ambiguous copy on a charge button is bad UX (and edges toward a
+dark pattern — see `ux-laws.md`).
+
+### Button pairs (Back/Continue, Cancel/Save)
+- The **more important action goes on the right**, the lesser (back/cancel) on the left — easiest
+  to reach with a right thumb, and matches reading-exit position. (Mirror for RTL — `i18n.md`.)
+- Style the primary as primary and the secondary as quieter — don't give both equal weight.
+- Don't show a "Back" on the first step of a flow (there's nowhere to go back to).
 
 ---
 
