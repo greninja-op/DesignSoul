@@ -166,6 +166,15 @@ Two artifacts let you resume without re-reading the world:
 Don't re-read every file to check the result. Instead:
 - **Grep** for the old values and for hardcoded bypasses — zero hits is the proof the token layer
   is doing the work.
+- **Run a final anti-pattern sweep** — a whole-frontend pass *will* leave a few AI-default tells in
+  stray files. Grep the converted code for each and fix every hit:
+  - `transition:\s*all` → name the exact properties (`polish.md`)
+  - `scale\(1\.0?5\)` → the AI-default hover (`anti-patterns.md`)
+  - `outline:\s*none` → must be paired with a visible `:focus-visible` ring (`accessibility.md`)
+  - the old hardcoded colors/shadows/radii that should now be tokens
+  - leftover `#3b82f6` / default shadow `0 2px 4px rgba(0,0,0,.1)` used as *styling* (chart/data
+    palette values are fine — judge by context)
+  Every hit is a cleanup item. Don't call a conversion "done" while these remain in real UI files.
 - **Render a few representative screens** (a primitive-heavy page, a bespoke page, a form) at the
   three viewports and critique them (`verification.md`). If the shared layer is right, the
   un-sampled screens are almost certainly right too.
@@ -191,6 +200,7 @@ rather than silently doing a shallow job on everything.
 - [ ] Bespoke screens done one isolated batch at a time (sub-agents where possible)
 - [ ] `DESIGN.md` + conversion manifest kept up to date (resumable after compaction)
 - [ ] Verified by grep + sampled renders, not by reloading every file
+- [ ] Final anti-pattern sweep done — zero `transition:all`, `scale(1.05)`, naked `outline:none`, or stray default colors/shadows left in real UI files
 - [ ] If it exceeds one pass, the user was told and given a converted-vs-remaining manifest
 
 Pairs with: `design-context.md` (find existing tokens), `design-system-doc.md` (DESIGN.md),

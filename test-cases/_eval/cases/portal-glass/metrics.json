@@ -1,18 +1,18 @@
 {
   "id": "portal-glass",
-  "generatedAt": "2026-06-25T21:10:26.447Z",
+  "generatedAt": "2026-06-25T21:17:07.418Z",
   "before": {
     "dir": "C:\\my files in athuls lap\\projects\\DESGINSOUL\\test-cases\\_eval\\cases\\portal-glass\\before",
-    "fileCount": 52,
+    "fileCount": 51,
     "negatives": {
-      "default_blue_3B82F6": 2,
-      "uniform_radius_8px": 2,
+      "default_blue_3B82F6": 0,
+      "uniform_radius_8px": 0,
       "default_card_shadow": 0,
       "transition_all": 5,
-      "inter_font": 0,
+      "inter_font_only": 0,
       "outline_none": 1,
       "scale_hover_1_05": 0,
-      "_total": 10
+      "_total": 6
     },
     "positives": {
       "css_tokens_var": 0,
@@ -23,23 +23,23 @@
       "_total": 3
     },
     "neutral": {
-      "hardcoded_hex_colors": 56,
+      "hardcoded_hex_colors": 49,
       "media_queries": 0,
-      "_total": 56
+      "_total": 49
     }
   },
   "after": {
     "dir": "C:\\my files in athuls lap\\projects\\DESGINSOUL\\test-cases\\_eval\\cases\\portal-glass\\after",
-    "fileCount": 52,
+    "fileCount": 51,
     "negatives": {
-      "default_blue_3B82F6": 2,
-      "uniform_radius_8px": 2,
+      "default_blue_3B82F6": 0,
+      "uniform_radius_8px": 0,
       "default_card_shadow": 0,
       "transition_all": 2,
-      "inter_font": 1,
+      "inter_font_only": 1,
       "outline_none": 2,
       "scale_hover_1_05": 1,
-      "_total": 10
+      "_total": 6
     },
     "positives": {
       "css_tokens_var": 99,
@@ -50,9 +50,9 @@
       "_total": 109
     },
     "neutral": {
-      "hardcoded_hex_colors": 65,
+      "hardcoded_hex_colors": 58,
       "media_queries": 1,
-      "_total": 66
+      "_total": 59
     }
   },
   "control": {
@@ -63,7 +63,7 @@
       "uniform_radius_8px": 0,
       "default_card_shadow": 0,
       "transition_all": 0,
-      "inter_font": 0,
+      "inter_font_only": 0,
       "outline_none": 0,
       "scale_hover_1_05": 0,
       "_total": 0

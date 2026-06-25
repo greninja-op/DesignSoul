@@ -27,15 +27,15 @@ _(filled by `node analyze.mjs portal-glass` — do not edit by hand)_
 <!-- AUTO:METRICS -->
 | Version | Files | AI-default signals (↓ better) | Craft signals (↑ better) | Hardcoded hex |
 |---|---|---|---|---|
-| before | 52 | 10 | 3 | 56 |
+| before | 51 | 6 | 3 | 49 |
 | control (no skill) | 0 | 0 | 0 | 0 |
-| **after (DesignSoul)** | 52 | 10 | 109 | 65 |
+| **after (DesignSoul)** | 51 | 6 | 109 | 58 |
 
-- before: **52 files** · AI-default signals **10** (default_blue_3B82F6 ×2, uniform_radius_8px ×2, transition_all ×5, outline_none ×1) · craft signals **3** (aria_attrs ×3) · 56 hardcoded hex, 0 @media
+- before: **51 files** · AI-default signals **6** (transition_all ×5, outline_none ×1) · craft signals **3** (aria_attrs ×3) · 49 hardcoded hex, 0 @media
 - control: **0 files** · AI-default signals **0** (none) · craft signals **0** (none) · 0 hardcoded hex, 0 @media
-- after: **52 files** · AI-default signals **10** (default_blue_3B82F6 ×2, uniform_radius_8px ×2, transition_all ×2, inter_font ×1, outline_none ×2, scale_hover_1_05 ×1) · craft signals **109** (css_tokens_var ×99, focus_visible ×1, reduced_motion ×1, aria_attrs ×2, modern_css ×6) · 65 hardcoded hex, 1 @media
+- after: **51 files** · AI-default signals **6** (transition_all ×2, inter_font_only ×1, outline_none ×2, scale_hover_1_05 ×1) · craft signals **109** (css_tokens_var ×99, focus_visible ×1, reduced_motion ×1, aria_attrs ×2, modern_css ×6) · 58 hardcoded hex, 1 @media
 
-_Generated 2026-06-25T21:10:26.447Z. Signals are heuristic proxies, not a verdict — pair with the screenshots and the craft scores below._
+_Generated 2026-06-25T21:17:07.418Z. Signals are heuristic proxies, not a verdict — pair with the screenshots and the craft scores below._
 <!-- /AUTO:METRICS -->
 
 ---
@@ -125,16 +125,20 @@ Open `references/anti-patterns.md` and tick any that STILL apply to the `after`:
 
 ---
 
-## Signal triage (manual — scanner needs context)
-The auto "AI-default signals" stayed 10 → 10, but most are **false positives** on inspection:
-- `default_blue_3B82F6` ×2 → intentional **chart palette** in `StudentAttendance.jsx` ("Excused" series), not a primary-blue tell.
-- `uniform_radius_8px` ×2 → in `public/debug-storage.html` (a **debug utility**, not the app UI).
-- `inter_font` ×1 → the deliberate **Sora display + Inter body** pairing, not Inter-by-default.
+## Signal triage (refined scanner)
+With the refined scanner (excludes debug/test files; counts `default_blue` only in CSS/markup, not
+JS data/chart arrays), signals are **before 6 → after 6**. The earlier "10 → 10" was inflated by
+false positives now auto-removed: the chart palette in `StudentAttendance.jsx` and the 8px radii in
+`public/debug-storage.html`.
 
-Genuine minor leftovers worth a cleanup pass (real, in-app):
+Remaining after-signals are minor, real-ish leftovers worth a cleanup sweep:
 - `transition: all` ×2 (down from 5) — should be specific properties (`polish.md`).
 - `scale(1.05)` hover ×1 — the AI-default hover (`anti-patterns.md`).
-- `outline: none` ×2 — verify each is paired with a visible `:focus-visible` ring (`accessibility.md`).
+- `outline: none` ×2 — verify each pairs with a visible `:focus-visible` ring (`accessibility.md`).
+- `inter_font_only` ×1 — the deliberate **Sora + Inter** body pairing, not Inter-by-default (fine).
+
+These slipping through a whole-frontend pass is exactly why a **final anti-pattern sweep** was added
+to the conversion close-out (`large-codebases.md` Phase 8).
 
 ## Headline result (code-level)
 - **CSS design tokens: 0 → 99** `var(--…)` usages; **craft signals 3 → 109**; modern CSS 0 → 6;
