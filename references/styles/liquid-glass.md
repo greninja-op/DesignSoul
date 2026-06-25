@@ -430,3 +430,6 @@ Keep `scale` modest (20–50) — high values look like water, not glass.
   cards, bars, and pills.
 - Always keep the specular `box-shadow` layers from the standard surface — refraction
   alone isn't enough; the highlight sells the glass.
+- This SVG-displacement approach needs **no WebGL library** — prefer it over a JS/WebGL glass
+  dependency. The full effect budget (reduced-motion, static fallback, mobile FPS) is in
+  `references/effects-performance.md`.

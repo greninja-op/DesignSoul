@@ -110,6 +110,9 @@ If you do use a WebGL shader gradient:
   right answer; the shader is the tenth. Importing a WebGL library for a background most users scroll
   past in two seconds is itself an AI-default mistake.
 
+> This ladder is the gradient-specific case of the general rule in `effects-performance.md` — the
+> lightest-tool ladder and performance/accessibility budget for *any* heavy effect.
+
 ---
 
 ## Cards / Surfaces on Aurora

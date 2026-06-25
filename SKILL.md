@@ -78,6 +78,8 @@ Then, conditionally:
 - Defining or applying the spacing scale (nearly always) → `references/spacing.md`
   (the 4pt base, 9-token scale, and the gap rules that read as senior vs junior)
 - Adding elevation, shadows, or gradients → `references/depth.md` (kills the default `0 2px 4px` shadow)
+- Adding any "wow" effect — glass, animated/shader gradient, 3D, liquid-metal, cursor/scroll → `references/effects-performance.md`
+  (the lightest-tool ladder + the performance/accessibility budget; when an effect is craft vs. heavy slop)
 - Using photos, illustrations, or icons → `references/imagery.md`
 - If deriving colors from scratch → `references/color-theory.md`
 - Building or reviewing real interactive UI (nearly always) → `references/accessibility.md`

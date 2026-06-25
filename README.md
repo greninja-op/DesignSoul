@@ -89,6 +89,7 @@ DesignSoul/
     ├── spacing.md                  ← The spacing system: 4pt base, 9-token scale, gap rules (the senior tell)
     ├── layout-grids.md             ← Column grids, 8pt spacing, alignment, responsive structure
     ├── depth.md                    ← Craft of shadows & gradients (kills the default flat card shadow)
+    ├── effects-performance.md      ← Premium effects (glass/gradient/3D/shader): lightest-tool ladder + perf/a11y budget
     ├── imagery.md                  ← Photos, illustrations & icons: selection and treatment
     ├── ux-laws.md                  ← The designer brain: heuristics, cognitive load, affordance, disclosure
     ├── accessibility.md            ← WCAG AA, ARIA, keyboard/focus, contrast, screen readers, RTL
