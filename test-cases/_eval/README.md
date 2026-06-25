@@ -49,6 +49,28 @@ It counts AI-default tells (default blue, uniform 8px radius, `0 2px 4px` shadow
 Inter-only, `outline:none`, `scale(1.05)` hover) and craft signals (CSS tokens, `:focus-visible`,
 reduced-motion, aria, modern CSS). Heuristic, not a verdict — but a fast objective signal.
 
+## Auto-push your test project (so the eval can just pull it)
+Want the test project's changes to land on GitHub automatically so you only hand over a repo link?
+Copy `autopush.mjs` into your **test project's** root and run it there:
+
+```bash
+# one-time, in your test project:
+git init
+git add -A && git commit -m "before: original AI-generated UI"   # this commit = your "before"
+git branch -M main
+git remote add origin <your-test-repo-url>
+git push -u origin main
+
+# then leave this running while the agent converts the UI:
+node autopush.mjs                 # pushes whenever >= 1 file changed
+# or batch it:  (PowerShell)  $env:DS_THRESHOLD=3; node autopush.mjs
+```
+
+Now every batch of changes is committed + pushed. Hand over the **repo URL + the first ("before")
+commit and the latest ("after") commit** — the eval clones it, diffs `before..after`, and ingests
+both into a case automatically. (Editor-hook alternative: a `fileEdited` hook that runs
+`git add -A; git commit -m wip; git push` does the same thing without a running process.)
+
 ## Privacy / git
 By default the raw case material — `before/`, `after/`, `control/`, `screenshots/`, and `diff.patch`
 — is **gitignored** (it's your throwaway code, possibly large or private). The lightweight evidence
