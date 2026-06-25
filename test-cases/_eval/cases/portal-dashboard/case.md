@@ -25,14 +25,27 @@ Drop images in `screenshots/` and reference them here (name them `before-375.png
 _(filled by `node analyze.mjs portal-dashboard` — do not edit by hand)_
 
 <!-- AUTO:METRICS -->
-_Run `node analyze.mjs portal-dashboard` to populate._
+| Version | Files | AI-default signals (↓ better) | Craft signals (↑ better) | Hardcoded hex |
+|---|---|---|---|---|
+| before | 51 | 6 | 109 | 58 |
+| control (no skill) | — | — | — | — |
+| **after (DesignSoul)** | 51 | 6 | 109 | 58 |
+
+- before: **51 files** · AI-default signals **6** (transition_all ×2, inter_font_only ×1, outline_none ×2, scale_hover_1_05 ×1) · craft signals **109** (css_tokens_var ×99, focus_visible ×1, reduced_motion ×1, aria_attrs ×2, modern_css ×6) · 58 hardcoded hex, 1 @media
+- control: _(folder empty)_
+- after: **51 files** · AI-default signals **6** (transition_all ×2, inter_font_only ×1, outline_none ×2, scale_hover_1_05 ×1) · craft signals **109** (css_tokens_var ×99, focus_visible ×1, reduced_motion ×1, aria_attrs ×2, modern_css ×6) · 58 hardcoded hex, 1 @media
+
+_Generated 2026-06-25T22:12:03.117Z. Signals are heuristic proxies, not a verdict — pair with the screenshots and the craft scores below._
 <!-- /AUTO:METRICS -->
 
 ---
 
 ## Auto: code diff (before → after)
 <!-- AUTO:DIFFSTAT -->
-_Run `node analyze.mjs portal-dashboard` to populate._
+```
+(no before/after to diff yet)
+```
+_Full patch: `diff.patch` (gitignored by default)._
 <!-- /AUTO:DIFFSTAT -->
 
 ---
@@ -73,3 +86,27 @@ Open `references/anti-patterns.md` and tick any that STILL apply to the `after`:
 ## Failure notes (the most valuable part)
 What still looked AI-made? Which reference did the agent ignore? Any component handled badly?
 _(These become new anti-patterns / fixes.)_
+
+## Human verdict + visual critique (redesign test)
+**Result: a real redesign, not a reskin — "day and night" improvement.** Owner happy; estimates it
+now reads ~25–50% human (up from fully-AI). Layout genuinely changed: greeting + date header,
+a real metric row (attendance w/ progress, CGPA, fees highlighted as the action), clean
+"you're all caught up" empty state, quick-access list, floating nav. Confirms the core lesson:
+**redesign works; reskin only helps an already-good design.** (Code diff not pushed to dev yet —
+judged from screenshots.)
+
+**What still reads as AI (the iteration roadmap toward "100% human"):**
+1. **Three equal stat tiles in a perfectly even row** — the uniform-card-grid reflex. Make one the
+   hero (deliberate size/weight variation — bento). (`visual-hierarchy.md`, `styles/bento.md`)
+2. **Symmetric 2-column split** (Notice board | Quick access) — even/predictable. Break symmetry
+   intentionally. (`layout-grids.md`)
+3. **"Modern SaaS on a soft gradient" with no opinion** — pleasant but generic; lacks a signature
+   detail or real brand character. Push personality harder. (`personality.md`)
+4. **Generic icons + chevrons; safe copy** — distinctive type treatment and one characterful accent
+   moment would lift it.
+5. **Generic widgets, not contextual content** — a real student dashboard could compose around
+   *today's classes / recent grades / timetable glance*, so it feels designed for this user, not
+   assembled from default cards.
+
+**Next iteration:** push hierarchy (one hero), asymmetry, genuine personality + a signature detail,
+and contextual content composition. Iterate until the squint test + the "a human made this" bar pass.

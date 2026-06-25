@@ -133,7 +133,11 @@ imagery, and copy — choosing it up front is what stops the output from feeling
 target feeling before building.
 
 **Determine the job — reskin or redesign?** Decide (and tell the user) which one this is:
-- If they named a style and want it applied to a decent existing layout → **style conversion**
+- **Default to redesign.** A reskin is only the right call when the existing design is *genuinely
+  good* and just wants a fresh surface. **Reskinning a weak or generic layout only polishes the
+  slop — it cannot make it look human-made**, and can even make a cramped/bad layout worse. If the
+  existing design is weak, say so and redesign (restructure), don't skin it.
+- If they named a style and want it applied to an *already-good* layout → **style conversion**
   (keep structure, change surface).
 - If they said "make it look better / not AI-generated / like a real product," or the layout
   itself is the problem (generic grid, weak hierarchy, cramped or aimless composition) → it's a
