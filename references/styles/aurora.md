@@ -84,6 +84,34 @@ Done wrong: a harsh rainbow. Done right: a calm, premium glow that gives depth w
 
 ---
 
+## Animated & Shader (WebGL) Gradients — pick the lightest tool that works
+
+A "living" gradient (slowly morphing blobs/mesh) is a strong premium signal — but the techniques
+range from nearly free to genuinely expensive. Climb this ladder and **stop at the first rung that
+achieves the look**:
+
+1. **Static CSS mesh** (above) — radial/conic blobs + `blur()`. Zero JS, zero runtime cost. The default.
+2. **CSS-animated drift** — the slow `auroraDrift` keyframe above. Still pure CSS, cheap; covers most
+   "it should move a little" needs.
+3. **Exported static image / short looping video (WebM/MP4)** of a richer gradient — render once in a
+   generator, ship as an asset. Heavier file, but no runtime GPU cost and trivially cross-framework.
+   Good when you want a complex look without shipping a renderer.
+4. **WebGL / shader gradient** (a canvas shader, or a Three.js / R3F mesh) — a true animated 3D
+   gradient. Only reach for this when a hero genuinely earns it. Real costs: a large
+   dependency/bundle, continuous GPU/battery use, SSR/hydration care, and a hard fallback requirement.
+
+If you do use a WebGL shader gradient:
+- **Reserve it for one hero surface** — never app-wide or behind scrolling content.
+- **Honor `prefers-reduced-motion`** — pause and replace the animation with a static frame.
+- **Ship a static fallback** (an exported image of the first frame) for no-WebGL / low-power / SSR.
+- **Cap it** — pause when offscreen or the tab is hidden, throttle FPS, and drop to a static image on
+  mobile if it janks (test — see `verification.md`).
+- **Never add a heavy 3D renderer for a look CSS can fake.** Nine times out of ten rungs 1–3 are the
+  right answer; the shader is the tenth. Importing a WebGL library for a background most users scroll
+  past in two seconds is itself an AI-default mistake.
+
+---
+
 ## Cards / Surfaces on Aurora
 
 Content surfaces stay calm and slightly translucent so the glow shows through faintly:
@@ -116,7 +144,8 @@ Primary buttons can use a subtle gradient fill drawn from the aurora hues:
   padding: 12px 24px;
   font-weight: 600;
   box-shadow: 0 6px 20px hsla(255, 80%, 60%, 0.30);
-  transition: all var(--duration-fast) var(--ease-out);
+  transition: transform var(--duration-fast) var(--ease-out),
+              box-shadow var(--duration-fast) var(--ease-out);
 }
 .aurora-btn-primary:hover {
   transform: translateY(-2px);
@@ -134,4 +163,6 @@ Primary buttons can use a subtle gradient fill drawn from the aurora hues:
 - [ ] Content surfaces are calm/near-neutral — the glow is behind, not on, the text
 - [ ] Text passes contrast over the lightest AND most saturated part of the background
 - [ ] Any motion drifts slowly (20–40s), no fast pulsing
+- [ ] Animated background uses the lightest tool that works (CSS before WebGL); shader gradients are
+      hero-only, with reduced-motion handling and a static fallback
 - [ ] `blur()` falloff is large (40–80px) so blobs read as glow, not shapes

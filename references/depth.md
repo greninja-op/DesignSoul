@@ -85,7 +85,8 @@ stand out. But a bad gradient looks worse than a flat color.
    - **Conic / angular** — color sweeps around a point. Distinctive but distracting; rare in
      product UI — use deliberately.
    - **Mesh** — multi-point abstract blends (the aurora look). Beautiful for hero backgrounds;
-     keep it behind calm content. (See `references/styles/aurora.md`.)
+     keep it behind calm content. (See `references/styles/aurora.md` — including the lightest-tool
+     ladder for *animated*/WebGL shader gradients.)
 4. **Subtle usually wins.** A faint gradient (two close shades of the same color, or a soft
    light-to-slightly-darker) adds depth without looking "designed-y." Loud rainbow gradients date
    fast and fight your content.
