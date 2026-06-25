@@ -10,6 +10,7 @@ Every unchecked item is a reason to keep working.
 - [ ] Looked for existing design context (design system, codebase tokens, live product, brand)
 - [ ] Lifted exact values from code where available (not redrawn from memory)
 - [ ] Vocalized the extracted system and confirmed direction with the user
+- [ ] Wrote/updated the project's `DESIGN.md` (source of truth) — see `design-system-doc.md`
 - [ ] If no context existed, told the user quality would drop and picked a deliberate direction
 
 ---
@@ -110,6 +111,7 @@ SKIPPED and tell the user the output is unverified — do not silently pass it.)
 - [ ] Visual hierarchy readable within 1 second on each screen
 - [ ] Named style is recognizably that style (not a generic approximation)
 - [ ] Grep sweep done — zero hardcoded transitions; all motion uses tokens
+- [ ] Static design audit run (`code-audit.md`) — slop signals, a11y breaks, DESIGN.md drift
 - [ ] Stated to the user exactly what was verified vs not
 
 ---

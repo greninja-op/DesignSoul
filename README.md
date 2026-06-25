@@ -78,10 +78,12 @@ DesignSoul/
 │   └── generic-card/               ← Worked reference example (before, after, notes)
 └── references/
     ├── design-context.md           ← Start from existing context (the most important idea)
+    ├── design-system-doc.md        ← The DESIGN.md artifact: a project's design system of record
     ├── anti-patterns.md            ← Every AI-default habit + the deeper content slop, with fixes
     ├── components.md               ← Professional UX standards per component
     ├── component-method.md         ← How to design/rebuild ANY component like a pro
     ├── critique.md                 ← Scored expert-review rubric (score it before shipping)
+    ├── code-audit.md               ← Static source-code design review (no browser needed)
     ├── skeleton.md                 ← How the skill uses the skeleton system for loading states
     ├── motion.md                   ← Global animation system
     ├── typography.md               ← Font pairing logic and type scale
@@ -133,7 +135,7 @@ When triggered, the AI:
 
 1. **Gathers context first** — reads your design system, codebase tokens, live product, or brand, and lifts exact values (designing from scratch is a last resort)
 2. **Audits** your existing frontend — maps every component, color, font, animation
-3. **Defines a design system** — tokens for color, typography, spacing, motion
+3. **Defines a design system** — tokens for color, typography, spacing, motion, written to a `DESIGN.md` source of truth
 4. **Checks anti-patterns** — kills every AI-default decision, including the deeper content slop
 5. **Applies professional component standards** — per-component UX knowledge for 20+ component types, plus a 9-pass design method that reaches the same bar for *any* component (listed or not, new or rebuilt)
 6. **Runs a global motion pass** — consistent animation system across everything

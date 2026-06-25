@@ -68,6 +68,8 @@ Before writing a single line of CSS or JSX, read these core reference files in o
 
 Then, conditionally:
 - If deriving colors from scratch → `references/color-theory.md`
+- Establishing or reading the project's design system → `references/design-system-doc.md` (the `DESIGN.md` artifact)
+- Reviewing a diff / existing frontend without a browser → `references/code-audit.md` (static source scan)
 - When writing real CSS → `references/modern-css.md` (the craft touches that read as hand-made)
 - Polishing components / final craft pass → `references/polish.md` (the micro-details that beat slop)
 - If any component loads async / needs loading states → `references/skeleton.md`
@@ -145,6 +147,12 @@ MOTION SYSTEM:  ← defined in references/motion.md
 
 These tokens are LAW. Every component uses them. Nothing is hardcoded.
 
+**Write the system down.** Persist it as a `DESIGN.md` at the project root using the template in
+`references/design-system-doc.md` — product context, aesthetic direction, type, color, spacing,
+layout, motion, and a decisions log. This becomes the project's source of truth: every later
+component and every review is calibrated against it. If a `DESIGN.md` already exists, read it
+first and extend it rather than overwrite.
+
 ---
 
 ## Step 3 — Apply by Component Category
@@ -214,6 +222,8 @@ shares one "smoothness," not just the part you were asked about.
 
 If no browser tool is available: apply everything, then **tell the user the output was not
 visually verified** and offer to install a browser MCP. Never claim a look you didn't see.
+Even without a browser, run the **static design audit** (`references/code-audit.md`) — a
+grep-level scan of the source for slop signals, accessibility breaks, and `DESIGN.md` drift.
 
 ---
 
