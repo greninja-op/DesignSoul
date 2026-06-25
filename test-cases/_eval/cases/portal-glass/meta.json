@@ -1,0 +1,16 @@
+{
+  "id": "portal-glass",
+  "createdAt": "2026-06-25",
+  "editor": "kiro",
+  "model": "(record the model used)",
+  "stack": "react-vite-tailwind",
+  "style": "glassmorphism (\"make it not look AI-generated\")",
+  "prompt": "Redesign this app's UI so it doesn't look AI-generated — apply a glassmorphism style. Convert the whole frontend, keep it consistent, and tell me what you changed.",
+  "mentionedSkill": false,
+  "agentConsultedSkill": true,
+  "repo": "https://github.com/greninja-op/integrated-campus-portal-test (dev)",
+  "beforeCommit": "2d15178",
+  "afterCommit": "f830bdc",
+  "diffScope": "47 files changed, +1740 / -1545",
+  "notes": "Auto-trigger worked (skill applied without being named). System-first conversion: frontend/DESIGN.md + tokenized index.css. Screenshots not yet received -> visual craft scores pending."
+}
