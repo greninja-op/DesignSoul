@@ -134,6 +134,20 @@ Everything spaced 24px apart regardless of relationship.
 
 ---
 
+### ❌ The Fixed/Floating Bar That Overlaps Content
+```css
+/* AI default: a fixed top/bottom nav with nothing reserving its space */
+.bottom-nav { position: fixed; bottom: 0; z-index: 50; }
+/* …and the page content runs underneath it, hidden behind the bar */
+```
+**Fix:** A fixed, sticky, or floating bar (top nav, bottom tab bar, FAB row) must **reserve space**
+so it never covers content — add matching `padding-bottom`/`padding-top` (or a spacer) to the scroll
+container equal to the bar's height (+ safe-area inset on mobile). `z-index` only controls stacking,
+not overlap. This is a top cause of "the last item is unreachable / hidden" and of redesigns that
+*look* broken — and it's easy to miss without rendering at real viewport sizes (see `verification.md`).
+
+---
+
 ### ❌ Icons Without Labels (or Labels Without Icons)
 Icon-only buttons with no tooltip. Or text labels with generic icons that add no meaning.
 **Fix:** Icons should either stand alone with a clear universal meaning (✕ close, ← back) or always have a label. Decorative icons that sit next to text they repeat are visual noise.

@@ -332,6 +332,14 @@ what still reads as AI-generated is the layout/hierarchy/content; reaching a hum
 restructuring X/Y/Z — want me to?" Report this honestly rather than presenting a prettier version
 of the same generic structure as finished.
 
+**Iterating is not monotonic — keep the best, change only what's weak.** When refining across
+passes, treat the **previous best version as the baseline**: identify the specific weak parts and
+fix *those*, rather than regenerating the whole screen (which often regresses — an oversized hero,
+a busier/lopsided layout, a reintroduced bug). Don't trade a clean result for a flashier-but-worse
+one. After each pass, compare against the prior version and **keep whichever is genuinely better**;
+verify the change didn't introduce overlap, overflow, or imbalance (this is hard to catch without
+the visual loop — see Step 5). One disciplined surgical pass beats three sweeping rewrites.
+
 ---
 
 ## Step 5c — Tell the User How to Run It (Dependencies & Commands) — MANDATORY

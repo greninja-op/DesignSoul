@@ -35,7 +35,7 @@ _(filled by `node analyze.mjs portal-dashboard` — do not edit by hand)_
 - control: _(folder empty)_
 - after: **51 files** · AI-default signals **6** (transition_all ×2, inter_font_only ×1, outline_none ×2, scale_hover_1_05 ×1) · craft signals **109** (css_tokens_var ×99, focus_visible ×1, reduced_motion ×1, aria_attrs ×2, modern_css ×6) · 58 hardcoded hex, 1 @media
 
-_Generated 2026-06-25T22:12:03.117Z. Signals are heuristic proxies, not a verdict — pair with the screenshots and the craft scores below._
+_Generated 2026-06-25T22:31:03.087Z. Signals are heuristic proxies, not a verdict — pair with the screenshots and the craft scores below._
 <!-- /AUTO:METRICS -->
 
 ---
@@ -110,3 +110,15 @@ judged from screenshots.)
 
 **Next iteration:** push hierarchy (one hero), asymmetry, genuine personality + a signature detail,
 and contextual content composition. Iterate until the squint test + the "a human made this" bar pass.
+
+## Iteration 2 — regressed (key learning: iteration isn't monotonic)
+A more aggressive pass (oversized underlined "Test" hero, "Recent marks" list added, busier/lopsided
+right column) read **worse** than the prior version per the owner ("the last one was the best"). Also
+the fixed bottom nav appeared over the marks list (likely a full-page-screenshot artifact of a
+`position:fixed` bar — but a real bug if it overlaps at viewport: must reserve `padding-bottom`).
+Learnings folded into the skill:
+- SKILL.md Step 5b: **iteration is not monotonic** — keep the previous best as baseline, change only
+  the weak parts, compare and keep whichever is genuinely better; don't regenerate wholesale.
+- anti-patterns.md: **fixed/floating bars must reserve space** (no content overlap).
+- Reinforces that **blind redesign (no visual loop) ships hard-to-see regressions** — wire Playwright.
+**Recovery:** revert to the prior best and iterate surgically.
