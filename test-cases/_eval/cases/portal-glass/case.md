@@ -35,7 +35,7 @@ _(filled by `node analyze.mjs portal-glass` — do not edit by hand)_
 - control: **0 files** · AI-default signals **0** (none) · craft signals **0** (none) · 0 hardcoded hex, 0 @media
 - after: **51 files** · AI-default signals **6** (transition_all ×2, inter_font_only ×1, outline_none ×2, scale_hover_1_05 ×1) · craft signals **109** (css_tokens_var ×99, focus_visible ×1, reduced_motion ×1, aria_attrs ×2, modern_css ×6) · 58 hardcoded hex, 1 @media
 
-_Generated 2026-06-25T21:17:07.418Z. Signals are heuristic proxies, not a verdict — pair with the screenshots and the craft scores below._
+_Generated 2026-06-25T21:23:32.288Z. Signals are heuristic proxies, not a verdict — pair with the screenshots and the craft scores below._
 <!-- /AUTO:METRICS -->
 
 ---

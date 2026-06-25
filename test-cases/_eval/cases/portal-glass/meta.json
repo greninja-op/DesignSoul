@@ -8,9 +8,13 @@
   "prompt": "Redesign this app's UI so it doesn't look AI-generated — apply a glassmorphism style. Convert the whole frontend, keep it consistent, and tell me what you changed.",
   "mentionedSkill": false,
   "agentConsultedSkill": true,
-  "repo": "https://github.com/greninja-op/integrated-campus-portal-test (dev)",
+
+  "repoUrl": "https://github.com/greninja-op/integrated-campus-portal-test.git",
+  "branch": "dev",
+  "subdir": "frontend",
   "beforeCommit": "2d15178",
-  "afterCommit": "f830bdc",
-  "diffScope": "47 files changed, +1740 / -1545",
-  "notes": "Auto-trigger worked (skill applied without being named). System-first conversion: frontend/DESIGN.md + tokenized index.css. Screenshots not yet received -> visual craft scores pending."
+  "afterRef": "origin/dev",
+
+  "diffScope": "47 files changed, +1740 / -1545 (initial after-commit f830bdc)",
+  "notes": "Auto-trigger worked. System-first conversion: frontend/DESIGN.md + tokenized index.css. afterRef tracks the live branch tip, so `node sync-case.mjs portal-glass` re-pulls + re-scores whenever the repo changes."
 }

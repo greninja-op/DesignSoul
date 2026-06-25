@@ -71,6 +71,26 @@ commit and the latest ("after") commit** — the eval clones it, diffs `before..
 both into a case automatically. (Editor-hook alternative: a `fileEdited` hook that runs
 `git add -A; git commit -m wip; git push` does the same thing without a running process.)
 
+## Continuous re-testing (one command, on demand)
+Once a case has a `meta.json` with `repoUrl` / `branch` / `subdir` / `beforeCommit` / `afterRef`,
+re-pull the live repo and re-score with a single command:
+
+```bash
+node sync-case.mjs portal-glass     # clones/fetches the repo, re-extracts before+after, re-runs analyze
+```
+
+It clones into a gitignored `_tmp_eval_<id>/`, resets to the latest branch tip, copies the `subdir`
+at `beforeCommit` → `before/` and at `afterRef` → `after/`, then runs `analyze.mjs`. So whenever the
+test repo changes, one command brings the eval up to date — no manual copying.
+
+**Prompt to keep the test repo auto-pushing** (paste in the *test project's* agent, once):
+> Set up continuous auto-push: create a hook (or run autopush.mjs) that, on every save / at the end
+> of each change, stages all changes, commits with a timestamped message, and `git push` to the
+> current branch's remote. Don't touch git config or force-push. Confirm it's active.
+
+With that running on their side and `sync-case.mjs` on ours, the loop is: they edit → it auto-pushes
+→ I run `sync-case.mjs <id>` → fresh metrics + diff + scorecard.
+
 ## Privacy / git
 By default the raw case material — `before/`, `after/`, `control/`, `screenshots/`, and `diff.patch`
 — is **gitignored** (it's your throwaway code, possibly large or private). The lightweight evidence
