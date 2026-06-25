@@ -215,6 +215,18 @@ SKIPPED and tell the user the output is unverified — do not silently pass it.)
 
 ---
 
+## Phase 5b: Handoff — How to Run It
+
+(See `SKILL.md` Step 5c. Never leave the user guessing whether the redesign runs.)
+
+- [ ] Stated new dependencies + exact install command — OR "no new dependencies, builds as-is"
+- [ ] Noted any fonts/assets added and how they load (CDN link / self-hosted / package)
+- [ ] Noted config touched (Tailwind/theme/build) and anything to regenerate
+- [ ] Gave the run command + dev URL, and reported the build/verify result (e.g. "build passes, 0 errors")
+- [ ] Flagged any manual follow-up (env vars, dev-server restart, cache clear)
+
+---
+
 ## Phase 6: The Final Question
 
 Run the scored critique in `references/critique.md` (five dimensions, fix anything below ~7),

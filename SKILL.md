@@ -295,6 +295,23 @@ offering directions, make at least one genuinely bold/characterful — don't let
 
 ---
 
+## Step 5c — Tell the User How to Run It (Dependencies & Commands)
+
+Never leave the user guessing whether the redesign actually runs. As part of the handoff, state
+explicitly:
+- **New dependencies** you introduced and the exact install command (e.g. `npm i <pkg>`), OR a
+  clear **"no new dependencies — it builds as-is."**
+- **Assets/fonts** added and how they load (CDN `<link>`, self-hosted, or a font package to install).
+- **Config touched** (Tailwind/theme/build) and whether anything must be regenerated.
+- **The command to see it** (`npm run dev`, the dev URL) and the **build/verify command** you ran
+  (and its result — "production build passes, 0 errors").
+- Any **manual follow-up** the user must do (env vars, restart the dev server, clear cache).
+
+If you ran the build/dev server, say so and report the outcome. If you couldn't, say that too. The
+goal: the user knows exactly what (if anything) to install or run before the new UI works.
+
+---
+
 ## Step 6 — The Completion Checklist
 
 Do not hand back the code until you can check every item:
