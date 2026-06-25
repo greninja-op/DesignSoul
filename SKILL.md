@@ -28,6 +28,21 @@ UI stop looking AI-generated.
 enforce a coherent design token + motion system, and apply professional per-component UX
 standards. With a browser tool (see Step 5) it can also *see* the rendered result and self-correct.
 
+> **The single most important truth: a reskin cannot make an AI layout look human-made.**
+> "Looks AI-generated" is mostly a *structural* problem — generic layouts, uniform card grids,
+> symmetric blocks, weak hierarchy, placeholder-ish content — not a color/glass/shadow problem.
+> Applying a style (glassmorphism, etc.) swaps the *surface* but keeps the *structure*, so a styled
+> AI layout still reads as AI. There are **two different jobs**, and you must know which one the
+> user wants (Step 1 makes you ask):
+> - **Style conversion (reskin):** keep the structure, change the surface. Safe, scoped, fast.
+>   Good when the layout is already decent and they just want a look.
+> - **De-slop redesign (restructure):** rethink layout, hierarchy, composition, density, and
+>   content — *this* is what's required to actually clear the "a human made this" bar.
+>
+> If the user says "make it not look AI-generated" but the **structure** is the tell, a reskin will
+> disappoint them. Say so plainly and offer to restructure — don't quietly deliver a prettier
+> version of the same generic layout and call it done.
+
 **Its real limits — state these to the user, never pretend otherwise:**
 - You **cannot see pixels without a browser tool.** If no browser MCP is available, you are
   styling blind — say so and treat the output as unverified (see `references/verification.md`).
@@ -116,6 +131,18 @@ system you extracted before building.
 like, based on its audience and brand? This single decision steers color, type, shape, motion,
 imagery, and copy — choosing it up front is what stops the output from feeling generic. State the
 target feeling before building.
+
+**Determine the job — reskin or redesign?** Decide (and tell the user) which one this is:
+- If they named a style and want it applied to a decent existing layout → **style conversion**
+  (keep structure, change surface).
+- If they said "make it look better / not AI-generated / like a real product," or the layout
+  itself is the problem (generic grid, weak hierarchy, cramped or aimless composition) → it's a
+  **de-slop redesign**: you must rethink layout, hierarchy, density, composition, and content —
+  not just apply a skin. A reskin here will under-deliver.
+- If the request is ambiguous (e.g. "redesign it with glassmorphism"), **say what you see**: "the
+  layout/hierarchy is what reads as AI-generated; I can skin it to glass, but to actually look
+  human-made I'd restructure X/Y/Z — want the reskin, the restructure, or both?" Don't silently
+  pick reskin and hand back a prettier version of the same generic layout.
 
 Then audit the existing codebase:
 
@@ -292,6 +319,14 @@ hierarchy, craft, functionality, originality). Fix anything below ~7 before fini
 **Bold-bias correction:** models drift toward safe, minimal, samey output. Counteract it. When
 offering directions, make at least one genuinely bold/characterful — don't let every option be
 "cream background + whitespace + one accent." Good design is distinctive, not just inoffensive.
+
+**Structural honesty (don't declare victory on a reskin).** Run the bar question — "would a senior
+say an AI made this?" — and if the answer is still *yes*, identify **why**. If the cause is
+structural (generic layout, uniform card grid, symmetric blocks, weak hierarchy, placeholder
+content), a style pass **cannot** fix it — and you must say so: "the styling is now consistent, but
+what still reads as AI-generated is the layout/hierarchy/content; reaching a human-made feel needs
+restructuring X/Y/Z — want me to?" Report this honestly rather than presenting a prettier version
+of the same generic structure as finished.
 
 ---
 

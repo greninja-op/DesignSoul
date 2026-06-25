@@ -159,8 +159,26 @@ to the conversion close-out (`large-codebases.md` Phase 8).
 Visual craft scores (style fidelity, hierarchy, craft-as-rendered) and the contrast checks the
 agent flagged (colored hero/banners; glass over light mesh) — can't be scored without the pixels.
 
-## Failure notes (the most valuable part)
-- Scanner false-positives on semantic/chart blues, debug pages, and paired body fonts → consider
-  excluding obvious non-app paths (`**/debug*`, vendor) and noting chart palettes are exempt.
-- Minor AI-default leftovers (transition:all, scale(1.05), outline:none) slipped through a "whole
-  frontend" pass — a final anti-pattern grep-sweep should be part of the conversion close-out.
+## Human verdict (the real test)
+Honest take from the project owner after eyeballing before/after:
+- **Motion got smoother**; **text/readability improved where it improved.**
+- **Layout/component placement unchanged** — it was a reskin, not a redesign.
+- Original was *already* glassmorphism (built ~1yr ago, older model), so this was **glass → better
+  glass**, a small delta.
+- **Still reads as AI-built — not human-designed.** Did NOT clear the skill's own bar.
+- Confound: the original UI was cramped/weak, leaving little room to improve **without restructuring**.
+
+**Root cause (key learning):** "looks AI-generated" is mostly **structural** (layout, hierarchy,
+composition, content), not surface. A style conversion swaps the surface but keeps the structure,
+so it can't reach "human-made." The conversion prompt + skill behaved as a reskin and didn't push
+back to offer a restructure.
+
+**Skill changes made from this case:**
+- SKILL.md now states up front that **a reskin can't fix an AI layout**, and Step 1 forces a
+  **reskin vs de-slop-redesign** determination (and to flag when the structure is the tell).
+- Step 5b critique now requires **structural honesty** — name what still reads as AI and whether
+  it's structural; offer the restructure instead of declaring victory on a prettier skin.
+
+**Next test to actually exercise the skill:** a *redesign* prompt (restructure permitted) on a
+project with room — ideally not already in the target style — to see if it can cross the human bar
+when allowed to change layout/hierarchy, not just skin.
