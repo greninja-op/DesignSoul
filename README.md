@@ -68,10 +68,11 @@ DesignSoul/
 ├── SKILL.md                        ← Main skill file (drop this into Claude Code)
 ├── checklist.md                    ← Completion checklist (AI runs this before finishing)
 ├── mcp.example.json                ← Browser-tool config for visual verification
-├── skeleton/                       ← DesignSoul Skeletons — loading skeletons from real UI
-│   ├── skeleton.css                ← runtime styles (pulse/shimmer/solid, dark, reduced-motion)
+├── skeleton/                       ← `designsoul-skeleton` npm package — skeletons from real UI
 │   ├── skeleton.js                 ← zero-dep runtime: <ds-skeleton> + renderSkeleton()
-│   ├── skeleton-gen.mjs            ← generator: snapshots real UI → .skeleton.json specs
+│   ├── skeleton.css                ← runtime styles (pulse/shimmer/solid, dark, reduced-motion)
+│   ├── adapters/                   ← React + Vue wrappers
+│   ├── bin/cli.mjs                 ← generator: snapshots real UI → .skeleton.json specs
 │   └── examples/                   ← worked source component + generated spec
 ├── test-cases/                     ← Before/after fixtures that validate the skill
 │   └── generic-card/               ← Worked reference example (before, after, notes)
@@ -151,13 +152,19 @@ visually verified** rather than pretend it looks right.
 
 ## Loading Skeletons (built in)
 
-DesignSoul has its own skeleton system in `skeleton/` — so when a design needs a loading
-state, the skeleton is generated *from your real component*, not hand-guessed boxes:
+DesignSoul ships its own installable skeleton package (`designsoul-skeleton`) — so when a
+design needs a loading state, the skeleton is generated *from your real component*, not
+hand-guessed boxes:
+
+```bash
+npm install designsoul-skeleton
+```
 
 1. Mark a component with `data-skeleton="name"`
-2. Run the generator — it snapshots the real layout into a `.skeleton.json` spec at multiple breakpoints
-3. Render it with `<ds-skeleton name="name" loading>` — animated blocks (pulse/shimmer/solid),
-   dark mode, stagger, and a fade to content
+2. Run the generator (`npx designsoul-skeleton <url>`) — it snapshots the real layout into a
+   `.skeleton.json` spec at multiple breakpoints
+3. Render it with `<ds-skeleton name="name" loading>` (or the React/Vue wrapper) — animated
+   blocks (pulse/shimmer/solid), dark mode, stagger, and a fade to content
 
 Zero runtime dependencies, works in any framework. See `skeleton/README.md`.
 

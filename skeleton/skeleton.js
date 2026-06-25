@@ -107,7 +107,11 @@ export function renderSkeleton(spec, options = {}) {
    Works in plain HTML, React, Vue, Svelte, Angular — anywhere.
    While `loading` is set, shows the skeleton for `name`; otherwise shows slotted children.
    ------------------------------------------------------------------------- */
-class DsSkeleton extends HTMLElement {
+/* SSR-safe base: in non-browser environments (Node, Next.js/Nuxt SSR) there is no
+   HTMLElement, so fall back to a dummy base and skip registration. */
+const HTMLElementBase = typeof HTMLElement !== "undefined" ? HTMLElement : class {};
+
+class DsSkeleton extends HTMLElementBase {
   static get observedAttributes() {
     return ["loading", "name", "animate", "color", "dark-color", "stagger", "transition"];
   }

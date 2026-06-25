@@ -27,8 +27,13 @@ library.** The skeleton is captured from the real component, so it matches the c
    - Add `data-skeleton-ignore` to elements that shouldn't appear in the skeleton.
 3. **Wrap the load site** with `<ds-skeleton name="<name>" loading="...">`.
 4. **Generate the spec** if a browser tool is available (see below). If not, see "No browser" below.
-5. **Wire the runtime**: copy `skeleton/skeleton.css` + `skeleton/skeleton.js` into the project,
-   import the generated `registry.js` once at app entry.
+5. **Wire the runtime**: `npm install designsoul-skeleton`, then at app entry import the
+   element, the CSS, and the generated registry:
+   ```js
+   import 'designsoul-skeleton';
+   import 'designsoul-skeleton/css';
+   import './skeletons/registry';
+   ```
 
 ---
 
@@ -37,7 +42,7 @@ library.** The skeleton is captured from the real component, so it matches the c
 With a browser tool (Playwright — the same one used by `verification.md`):
 
 ```bash
-node skeleton/skeleton-gen.mjs <dev-server-url-or-html-file> --out <project>/src/skeletons
+npx designsoul-skeleton <dev-server-url-or-html-file> --out <project>/src/skeletons
 ```
 
 The generator captures at 375 / 768 / 1280 by default and writes one `.skeleton.json` per

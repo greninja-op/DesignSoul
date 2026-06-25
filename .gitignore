@@ -6,6 +6,8 @@ test-cases/_runner/package-lock.json
 skeleton/node_modules/
 skeleton/package-lock.json
 skeleton/examples/artifacts/
+skeleton/.packtest/
+skeleton/*.tgz
 
 # Temp clone (study only, never committed)
 _tmp_skeleton/

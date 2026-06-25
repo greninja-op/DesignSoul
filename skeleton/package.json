@@ -1,18 +1,50 @@
 {
   "name": "designsoul-skeleton",
   "version": "0.1.0",
-  "private": true,
+  "description": "Loading skeletons captured from your real UI. Part of the DesignSoul design system. Zero runtime dependencies, works in any framework.",
   "type": "module",
-  "description": "DesignSoul Skeletons — capture pixel-accurate loading skeletons from your real UI.",
-  "bin": {
-    "designsoul-skeleton": "skeleton-gen.mjs"
+  "license": "MIT",
+  "keywords": ["skeleton", "loading", "placeholder", "shimmer", "ui", "designsoul", "web-component"],
+  "exports": {
+    ".": "./skeleton.js",
+    "./css": "./skeleton.css",
+    "./skeleton.css": "./skeleton.css",
+    "./react": "./adapters/react.js",
+    "./vue": "./adapters/vue.js",
+    "./package.json": "./package.json"
   },
+  "bin": {
+    "designsoul-skeleton": "./bin/cli.mjs"
+  },
+  "files": [
+    "skeleton.js",
+    "skeleton.css",
+    "adapters/",
+    "bin/",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
-    "gen": "node skeleton-gen.mjs",
+    "gen": "node bin/cli.mjs",
     "test": "node render-test.mjs",
     "setup": "npm install && npx playwright install chromium"
   },
+  "peerDependencies": {
+    "playwright": ">=1.40.0",
+    "react": ">=17",
+    "vue": ">=3"
+  },
+  "peerDependenciesMeta": {
+    "playwright": { "optional": true },
+    "react": { "optional": true },
+    "vue": { "optional": true }
+  },
   "devDependencies": {
     "playwright": "^1.49.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/greninja-op/DesignSoul.git",
+    "directory": "skeleton"
   }
 }
