@@ -10,11 +10,11 @@
   "agentConsultedSkill": null,
   "scope": "single page: student dashboard only",
 
-  "repoUrl": "https://github.com/greninja-op/integrated-campus-portal-test.git",
+  "repoUrl": "https://github.com/greninja-op/integrated-campus-portal.git",
   "branch": "dev",
   "subdir": "frontend",
-  "beforeCommit": "f830bdc",
+  "beforeCommit": "1500d8d",
   "afterRef": "origin/dev",
 
-  "notes": "Tests the REDESIGN path (structure may change), unlike portal-glass which was a reskin. before = f830bdc (current glass state of the dashboard); after = the redesigned dashboard. Judge by the student-dashboard before/after screenshots specifically. Run: node sync-case.mjs portal-dashboard after they push."
+  "notes": "NOTE: the auto-push hook pushes to 'origin' = the REAL repo (integrated-campus-portal.git), not portal-test — so we pull from the real repo. afterRef=origin/dev tracks the live tip (24aaab5 = iteration-2 revert, the layout the owner likes). Iterations are not separate labeled commits, so judge primarily by screenshots."
 }

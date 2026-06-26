@@ -27,15 +27,15 @@ _(filled by `node analyze.mjs portal-dashboard` — do not edit by hand)_
 <!-- AUTO:METRICS -->
 | Version | Files | AI-default signals (↓ better) | Craft signals (↑ better) | Hardcoded hex |
 |---|---|---|---|---|
-| before | 51 | 6 | 109 | 58 |
+| before | 51 | 6 | 118 | 55 |
 | control (no skill) | — | — | — | — |
-| **after (DesignSoul)** | 51 | 6 | 109 | 58 |
+| **after (DesignSoul)** | 51 | 6 | 118 | 55 |
 
-- before: **51 files** · AI-default signals **6** (transition_all ×2, inter_font_only ×1, outline_none ×2, scale_hover_1_05 ×1) · craft signals **109** (css_tokens_var ×99, focus_visible ×1, reduced_motion ×1, aria_attrs ×2, modern_css ×6) · 58 hardcoded hex, 1 @media
+- before: **51 files** · AI-default signals **6** (transition_all ×2, inter_font_only ×1, outline_none ×2, scale_hover_1_05 ×1) · craft signals **118** (css_tokens_var ×99, focus_visible ×1, reduced_motion ×1, aria_attrs ×11, modern_css ×6) · 55 hardcoded hex, 1 @media
 - control: _(folder empty)_
-- after: **51 files** · AI-default signals **6** (transition_all ×2, inter_font_only ×1, outline_none ×2, scale_hover_1_05 ×1) · craft signals **109** (css_tokens_var ×99, focus_visible ×1, reduced_motion ×1, aria_attrs ×2, modern_css ×6) · 58 hardcoded hex, 1 @media
+- after: **51 files** · AI-default signals **6** (transition_all ×2, inter_font_only ×1, outline_none ×2, scale_hover_1_05 ×1) · craft signals **118** (css_tokens_var ×99, focus_visible ×1, reduced_motion ×1, aria_attrs ×11, modern_css ×6) · 55 hardcoded hex, 1 @media
 
-_Generated 2026-06-25T22:31:03.087Z. Signals are heuristic proxies, not a verdict — pair with the screenshots and the craft scores below._
+_Generated 2026-06-26T03:45:58.192Z. Signals are heuristic proxies, not a verdict — pair with the screenshots and the craft scores below._
 <!-- /AUTO:METRICS -->
 
 ---
@@ -43,7 +43,8 @@ _Generated 2026-06-25T22:31:03.087Z. Signals are heuristic proxies, not a verdic
 ## Auto: code diff (before → after)
 <!-- AUTO:DIFFSTAT -->
 ```
-(no before/after to diff yet)
+.../src/index.css"                                 | 29 ++++++++++++++--------
+ 1 file changed, 18 insertions(+), 11 deletions(-)
 ```
 _Full patch: `diff.patch` (gitignored by default)._
 <!-- /AUTO:DIFFSTAT -->
