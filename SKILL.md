@@ -340,6 +340,13 @@ one. After each pass, compare against the prior version and **keep whichever is 
 verify the change didn't introduce overlap, overflow, or imbalance (this is hard to catch without
 the visual loop — see Step 5). One disciplined surgical pass beats three sweeping rewrites.
 
+> **Iterating "from the previous version" requires reverting the code first.** You edit the
+> *current working tree* — you cannot pull a layout from a screenshot or memory. If the user says
+> "go back to the version I liked and change only X," first **restore that version in code**
+> (`git checkout <commit> -- <path>`), confirm it's back, *then* make the surgical change.
+> Otherwise you'll "fix X" on top of the layout they were trying to leave — a common, frustrating
+> miss.
+
 ---
 
 ## Step 5c — Tell the User How to Run It (Dependencies & Commands) — MANDATORY
