@@ -109,6 +109,13 @@ looks "safe"). If you can't clearly see the colored background *through* the car
 Aim for the read: **you can clearly see the background colors moving through the card, AND the text
 is comfortably legible.** Both, not one at the cost of the other.
 
+**Watch text that sits *directly on the vivid background*** (page headers, section labels, dates) —
+it has no glass panel to help it. Muted/low-opacity grey tokens calibrated for a pale background
+**wash out on a saturated one**. For any text on the bare background, use a **high-contrast** color
+(near-solid, not a faint translucent grey), and re-verify contrast over the *busiest/most saturated*
+area of the background — not just the calm corner (see `accessibility.md`). This is a top cause of
+"the glass looks great but the labels are hard to read."
+
 ---
 
 ## The Glass Card Component
