@@ -71,6 +71,18 @@ commit and the latest ("after") commit** — the eval clones it, diffs `before..
 both into a case automatically. (Editor-hook alternative: a `fileEdited` hook that runs
 `git add -A; git commit -m wip; git push` does the same thing without a running process.)
 
+## Version every iteration (so you can always return to the best one)
+Design iteration is **not monotonic** — a later pass can be worse. Commit (or auto-commit) **each
+iteration as its own commit**, ideally with a label, so you can always go back to the one you liked:
+```
+git add -A && git commit -m "iter2: clean dashboard (the good one)"
+```
+To resume from a previous iteration, **restore its code first** (the agent edits the current working
+tree, not a screenshot): `git checkout <iter-commit> -- <path>`. Tip: layout and background usually
+live in different files (page component vs `index.css`), so you can mix "iter-2 layout + iter-4
+background" by checking out only the page file and keeping the current global styles. If iterations
+weren't committed separately, an overwritten version is gone — only the screenshots survive.
+
 ## Continuous re-testing (one command, on demand)
 Once a case has a `meta.json` with `repoUrl` / `branch` / `subdir` / `beforeCommit` / `afterRef`,
 re-pull the live repo and re-score with a single command:
