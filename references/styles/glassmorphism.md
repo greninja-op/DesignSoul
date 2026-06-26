@@ -84,6 +84,33 @@ Before any glass component, define the background:
 
 ---
 
+## Transparency vs Frost — the dial that makes or breaks it
+
+Glass = **blur (frost) + transparency (see-through)**. The most common failure is going too far
+toward frost: heavy blur + a high fill opacity → the panel turns into **opaque frosted plastic**,
+you can't see the background through it, and it stops reading as glass (even though text contrast
+looks "safe"). If you can't clearly see the colored background *through* the cards, it's over-frosted.
+
+**To bring transparency back:**
+- **Lower the blur radius** — try `blur(8–12px)` instead of 16–32px. Less frost = more see-through.
+- **Lower the fill opacity** — drop the white/black tint alpha (e.g. `rgba(255,255,255,0.15)` →
+  `~0.06–0.10`; dark glass `~0.20` → `~0.10–0.15`). The lower the alpha, the more the background reads through.
+- Keep the **inner top highlight + 1px border** — those edges are what still say "glass" once the
+  fill is barely there.
+
+**The contrast tension (don't solve it the wrong way):** more transparency can hurt text legibility.
+**Do not fix that by cranking the panel opacity back up** — that just re-frosts it. Instead:
+- put a subtle local scrim *behind the text only* (a soft gradient or a slightly stronger tint just
+  under the text block), or a faint text-shadow;
+- or darken/lighten just the area of the background behind text-heavy cards;
+- reserve the more-opaque "strong glass" token for the few cards that truly need it, and keep the
+  rest see-through.
+
+Aim for the read: **you can clearly see the background colors moving through the card, AND the text
+is comfortably legible.** Both, not one at the cost of the other.
+
+---
+
 ## The Glass Card Component
 
 ```css

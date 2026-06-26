@@ -254,6 +254,8 @@ If the answer is **no** — ship it.
 ### Glassmorphism
 - [ ] Background is rich, saturated, and *varied* (3–4 color zones/glows or image) — NOT pale/uniform
 - [ ] Adjacent glass panels visibly sit over different background colors (glass actually refracts)
+- [ ] Not over-frosted — you can clearly see the background *through* the cards (blur ~8–12px, low fill alpha)
+- [ ] Text stays legible without re-frosting (local scrim/shadow behind text, not a higher panel opacity)
 - [ ] All surfaces have `backdrop-filter` + `-webkit-backdrop-filter`
 - [ ] Inner top-left highlight present
 - [ ] `@supports` fallback written

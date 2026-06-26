@@ -35,7 +35,7 @@ _(filled by `node analyze.mjs portal-dashboard` — do not edit by hand)_
 - control: _(folder empty)_
 - after: **51 files** · AI-default signals **6** (transition_all ×2, inter_font_only ×1, outline_none ×2, scale_hover_1_05 ×1) · craft signals **118** (css_tokens_var ×99, focus_visible ×1, reduced_motion ×1, aria_attrs ×11, modern_css ×6) · 55 hardcoded hex, 1 @media
 
-_Generated 2026-06-26T03:45:58.192Z. Signals are heuristic proxies, not a verdict — pair with the screenshots and the craft scores below._
+_Generated 2026-06-26T03:52:53.257Z. Signals are heuristic proxies, not a verdict — pair with the screenshots and the craft scores below._
 <!-- /AUTO:METRICS -->
 
 ---
