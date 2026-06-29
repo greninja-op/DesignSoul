@@ -1,6 +1,6 @@
 # Glassmorphism — Component Code Library (ready to use)
 
-Drop-in, production-ready glassmorphism code for each common component. `styles/glassmorphism.md`
+Drop-in, production-ready glassmorphism code for each common component. `../styles/glassmorphism.md`
 holds the *principles and tokens*; **this file holds the exact code** so the right version already
 exists when a user asks for "a glass card / navbar / button…". Every recipe bakes in the hard rules
 we learned the hard way:
@@ -14,7 +14,7 @@ we learned the hard way:
   text directly on the vivid background uses a near-solid color.
 - **Accessible by default** — visible `:focus-visible`, `prefers-reduced-motion`, ≥44px hit areas.
 
-> All recipes use the tokens below. Define them once (from `styles/glassmorphism.md`), then every
+> All recipes use the tokens below. Define them once (from `../styles/glassmorphism.md`), then every
 > component is consistent. Adjust the 3 dials — `--glass-blur`, `--glass-bg` alpha, `--glass-border` —
 > to taste; everything else follows.
 
@@ -395,6 +395,6 @@ here**, then adapt the tokens to the project's accent and the page's real conten
 - [ ] `prefers-reduced-motion` respected; no `transition: all`
 - [ ] Contrast verified over the busiest background area (incl. text directly on the bg)
 
-Pairs with: `styles/glassmorphism.md` (principles + the frost↔transparency dial), `depth.md`
+Pairs with: `../styles/glassmorphism.md` (principles + the frost↔transparency dial), `depth.md`
 (shadows/gradients), `accessibility.md` (contrast, focus, ARIA), `components.md` (per-component UX
 standards), `polish.md` (concentric radius, scale-on-press, hit areas).
