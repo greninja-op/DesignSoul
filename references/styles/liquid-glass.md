@@ -4,6 +4,10 @@ Apple's 2025 design language. Not the frosted glass of iOS 7.
 This is glass that reacts, refracts, and feels physically present.
 The difference: specular highlights, chromatic refraction, dynamic blur, and materials that respond to content behind them.
 
+> **Ready-to-use code:** drop-in liquid-glass components (card, button, dock/pill nav, toggle, input,
+> modal) — the zero-dep SVG-displacement build plus the WebGL heavy-tier stub — live in
+> `../recipes/liquid-glass.md`. Use this file for the *why* and the pipeline; use the recipe for code.
+
 ---
 
 ## What Makes This Different From Glassmorphism
