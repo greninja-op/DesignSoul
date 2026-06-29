@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Liquid Glass — DesignSoul demo</title>
+<style>
+  /* ---- tokens (from recipes/liquid-glass.md) ---- */
+  :root{
+    --lg-blur:14px; --lg-sat:180%;
+    --lg-bg:rgba(255,255,255,0.10); --lg-bg-strong:rgba(255,255,255,0.18);
+    --lg-border:rgba(255,255,255,0.42); --lg-highlight:rgba(255,255,255,0.72);
+    --lg-radius:26px; --lg-text:#0c0e1c; --lg-muted:#3a3d55;
+    --accent:#6d5efc; --accent-2:#d65efc;
+    --ease-spring:cubic-bezier(.34,1.56,.64,1); --dur:260ms;
+    --bg-base:hsl(248,65%,95%);
+  }
+  html[data-theme="dark"]{
+    --lg-bg:rgba(255,255,255,0.07); --lg-bg-strong:rgba(255,255,255,0.13);
+    --lg-border:rgba(255,255,255,0.18); --lg-highlight:rgba(255,255,255,0.35);
+    --lg-text:#f4f3ff; --lg-muted:rgba(255,255,255,0.72); --bg-base:hsl(245,55%,9%);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+    color:var(--lg-text); min-height:100vh; padding-bottom:120px;
+    background-color:var(--bg-base);
+    background-image:
+      radial-gradient(at 14% 12%, hsla(250,100%,64%,.88) 0, transparent 55%),
+      radial-gradient(at 88%  8%, hsla(292,100%,66%,.82) 0, transparent 52%),
+      radial-gradient(at 80% 82%, hsla(189,100%,54%,.80) 0, transparent 55%),
+      radial-gradient(at 14% 90%, hsla(332,100%,64%,.80) 0, transparent 52%),
+      radial-gradient(at 52% 48%, hsla(40,100%,68%,.48)  0, transparent 45%);
+    background-attachment:fixed;
+  }
+  html[data-theme="dark"] body{
+    background-image:
+      radial-gradient(at 14% 12%, hsla(256,95%,55%,.62) 0, transparent 55%),
+      radial-gradient(at 88%  8%, hsla(291,92%,55%,.56) 0, transparent 52%),
+      radial-gradient(at 80% 82%, hsla(190,95%,50%,.48) 0, transparent 55%),
+      radial-gradient(at 14% 90%, hsla(330,92%,54%,.50) 0, transparent 52%),
+      radial-gradient(at 52% 48%, hsla(275,88%,46%,.42) 0, transparent 50%);
+  }
+
+  /* ---- shared liquid surface ---- */
+  .lg{
+    position:relative; background:var(--lg-bg);
+    -webkit-backdrop-filter:blur(var(--lg-blur)) saturate(var(--lg-sat));
+    backdrop-filter:blur(var(--lg-blur)) saturate(var(--lg-sat));
+    border:1px solid var(--lg-border); border-radius:var(--lg-radius); color:var(--lg-text);
+    box-shadow:0 8px 32px rgba(16,18,40,.22), inset 0 1.5px 0 var(--lg-highlight), inset 0 0 0 1px rgba(255,255,255,.08);
+    overflow:hidden;
+  }
+  .lg::after{ /* chromatic rim */
+    content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+    box-shadow:inset 1px 0 0 rgba(255,120,200,.22), inset -1px 0 0 rgba(120,200,255,.22);
+    mix-blend-mode:screen;
+  }
+  @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+    .lg{background:rgba(255,255,255,.82)}
+    html[data-theme="dark"] .lg{background:rgba(20,20,40,.86)}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition-duration:.01ms!important;animation-duration:.01ms!important}}
+
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  .on-bg-muted{color:var(--lg-text);opacity:.72;font-weight:500}
+
+  /* ---- navbar ---- */
+  .nav{position:sticky;top:14px;z-index:50;display:flex;align-items:center;gap:18px;padding:10px 16px;margin:14px auto;max-width:1080px;border-radius:18px}
+  .nav .brand{font-weight:800;letter-spacing:-.02em;margin-right:auto;font-size:1.05rem}
+  .nav a{padding:8px 14px;border-radius:11px;color:var(--lg-text);opacity:.7;text-decoration:none;font-weight:600;font-size:.92rem;transition:background var(--dur) var(--ease-spring),opacity var(--dur)}
+  .nav a:hover{opacity:1;background:rgba(255,255,255,.18)}
+  .nav a.active{opacity:1;background:rgba(255,255,255,.24)}
+  .nav a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+  /* ---- buttons ---- */
+  .btn{height:48px;padding:0 24px;border-radius:999px;font-weight:700;font-size:.95rem;display:inline-flex;align-items:center;gap:8px;cursor:pointer;border:1px solid var(--lg-border);background:var(--lg-bg-strong);color:var(--lg-text);-webkit-backdrop-filter:blur(var(--lg-blur));backdrop-filter:blur(var(--lg-blur));box-shadow:inset 0 1.5px 0 var(--lg-highlight);transition:transform var(--dur) var(--ease-spring),box-shadow var(--dur) var(--ease-spring),background var(--dur)}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:active{transform:scale(.94)}
+  .btn--solid{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;border:none;box-shadow:0 8px 24px color-mix(in oklab,var(--accent) 50%,transparent),inset 0 1.5px 0 rgba(255,255,255,.5)}
+
+  /* ---- layout grid ---- */
+  .grid{display:grid;gap:18px;margin-top:22px}
+  .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+  .grid.cols-2{grid-template-columns:1.4fr 1fr}
+  @media (max-width:760px){.grid.cols-3,.grid.cols-2{grid-template-columns:1fr}}
+
+  .card{padding:22px 24px;display:flex;flex-direction:column;gap:10px}
+  .card.interactive{cursor:pointer;transition:transform var(--dur) var(--ease-spring),box-shadow var(--dur) var(--ease-spring)}
+  .card.interactive:hover{transform:translateY(-4px) scale(1.01)}
+  .card h3{font-size:1.1rem;letter-spacing:-.01em}
+  .card p{color:var(--lg-muted);font-size:.92rem;line-height:1.5}
+
+  /* hero */
+  .hero{padding:30px 32px}
+  .hero h1{font-size:2.6rem;letter-spacing:-.03em;line-height:1.05;margin:6px 0 4px}
+  .hero .row{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+
+  /* stat tile */
+  .stat .label{font-size:.7rem;letter-spacing:.07em;text-transform:uppercase;opacity:.65;font-weight:700}
+  .stat .val{font-size:2.3rem;font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
+  .stat .unit{font-size:1rem;opacity:.6;margin-left:2px}
+  .bar{height:6px;border-radius:999px;background:rgba(0,0,0,.14);overflow:hidden;margin-top:4px}
+  html[data-theme="dark"] .bar{background:rgba(255,255,255,.14)}
+  .bar i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+
+  /* chips */
+  .chips{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 12px;border-radius:999px;font-size:.78rem;font-weight:600;background:var(--lg-bg-strong);border:1px solid var(--lg-border);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+  .chip.accent{background:color-mix(in oklab,var(--accent) 26%,transparent);border-color:color-mix(in oklab,var(--accent) 45%,transparent)}
+
+  /* form */
+  .field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+  .field label{font-size:.82rem;opacity:.7;font-weight:600}
+  .input{height:50px;padding:0 16px;border-radius:14px;font-size:1rem;color:var(--lg-text);width:100%;background:var(--lg-bg-strong);border:1px solid var(--lg-border);-webkit-backdrop-filter:blur(var(--lg-blur));backdrop-filter:blur(var(--lg-blur));box-shadow:inset 0 1.5px 0 var(--lg-highlight);transition:box-shadow var(--dur) var(--ease-spring),border-color var(--dur)}
+  .input::placeholder{color:var(--lg-text);opacity:.42}
+  .input:focus-visible{outline:none;border-color:var(--accent);box-shadow:inset 0 1.5px 0 var(--lg-highlight),0 0 0 3px color-mix(in oklab,var(--accent) 30%,transparent)}
+
+  .switch{width:58px;height:34px;padding:4px;border-radius:999px;cursor:pointer;display:flex;border:1px solid var(--lg-border);background:var(--lg-bg-strong);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transition:background var(--dur) var(--ease-spring)}
+  .switch .knob{width:26px;height:26px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.35);transition:transform var(--dur) var(--ease-spring)}
+  .switch[aria-checked="true"]{background:var(--accent);border-color:transparent}
+  .switch[aria-checked="true"] .knob{transform:translateX(24px)}
+  .switch-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0}
+
+  /* dock */
+  .dock{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(18px + env(safe-area-inset-bottom));display:flex;gap:6px;padding:10px;border-radius:999px;z-index:60}
+  .dock a{width:50px;height:50px;display:grid;place-items:center;border-radius:50%;color:var(--lg-text);opacity:.7;text-decoration:none;font-size:1.2rem;transition:transform var(--dur) var(--ease-spring),background var(--dur)}
+  .dock a:hover{transform:translateY(-4px) scale(1.12);opacity:1}
+  .dock a.active{opacity:1;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff}
+
+  /* modal */
+  .overlay{position:fixed;inset:0;z-index:100;display:none;place-items:center;padding:20px;background:rgba(10,12,30,.42);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+  .overlay.open{display:grid}
+  .modal{width:min(440px,100%);padding:26px;background:var(--lg-bg-strong);display:flex;flex-direction:column;gap:14px;animation:in var(--dur) var(--ease-spring)}
+  .modal .row{display:flex;justify-content:flex-end;gap:10px}
+  @keyframes in{from{opacity:0;transform:translateY(14px) scale(.95)}to{opacity:1;transform:none}}
+
+  section{margin-top:26px}
+  .section-title{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;opacity:.6;font-weight:700;margin:0 4px 10px}
+</style>
+</head>
+<body>
+
+<!-- top navbar -->
+<nav class="lg nav">
+  <span class="brand">Aurora</span>
+  <a href="#" class="active">Home</a>
+  <a href="#">Discover</a>
+  <a href="#">Library</a>
+  <button class="switch" id="theme" role="switch" aria-checked="false" aria-label="Toggle theme"><span class="knob"></span></button>
+  <button class="btn btn--solid" onclick="document.getElementById('ov').classList.add('open')">Get started</button>
+</nav>
+
+<main class="wrap">
+
+  <!-- hero -->
+  <div class="lg hero">
+    <span class="on-bg-muted">Friday, June 26</span>
+    <h1>Liquid glass, live.</h1>
+    <p class="on-bg-muted" style="max-width:46ch">A standalone demo of the DesignSoul liquid-glass recipe — see-through surfaces, specular edges, a chromatic rim, and springy motion, all over a vivid refracting background.</p>
+    <div class="chips" style="margin-top:14px">
+      <span class="chip">Zero dependencies</span><span class="chip accent">SVG displacement</span><span class="chip">Dark mode</span>
+    </div>
+    <div class="row">
+      <button class="btn btn--solid">Primary action</button>
+      <button class="btn">Glass action</button>
+    </div>
+  </div>
+
+  <!-- stat tiles -->
+  <section>
+    <p class="section-title">Stats</p>
+    <div class="grid cols-3">
+      <div class="lg card stat"><span class="label">Attendance</span><div class="val">94<span class="unit">%</span></div><div class="bar"><i style="width:94%"></i></div></div>
+      <div class="lg card stat"><span class="label">CGPA</span><div class="val">8.83</div><span class="on-bg-muted" style="font-size:.82rem">This semester</span></div>
+      <div class="lg card stat"><span class="label">Fees</span><div class="val">2<span class="unit">due</span></div><span class="on-bg-muted" style="font-size:.82rem">Tap to pay</span></div>
+    </div>
+  </section>
+
+  <!-- content + form -->
+  <section>
+    <p class="section-title">Components</p>
+    <div class="grid cols-2">
+      <div class="lg card interactive">
+        <h3>Interactive card</h3>
+        <p>Hover me — the whole surface lifts on a spring. The background colours bend through the glass and the top edge catches light. Body text rides a faint scrim so it stays readable without making the panel opaque.</p>
+        <div class="chips"><span class="chip">Tag</span><span class="chip">Another</span></div>
+      </div>
+      <div class="lg card">
+        <h3>Sign in</h3>
+        <div class="field"><label for="e">Email</label><input class="input" id="e" type="email" placeholder="you@aurora.app"></div>
+        <div class="field"><label for="p">Password</label><input class="input" id="p" type="password" placeholder="••••••••"></div>
+        <div class="switch-row"><span class="on-bg-muted">Remember me</span>
+          <button class="switch" role="switch" aria-checked="true" onclick="this.setAttribute('aria-checked', this.getAttribute('aria-checked')==='true'?'false':'true')"><span class="knob"></span></button></div>
+        <button class="btn btn--solid" style="width:100%;justify-content:center;margin-top:6px">Continue</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- floating dock -->
+<nav class="lg dock" aria-label="Primary">
+  <a href="#" class="active" aria-current="page">⌂</a>
+  <a href="#">◷</a>
+  <a href="#">✦</a>
+  <a href="#">☰</a>
+</nav>
+
+<!-- modal -->
+<div class="overlay" id="ov" role="dialog" aria-modal="true" aria-labelledby="mt">
+  <div class="lg modal">
+    <h3 id="mt">Welcome to Aurora</h3>
+    <p class="on-bg-muted">This modal is a liquid surface too — dimmed, blurred backdrop, spring entrance.</p>
+    <div class="row">
+      <button class="btn" onclick="document.getElementById('ov').classList.remove('open')">Close</button>
+      <button class="btn btn--solid" onclick="document.getElementById('ov').classList.remove('open')">Got it</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // theme toggle
+  const t=document.getElementById('theme');
+  t.addEventListener('click',()=>{
+    const dark=document.documentElement.getAttribute('data-theme')==='dark';
+    document.documentElement.setAttribute('data-theme',dark?'light':'dark');
+    t.setAttribute('aria-checked',(!dark).toString());
+  });
+  // close modal on overlay click / Esc
+  const ov=document.getElementById('ov');
+  ov.addEventListener('click',e=>{if(e.target===ov)ov.classList.remove('open')});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')ov.classList.remove('open')});
+</script>
+</body>
+</html>
