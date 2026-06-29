@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Liquid Glass Components — WebGL over a real photo (DesignSoul)</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{ --txt:#fff; --shadow:0 1px 2px rgba(0,0,0,.45), 0 2px 12px rgba(0,0,0,.30); }
+  html,body{height:100%;overflow:hidden;background:#0a0b1e;
+    font-family:'Inter',system-ui,'Segoe UI',sans-serif;color:var(--txt)}
+  /* the WebGL canvas paints the photo + all the glass refraction, behind everything */
+  #gl{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:0}
+
+  /* the DOM overlay: every .lens is a transparent box whose rect is fed to the shader.
+     the shader draws the glass under it; here we only put the crisp text/icons on top. */
+  .overlay{position:fixed;inset:0;z-index:2;pointer-events:none}
+  .lens{pointer-events:auto}                 /* shapes the shader refracts + holds content */
+  .stage{position:absolute;inset:0;display:flex;flex-direction:column;
+    align-items:center;padding:22px 16px 0}
+
+  /* ---- navbar ---- */
+  nav{width:min(920px,94%);height:60px;border-radius:30px;
+    display:flex;align-items:center;justify-content:space-between;padding:0 22px;margin-bottom:34px}
+  nav .brand{font-weight:700;letter-spacing:.02em;font-size:1.05rem;text-shadow:var(--shadow)}
+  nav .brand b{color:#c4b5fd}
+  nav .links{display:flex;gap:26px;font-size:.9rem;font-weight:500}
+  nav .links a{color:#fff;text-decoration:none;opacity:.92;text-shadow:var(--shadow)}
+  nav .links a:hover{opacity:1}
+
+  /* ---- hero card ---- */
+  .hero{width:min(620px,94%);min-height:230px;border-radius:30px;padding:34px 34px 30px;
+    display:flex;flex-direction:column;gap:14px;margin-bottom:22px}
+  .hero .eyebrow{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;opacity:.85;
+    text-shadow:var(--shadow)}
+  .hero h1{font-size:2.1rem;line-height:1.1;font-weight:700;text-shadow:var(--shadow)}
+  .hero p{font-size:.98rem;line-height:1.55;opacity:.95;max-width:46ch;text-shadow:var(--shadow)}
+  .row{display:flex;gap:14px;margin-top:6px;flex-wrap:wrap}
+
+  /* ---- glass pill buttons ---- */
+  .btn{height:48px;border-radius:24px;display:inline-flex;align-items:center;gap:9px;
+    padding:0 24px;font-size:.95rem;font-weight:600;cursor:pointer;border:none;background:transparent;
+    color:#fff;text-shadow:var(--shadow)}
+  .btn.primary{color:#0a0b1e;text-shadow:none}     /* primary gets a solid accent fill (see shader tag) */
+
+  /* ---- stat tiles ---- */
+  .tiles{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-bottom:22px}
+  .tile{width:150px;height:104px;border-radius:24px;padding:18px;
+    display:flex;flex-direction:column;justify-content:space-between}
+  .tile .k{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;opacity:.85;text-shadow:var(--shadow)}
+  .tile .v{font-size:1.7rem;font-weight:700;text-shadow:var(--shadow)}
+  .tile .d{font-size:.78rem;color:#86efac;font-weight:600;text-shadow:var(--shadow)}
+
+  /* ---- bottom dock ---- */
+  .dock{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);
+    height:74px;border-radius:24px;display:flex;align-items:center;gap:16px;padding:0 20px}
+  .dock .ic{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;
+    font-size:1.3rem;cursor:pointer;filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))}
+
+  /* ---- controls + hint ---- */
+  .hint{position:fixed;left:50%;top:0;transform:translateX(-50%);z-index:3;
+    font-size:.8rem;opacity:.0;pointer-events:none}
+  .panel{position:fixed;left:18px;bottom:18px;z-index:4;width:210px;
+    background:rgba(20,20,40,.45);border:1px solid rgba(255,255,255,.18);
+    -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+    border-radius:16px;padding:13px 15px;box-shadow:0 8px 30px rgba(0,0,0,.35)}
+  .panel h4{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;opacity:.7;margin-bottom:6px}
+  .panel label{display:block;font-size:.72rem;opacity:.85;margin:9px 0 2px}
+  .panel .v{float:right;opacity:.7;font-variant-numeric:tabular-nums}
+  .panel input[type=range]{width:100%;accent-color:#a78bfa}
+  @media (max-width:560px){ nav .links{gap:16px} .hero h1{font-size:1.6rem} }
+</style>
+</head>
+<body>
+<canvas id="gl"></canvas>
+
+<div class="overlay">
+  <div class="stage">
+    <nav class="lens" data-fill="glass">
+      <div class="brand">Liquid<b>Soul</b></div>
+      <div class="links"><a href="#">Home</a><a href="#">Gallery</a><a href="#">Pricing</a><a href="#">About</a></div>
+    </nav>
+
+    <section class="hero lens" data-fill="glass">
+      <span class="eyebrow">Real-time refraction</span>
+      <h1>Glass that bends the world behind it.</h1>
+      <p>Every surface here is a live WebGL lens refracting the photo underneath — edge bending, chromatic fringe, and a specular rim. Drag any component to feel the glass move.</p>
+      <div class="row">
+        <button class="btn primary lens" data-fill="accent">Get started</button>
+        <button class="btn lens" data-fill="glass">Learn more</button>
+      </div>
+    </section>
+
+    <div class="tiles">
+      <div class="tile lens" data-fill="glass"><div class="k">Refraction</div><div class="v">38px</div><div class="d">edge-weighted</div></div>
+      <div class="tile lens" data-fill="glass"><div class="k">Chromatic</div><div class="v">6.0</div><div class="d">rgb split</div></div>
+      <div class="tile lens" data-fill="glass"><div class="k">Frame rate</div><div class="v" id="fps">60</div><div class="d">GPU shader</div></div>
+    </div>
+  </div>
+
+  <div class="dock lens" data-fill="glass">
+    <div class="ic">🏠</div><div class="ic">🔍</div><div class="ic">✦</div><div class="ic">🖼️</div><div class="ic">⚙️</div>
+  </div>
+</div>
+
+<div class="panel">
+  <h4>Liquid Glass · WebGL</h4>
+  <label>Refraction <span class="v" id="vR">38</span></label><input id="sR" type="range" min="0" max="80" value="38">
+  <label>Chromatic <span class="v" id="vC">6</span></label><input id="sC" type="range" min="0" max="20" value="6">
+  <label>Magnify <span class="v" id="vM">10</span></label><input id="sM" type="range" min="0" max="40" value="10">
+  <label>Frost <span class="v" id="vB">1.5</span></label><input id="sB" type="range" min="0" max="6" step="0.5" value="1.5">
+</div>
+
+<script>
+const cv = document.getElementById('gl');
+const gl = cv.getContext('webgl', { antialias:true });
+if(!gl){ document.body.innerHTML='<p style="color:#fff;padding:40px">WebGL not supported.</p>'; }
+
+const vsrc = `attribute vec2 p; void main(){ gl_Position=vec4(p,0.,1.); }`;
+
+const fsrc = `
+precision highp float;
+const int MAXLENS = 12;
+uniform vec2  u_res;
+uniform float u_time;
+uniform sampler2D u_tex;
+uniform vec2  u_img;          // photo natural size (px)
+uniform float u_imgReady;
+uniform int   u_count;
+uniform vec2  u_center[MAXLENS];
+uniform vec2  u_half[MAXLENS];
+uniform float u_radius[MAXLENS];
+uniform float u_accent[MAXLENS];   // 1.0 = solid accent fill (primary button), 0.0 = glass
+uniform float u_strength, u_chroma, u_mag, u_frost;
+
+// cover-fit the (vertical) photo to the canvas + a slow vertical pan to use its height
+vec2 coverUV(vec2 px){
+  vec2 s = u_res / u_img;
+  float scale = max(s.x, s.y);
+  vec2 size = u_img * scale;
+  vec2 offset = (u_res - size) * 0.5;
+  float overflow = max(size.y - u_res.y, 0.0);
+  offset.y = -overflow * (0.5 + 0.5*sin(u_time*0.06));   // pan through the tall image
+  return (px - offset) / size;
+}
+vec3 background(vec2 px){
+  if(u_imgReady < 0.5){                       // fallback gradient until the photo loads
+    vec2 uv = px/u_res; return mix(vec3(0.06,0.06,0.16), vec3(0.12,0.08,0.24), uv.y);
+  }
+  vec2 uv = clamp(coverUV(px), 0.0, 1.0);
+  return texture2D(u_tex, uv).rgb;
+}
+float sdRoundRect(vec2 p, vec2 b, float r){
+  vec2 q = abs(p) - b + r;
+  return min(max(q.x,q.y),0.0) + length(max(q,0.0)) - r;
+}
+
+void main(){
+  vec2 px = gl_FragCoord.xy;
+  vec3 col = background(px);
+  float chosen = 1e9;
+
+  for(int i=0;i<MAXLENS;i++){
+    if(i>=u_count) break;
+    vec2 p = px - u_center[i];
+    float d = sdRoundRect(p, u_half[i], u_radius[i]);
+    if(d < 1.0 && d < chosen){
+      chosen = d;
+      float aa = smoothstep(1.0, -1.0, d);
+
+      // bevel normal = gradient of the SDF (points outward)
+      vec2 e = vec2(2.0,0.0);
+      vec2 grad = normalize(vec2(
+        sdRoundRect(p+e.xy,u_half[i],u_radius[i]) - sdRoundRect(p-e.xy,u_half[i],u_radius[i]),
+        sdRoundRect(p+e.yx,u_half[i],u_radius[i]) - sdRoundRect(p-e.yx,u_half[i],u_radius[i])
+      )+1e-5);
+      float rim = 1.0 - smoothstep(0.0, 22.0, -d);   // 1 at edge -> 0 in the flat middle
+
+      vec3 c;
+      if(u_accent[i] > 0.5){
+        // solid accent (primary CTA) — still gets a rim + specular so it reads as glassy plastic
+        c = mix(vec3(0.49,0.36,0.96), vec3(0.62,0.47,0.99), rim);
+      } else {
+        // refract the background: bend outward, strongest at the rim
+        vec2 refr = px + grad*rim*u_strength;
+        refr = u_center[i] + (refr-u_center[i])*(1.0 - u_mag*0.01);   // magnify
+        vec3 acc = vec3(0.0); float w=0.0;
+        for(int k=-2;k<=2;k++){
+          float o = float(k)*u_frost;
+          acc.r += background(refr + grad*(u_chroma+o)).r;   // chromatic split along the rim
+          acc.g += background(refr + vec2(o,-o)*0.5).g;
+          acc.b += background(refr - grad*(u_chroma-o)).b;
+          w += 1.0;
+        }
+        c = acc / w;
+        c = mix(c, vec3(0.05,0.06,0.12), 0.20);             // tint down for text contrast
+      }
+
+      // specular glint on the bevel (light upper-left)
+      vec3 n = normalize(vec3(grad*rim, 1.0));
+      float spec = pow(max(dot(n, normalize(vec3(-0.6,0.7,0.55))),0.0), 16.0) * rim;
+      c += spec * 0.85;
+      c += smoothstep(0.0,-u_half[i].y,p.y) * 0.05;          // top sheen
+      float rimLine = smoothstep(2.0,0.0,abs(d));            // bright edge + chromatic tint
+      c += mix(vec3(0.7,0.85,1.0),vec3(1.0,0.85,0.95),grad.x*0.5+0.5) * rimLine * 0.55;
+
+      col = mix(col, c, aa);
+    }
+  }
+  gl_FragColor = vec4(col,1.0);
+}`;
+
+function sh(t,s){const o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);
+  if(!gl.getShaderParameter(o,gl.COMPILE_STATUS))console.error(gl.getShaderInfoLog(o));return o;}
+const prog=gl.createProgram();
+gl.attachShader(prog,sh(gl.VERTEX_SHADER,vsrc));
+gl.attachShader(prog,sh(gl.FRAGMENT_SHADER,fsrc));
+gl.linkProgram(prog);gl.useProgram(prog);
+
+const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+const loc=gl.getAttribLocation(prog,'p');gl.enableVertexAttribArray(loc);
+gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+
+const U=n=>gl.getUniformLocation(prog,n);
+const u={res:U('u_res'),time:U('u_time'),tex:U('u_tex'),img:U('u_img'),imgReady:U('u_imgReady'),
+  count:U('u_count'),center:U('u_center'),half:U('u_half'),radius:U('u_radius'),accent:U('u_accent'),
+  strength:U('u_strength'),chroma:U('u_chroma'),mag:U('u_mag'),frost:U('u_frost')};
+
+// ---- load the photo as a texture ----
+let imgReady=0, imgW=1080, imgH=1620;
+const tex=gl.createTexture();
+gl.bindTexture(gl.TEXTURE_2D,tex);
+gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,1,1,0,gl.RGBA,gl.UNSIGNED_BYTE,new Uint8Array([20,20,40,255]));
+gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);
+gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);
+gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+const photo=new Image();
+photo.onload=()=>{ imgW=photo.naturalWidth; imgH=photo.naturalHeight;
+  gl.bindTexture(gl.TEXTURE_2D,tex);
+  gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,true);
+  gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,photo);
+  imgReady=1; };
+photo.onerror=()=>console.warn('photo failed to load');
+photo.src='/IMAGES/pexels-flowers-iso-107015608-31363617.jpg';
+
+// ---- size ----
+let W,H,DPR=Math.min(devicePixelRatio||1,2);
+function resize(){W=cv.width=Math.round(innerWidth*DPR);H=cv.height=Math.round(innerHeight*DPR);
+  cv.style.width=innerWidth+'px';cv.style.height=innerHeight+'px';gl.viewport(0,0,W,H);}
+addEventListener('resize',resize);resize();
+
+// ---- collect the component rects each frame -> feed the shader ----
+const els=[...document.querySelectorAll('.lens')];
+function radiusOf(el){const r=parseFloat(getComputedStyle(el).borderRadius)||0;return r;}
+
+// ---- drag any component ----
+let dragEl=null, start=[0,0], base=[0,0];
+els.forEach(el=>{
+  el.addEventListener('pointerdown',e=>{
+    if(e.target.closest('a,button')&&el!==e.target) {} // links still work
+    dragEl=el; start=[e.clientX,e.clientY];
+    const t=getComputedStyle(el).transform;
+    base = el._off||[0,0]; el.setPointerCapture?.(e.pointerId);
+  });
+});
+addEventListener('pointermove',e=>{ if(!dragEl)return;
+  const dx=e.clientX-start[0], dy=e.clientY-start[1];
+  dragEl._off=[base[0]+dx, base[1]+dy];
+  dragEl.style.transform=(dragEl.classList.contains('dock')?'translateX(-50%) ':'')+
+    `translate(${dragEl._off[0]}px,${dragEl._off[1]}px)`;
+});
+addEventListener('pointerup',()=>dragEl=null);
+
+// ---- sliders ----
+const ctrl={R:38,C:6,M:10,B:1.5};
+[['R','sR','vR'],['C','sC','vC'],['M','sM','vM'],['B','sB','vB']].forEach(([k,s,v])=>{
+  const S=document.getElementById(s),V=document.getElementById(v);
+  S.addEventListener('input',()=>{ctrl[k]=parseFloat(S.value);V.textContent=S.value;});
+});
+
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const t0=performance.now(); let last=t0, frames=0, fpsEl=document.getElementById('fps');
+(function loop(){
+  const now=performance.now(), tm=reduce?8:((now-t0)/1000);
+  frames++; if(now-last>500){ if(fpsEl)fpsEl.textContent=Math.round(frames*1000/(now-last)); frames=0; last=now; }
+
+  const cx=[],cy=[],hx=[],hy=[],rad=[],acc=[];
+  els.forEach(el=>{
+    const r=el.getBoundingClientRect();
+    cx.push((r.left+r.width/2)*DPR);
+    cy.push(H-(r.top+r.height/2)*DPR);           // flip Y for gl_FragCoord
+    hx.push(r.width/2*DPR); hy.push(r.height/2*DPR);
+    rad.push(Math.min(radiusOf(el)*DPR, r.width/2*DPR, r.height/2*DPR));
+    acc.push(el.dataset.fill==='accent'?1:0);
+  });
+  const n=els.length;
+  const cen=new Float32Array(n*2), hlf=new Float32Array(n*2);
+  for(let i=0;i<n;i++){cen[2*i]=cx[i];cen[2*i+1]=cy[i];hlf[2*i]=hx[i];hlf[2*i+1]=hy[i];}
+
+  gl.uniform2f(u.res,W,H); gl.uniform1f(u.time,tm);
+  gl.uniform1f(u.imgReady,imgReady); gl.uniform2f(u.img,imgW,imgH); gl.uniform1i(u.tex,0);
+  gl.uniform1i(u.count,n);
+  gl.uniform2fv(u.center,cen); gl.uniform2fv(u.half,hlf);
+  gl.uniform1fv(u.radius,new Float32Array(rad)); gl.uniform1fv(u.accent,new Float32Array(acc));
+  gl.uniform1f(u.strength,ctrl.R*DPR); gl.uniform1f(u.chroma,ctrl.C*DPR);
+  gl.uniform1f(u.mag,ctrl.M); gl.uniform1f(u.frost,ctrl.B*DPR);
+  gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D,tex);
+  gl.drawArrays(gl.TRIANGLES,0,3);
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
