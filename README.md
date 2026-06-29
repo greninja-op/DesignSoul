@@ -185,6 +185,7 @@ DesignSoul/
     ├── modern-css.md               ← Craft toolkit: text-wrap, :has(), container queries, color-mix
     ├── polish.md                   ← Micro-craft details that separate built UI from slop
     ├── verification.md             ← Visual feedback loop (render → critique → fix)
+    ├── recipes/                     ← Ready-to-use component code per style (glassmorphism: card, nav, button, input, modal…)
     └── styles/
         ├── _index.md               ← Style selection & combination guide
         ├── glassmorphism.md
