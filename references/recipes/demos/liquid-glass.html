@@ -170,6 +170,8 @@
     <button data-style="glass" role="tab">Glassmorphism</button>
     <button data-style="liquid" role="tab" class="on">Liquid&nbsp;Glass</button>
   </div>
+  <input type="file" id="bgfile" accept="image/*" hidden />
+  <button class="btn" id="bgbtn" style="height:40px;padding:0 14px;font-size:.82rem">📷 Photo bg</button>
   <button class="switch" id="theme" role="switch" aria-checked="false" aria-label="Toggle dark mode"><span class="knob"></span></button>
   <button class="btn btn--solid" onclick="document.getElementById('ov').classList.add('open')">Get started</button>
 </nav>
@@ -250,12 +252,36 @@
     document.documentElement.setAttribute('data-style', b.dataset.style);
     seg.querySelectorAll('button').forEach(x=>x.classList.toggle('on', x===b));
   });
-  // theme toggle
+
+  // photo background (upload in-browser, or auto-load demos/bg.jpg if present)
+  const bgbtn=document.getElementById('bgbtn'), bgfile=document.getElementById('bgfile');
+  let photoSrc=null;
+  const scrim=()=>document.documentElement.getAttribute('data-theme')==='dark'
+    ? 'linear-gradient(rgba(8,10,26,.42),rgba(8,10,26,.42))'
+    : 'linear-gradient(rgba(255,255,255,.14),rgba(255,255,255,.14))';
+  function applyPhoto(src){ photoSrc=src;
+    document.body.style.backgroundImage=`${scrim()}, url("${src}")`;
+    document.body.style.backgroundSize='cover';
+    document.body.style.backgroundPosition='center';
+    document.body.style.backgroundAttachment='fixed';
+    bgbtn.textContent='✕ Aurora bg';
+  }
+  function clearPhoto(){ photoSrc=null;
+    document.body.style.cssText=''; bgbtn.textContent='📷 Photo bg';
+  }
+  bgbtn.addEventListener('click',()=>{ photoSrc ? clearPhoto() : bgfile.click(); });
+  bgfile.addEventListener('change',e=>{ const f=e.target.files[0]; if(!f) return;
+    const r=new FileReader(); r.onload=()=>applyPhoto(r.result); r.readAsDataURL(f); });
+  // auto-use demos/bg.jpg if you've saved it there (also lets the MCP render it)
+  const probe=new Image(); probe.onload=()=>applyPhoto('./bg.jpg'); probe.src='./bg.jpg';
+
+  // theme toggle (re-apply photo scrim so it stays readable in both themes)
   const t=document.getElementById('theme');
   t.addEventListener('click',()=>{
     const dark=document.documentElement.getAttribute('data-theme')==='dark';
     document.documentElement.setAttribute('data-theme',dark?'light':'dark');
     t.setAttribute('aria-checked',(!dark).toString());
+    if(photoSrc) applyPhoto(photoSrc);
   });
   // close modal on overlay click / Esc
   const ov=document.getElementById('ov');
