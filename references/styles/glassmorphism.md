@@ -3,6 +3,10 @@
 Frosted glass surfaces. Depth through blur. Light through translucency.
 Done wrong: blurry grey boxes on a gradient. Done right: a UI that feels like it exists in physical space.
 
+> **Ready-to-use code:** drop-in component snippets (card, navbar, button, input, modal, tabs…) that
+> apply everything below live in `../recipes/glassmorphism.md`. Use this file for the *why*; use the
+> recipe library for the exact code.
+
 ---
 
 ## The Core Principles
