@@ -433,3 +433,53 @@ Keep `scale` modest (20–50) — high values look like water, not glass.
 - This SVG-displacement approach needs **no WebGL library** — prefer it over a JS/WebGL glass
   dependency. The full effect budget (reduced-motion, static fallback, mobile FPS) is in
   `references/effects-performance.md`.
+
+---
+
+## How "true" Liquid Glass works (the WebGL refraction pipeline)
+
+The SVG/CSS approach above is our default and covers most needs. But the *full* Apple "Liquid
+Glass" — glass that **refracts live, moving content** (video, scrolling text) in real time, with
+magnification and chromatic aberration — needs a shader. Here's the pipeline, and the one clever
+trick that makes it possible:
+
+**The constraint:** WebGL **cannot read live screen pixels** (browser security). So you can't just
+"sample what's behind the element." The workaround is a snapshot.
+
+**The pipeline:**
+1. **Snapshot the background** behind the glass element into an image (a DOM-to-canvas snapshotter
+   rasterizes the page region behind the lens).
+2. **Upload that snapshot as a texture** into a WebGL shader.
+3. **The fragment shader does the glass** — for each pixel it samples the background texture
+   *displaced through a lens shape*: **refraction** (offset by a bevel/edge normal — strongest at
+   the rim), **magnification** (scale the sample toward center), **chromatic aberration** (sample
+   R/G/B at slightly different offsets at the edges), **frosted blur**, plus **specular highlights**
+   and a soft drop shadow drawn on top.
+4. **Keep it live** — re-snapshot / re-render on scroll and on content change so the lens refracts
+   *current* content, not a frozen image (this is what separates it from a static `backdrop-filter`).
+5. The lens is a **fixed, high-z-index element**; its own inner content renders on top, excluded
+   from the refraction.
+
+```glsl
+// the essence of the fragment shader (conceptual)
+vec2 lens   = uv - center;
+float bevel = smoothstep(radius, radius - edge, length(lens));   // strong bend at the rim
+vec2 refr   = uv - lens * bevel * strength;                      // displace the sample
+vec3 col;
+col.r = texture2D(bg, refr + aberration).r;                      // chromatic split at edges
+col.g = texture2D(bg, refr).g;
+col.b = texture2D(bg, refr - aberration).b;
+col  += specular(lens, lightDir);                                // highlight on the bevel
+```
+
+## Two tiers — pick by need (see `../effects-performance.md`)
+
+| Tier | Technique | Use when | Cost |
+|---|---|---|---|
+| **Lightweight (default)** | SVG `feDisplacementMap` + `backdrop-filter` (above) | cards, bars, pills, panels — 95% of cases | zero deps, pure CSS/SVG |
+| **Heavy (true liquid glass)** | snapshot → WebGL shader (this pipeline) | a hero that must refract **live video / scrolling content** | a snapshotter + WebGL + GPU; needs a static fallback |
+
+**Don't reach for the WebGL tier by reflex.** It pulls in a snapshot library + a shader, costs
+continuous GPU, and must be reserved for one hero surface with `prefers-reduced-motion` handling and
+a static first-frame fallback (full budget in `../effects-performance.md`). For everything else, the
+SVG-displacement glass already reads convincingly and ships free.
