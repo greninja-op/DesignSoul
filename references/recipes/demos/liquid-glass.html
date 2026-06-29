@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="light" data-style="liquid">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -137,6 +137,28 @@
 
   section{margin-top:26px}
   .section-title{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;opacity:.6;font-weight:700;margin:0 4px 10px}
+
+  /* ---- effect switcher (segmented) ---- */
+  .seg{display:inline-flex;gap:2px;padding:4px;border-radius:12px;background:var(--lg-bg-strong);border:1px solid var(--lg-border);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+  .seg button{border:0;background:transparent;color:var(--lg-text);opacity:.6;cursor:pointer;font-weight:700;font-size:.82rem;padding:7px 13px;border-radius:9px;transition:background var(--dur),opacity var(--dur)}
+  .seg button.on{opacity:1;background:rgba(255,255,255,.28)}
+
+  /* ---- GLASSMORPHISM mode (frosted, clean, less physical) ---- */
+  html[data-style="glass"]{
+    --lg-blur:10px; --lg-sat:130%; --lg-radius:16px;
+    --lg-bg:rgba(255,255,255,0.08); --lg-bg-strong:rgba(255,255,255,0.16);
+    --ease-spring:cubic-bezier(.22,1,.36,1);   /* standard ease — no spring overshoot */
+  }
+  html[data-style="glass"] .lg::after{display:none}                 /* no chromatic rim */
+  html[data-style="glass"] .lg{box-shadow:0 8px 30px rgba(16,18,40,.14), inset 0 1px 0 rgba(255,255,255,.5)} /* softer specular */
+  html[data-style="glass"] .btn{border-radius:12px}
+  html[data-style="glass"] .nav,html[data-style="glass"] .dock{border-radius:16px}
+  html[data-style="glass"] .dock a{border-radius:12px}
+  html[data-style="glass"] .hero h1,html[data-style="glass"] .card h3{letter-spacing:-.01em}
+  /* glass mode: tile/card hover is a calm lift (no scale pop) */
+  html[data-style="glass"] .card.interactive:hover{transform:translateY(-3px)}
+  html[data-style="glass"] .dock a:hover{transform:translateY(-2px) scale(1.04)}
+
 </style>
 </head>
 <body>
@@ -144,10 +166,11 @@
 <!-- top navbar -->
 <nav class="lg nav">
   <span class="brand">Aurora</span>
-  <a href="#" class="active">Home</a>
-  <a href="#">Discover</a>
-  <a href="#">Library</a>
-  <button class="switch" id="theme" role="switch" aria-checked="false" aria-label="Toggle theme"><span class="knob"></span></button>
+  <div class="seg" id="seg" role="tablist" aria-label="Effect">
+    <button data-style="glass" role="tab">Glassmorphism</button>
+    <button data-style="liquid" role="tab" class="on">Liquid&nbsp;Glass</button>
+  </div>
+  <button class="switch" id="theme" role="switch" aria-checked="false" aria-label="Toggle dark mode"><span class="knob"></span></button>
   <button class="btn btn--solid" onclick="document.getElementById('ov').classList.add('open')">Get started</button>
 </nav>
 
@@ -220,6 +243,13 @@
 </div>
 
 <script>
+  // effect switcher (glassmorphism <-> liquid glass)
+  const seg=document.getElementById('seg');
+  seg.addEventListener('click',e=>{
+    const b=e.target.closest('button[data-style]'); if(!b) return;
+    document.documentElement.setAttribute('data-style', b.dataset.style);
+    seg.querySelectorAll('button').forEach(x=>x.classList.toggle('on', x===b));
+  });
   // theme toggle
   const t=document.getElementById('theme');
   t.addEventListener('click',()=>{
