@@ -260,9 +260,9 @@ lives in `references/ux-laws.md`; run its ten heuristics against each screen as 
 > `component-method.md` (recover the job, find missing states, decide restyle vs. restructure)
 > — never reskin a structurally broken component.
 
-> If the named style has a **recipe library** (`references/recipes/<style>.md`, e.g.
-> `recipes/glassmorphism.md`), start each component from its exact, ready code, then adapt the
-> tokens to the project's accent and the component's real content — don't reinvent what's proven.
+> If the named style has a **recipe library** (`references/recipes/`, e.g.
+> `references/recipes/glassmorphism.md`), start each component from its exact, ready code, then adapt
+> the tokens to the project's accent and the component's real content — don't reinvent what's proven.
 
 **Order of priority:**
 1. Navigation (sets the tone for everything)
