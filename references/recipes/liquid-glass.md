@@ -237,6 +237,37 @@ a WebGL renderer, runs the GPU continuously, and **must** ship:
 If you can't meet that budget, use the lightweight SVG glass above — it reads convincingly and is
 free. Full decision criteria in `../effects-performance.md`.
 
+### Runnable reference implementation
+
+`demos/liquid-glass-webgl.html` is a complete, self-contained WebGL implementation of this tier —
+a draggable rounded-rect lens that refracts a live animated background in real time. Open it to see
+every effect in isolation, with sliders for refraction / frost / chromatic / magnify. It uses a
+procedural background (moving colour blobs + a grid) so the bending is obvious, but the lens code is
+the same one you'd point at a snapshot texture for a real hero.
+
+The core is a single fragment shader. Inside the lens, sample the background with an outward offset
+that grows toward the rim (a rounded-box SDF gives both the mask and the bevel normal), then split
+the RGB taps and add a specular highlight:
+
+```glsl
+// d  = signed distance to the rounded-rect (<0 inside the glass)
+// grad = normalize(gradient of the SDF) — points outward, i.e. the 2D bevel normal
+float rim    = 1.0 - smoothstep(0.0, bevel, -d);   // 1 at the edge → 0 flat interior
+vec2  refr   = px + grad * rim * strength;          // 1) refraction: bend strongest at the rim
+refr = center + (refr - center) * (1.0 - magnify);  // 2) magnify across the whole pane
+
+vec3 col;                                            // 3) chromatic aberration: split along the rim
+col.r = background(refr + grad * chroma).r;
+col.g = background(refr).g;
+col.b = background(refr - grad * chroma).b;
+
+vec3 n = normalize(vec3(grad * rim, 1.0));           // 4) specular on the bevel (light upper-left)
+col += pow(max(dot(n, normalize(vec3(-0.6,0.7,0.55))), 0.0), 18.0) * rim;
+```
+
+For a real hero, swap `background(uv)` for a `texture2D(snapshot, uv)` lookup, where `snapshot` is a
+canvas of the page behind the glass (re-captured on scroll / content change). Everything else stays.
+
 ---
 
 ## Quick checklist
