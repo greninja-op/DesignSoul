@@ -260,6 +260,10 @@ lives in `references/ux-laws.md`; run its ten heuristics against each screen as 
 > `component-method.md` (recover the job, find missing states, decide restyle vs. restructure)
 > — never reskin a structurally broken component.
 
+> If the named style has a **recipe library** (`references/recipes/<style>.md`, e.g.
+> `recipes/glassmorphism.md`), start each component from its exact, ready code, then adapt the
+> tokens to the project's accent and the component's real content — don't reinvent what's proven.
+
 **Order of priority:**
 1. Navigation (sets the tone for everything)
 2. Primary content components (hero, cards, lists)
@@ -417,7 +421,7 @@ If the user says any of these, load the corresponding style reference:
 
 | User Says | Load File |
 |---|---|
-| glassmorphism, frosted glass, blur card | `references/styles/glassmorphism.md` |
+| glassmorphism, frosted glass, blur card | `references/styles/glassmorphism.md` (+ ready component code in `references/recipes/glassmorphism.md`) |
 | liquid glass, Apple glass, iOS 26, visionOS | `references/styles/liquid-glass.md` |
 | material you, material design, material 3, android | `references/styles/material-you.md` |
 | aurora, mesh gradient, glow background, gradient hero | `references/styles/aurora.md` |
