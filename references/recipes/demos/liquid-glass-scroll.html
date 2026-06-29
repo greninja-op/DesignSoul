@@ -257,10 +257,42 @@ gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
 gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);
 gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
 const photo=new Image();
-photo.onload=()=>{ imgW=photo.naturalWidth;imgH=photo.naturalHeight;
-  gl.bindTexture(gl.TEXTURE_2D,tex);gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,true);
-  gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,photo);imgReady=1;dirty=true; };
-photo.onerror=()=>console.warn('photo failed to load');
+// build the fixed background TEXTURE = photo + big baked text, so the glass refracts the letters too
+function fitFont(x,text,targetW){ let fs=12; x.font=`800 ${fs}px Inter,system-ui,sans-serif`;
+  while(x.measureText(text).width<targetW && fs<600){ fs+=4; x.font=`800 ${fs}px Inter,system-ui,sans-serif`; }
+  return fs; }
+function buildTexture(hasPhoto){
+  const maxW=1280;
+  const pw = hasPhoto?photo.naturalWidth:1080, ph = hasPhoto?photo.naturalHeight:1620;
+  const scale=Math.min(1,maxW/pw), w=Math.round(pw*scale), h=Math.round(ph*scale);
+  const c=document.createElement('canvas'); c.width=w; c.height=h;
+  const x=c.getContext('2d');
+  if(hasPhoto){ x.drawImage(photo,0,0,w,h); }
+  else { const g=x.createLinearGradient(0,0,0,h); g.addColorStop(0,'#101033'); g.addColorStop(1,'#2a1840');
+    x.fillStyle=g; x.fillRect(0,0,w,h); }
+  x.fillStyle='rgba(10,8,24,0.20)'; x.fillRect(0,0,w,h);            // slight darken for legibility
+  // baked headline text spanning the full width, row by row — wherever a lens lands, there's a letter to bend
+  const phrases=['LIQUID GLASS','REFRACTION','BEND THE LIGHT','DESIGNSOUL','SEE THROUGH'];
+  x.textAlign='center'; x.textBaseline='middle';
+  const rows=7;
+  for(let r=0;r<rows;r++){
+    const phrase=phrases[r%phrases.length];
+    const fs=fitFont(x,phrase,w*0.94);
+    x.font=`800 ${fs}px Inter,system-ui,sans-serif`;
+    const y=(r+0.5)*h/rows;
+    x.lineWidth=Math.max(2,fs*0.012);
+    x.strokeStyle='rgba(0,0,0,0.18)';                            // faint edge so letters read against busy photo
+    x.fillStyle = r%2 ? 'rgba(255,255,255,0.42)' : 'rgba(255,255,255,0.30)';
+    x.strokeText(phrase, w*0.5, y);
+    x.fillText(phrase, w*0.5, y);
+  }
+  imgW=w; imgH=h;
+  gl.bindTexture(gl.TEXTURE_2D,tex); gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,true);
+  gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,c);
+  imgReady=1; dirty=true;
+}
+photo.onload=()=>buildTexture(true);
+photo.onerror=()=>{ console.warn('photo failed to load — text-only background'); buildTexture(false); };
 photo.src='/IMAGES/pexels-flowers-iso-107015608-31363617.jpg';
 
 let W,H,DPR=Math.min(devicePixelRatio||1,1.5),dirty=true;
