@@ -214,7 +214,7 @@
         <div class="field"><label for="e">Email</label><input class="input" id="e" type="email" placeholder="you@aurora.app"></div>
         <div class="field"><label for="p">Password</label><input class="input" id="p" type="password" placeholder="••••••••"></div>
         <div class="switch-row"><span class="on-bg-muted">Remember me</span>
-          <button class="switch" role="switch" aria-checked="true" onclick="this.setAttribute('aria-checked', this.getAttribute('aria-checked')==='true'?'false':'true')"><span class="knob"></span></button></div>
+          <button class="switch" role="switch" aria-checked="true" aria-label="Remember me" onclick="this.setAttribute('aria-checked', this.getAttribute('aria-checked')==='true'?'false':'true')"><span class="knob"></span></button></div>
         <button class="btn btn--solid" style="width:100%;justify-content:center;margin-top:6px">Continue</button>
       </div>
     </div>
@@ -224,10 +224,10 @@
 
 <!-- floating dock -->
 <nav class="lg dock" aria-label="Primary">
-  <a href="#" class="active" aria-current="page">⌂</a>
-  <a href="#">◷</a>
-  <a href="#">✦</a>
-  <a href="#">☰</a>
+  <a href="#" class="active" aria-current="page" aria-label="Home">⌂</a>
+  <a href="#" aria-label="Recent">◷</a>
+  <a href="#" aria-label="Favourites">✦</a>
+  <a href="#" aria-label="Menu">☰</a>
 </nav>
 
 <!-- modal -->

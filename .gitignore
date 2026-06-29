@@ -30,3 +30,8 @@ test-cases/_eval/node_modules/
 # Editor / OS
 .DS_Store
 Thumbs.db
+
+# Browser-tool review artifacts (Playwright MCP)
+.playwright-mcp/
+/liquid-*.png
+/glass-*.png
