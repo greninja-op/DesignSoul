@@ -113,7 +113,7 @@
 
 <script>
 const cv = document.getElementById('gl');
-const gl = cv.getContext('webgl', { antialias:true });
+const gl = cv.getContext('webgl', { antialias:false, powerPreference:'high-performance', desynchronized:true });
 if(!gl){ document.body.innerHTML='<p style="color:#fff;padding:40px">WebGL not supported.</p>'; }
 
 const vsrc = `attribute vec2 p; void main(){ gl_Position=vec4(p,0.,1.); }`;
@@ -184,16 +184,18 @@ void main(){
         // refract the background: bend outward, strongest at the rim
         vec2 refr = px + grad*rim*u_strength;
         refr = u_center[i] + (refr-u_center[i])*(1.0 - u_mag*0.01);   // magnify
-        vec3 acc = vec3(0.0); float w=0.0;
-        for(int k=-2;k<=2;k++){
-          float o = float(k)*u_frost;
-          acc.r += background(refr + grad*(u_chroma+o)).r;   // chromatic split along the rim
-          acc.g += background(refr + vec2(o,-o)*0.5).g;
-          acc.b += background(refr - grad*(u_chroma-o)).b;
-          w += 1.0;
+        // chromatic split along the rim — just 3 dependent reads (cheap)
+        vec3 cc;
+        cc.r = background(refr + grad*u_chroma).r;
+        cc.g = background(refr).g;
+        cc.b = background(refr - grad*u_chroma).b;
+        // optional frost — 2 extra offset taps blended in, only when the slider is up
+        if(u_frost > 0.25){
+          vec2 fo = vec2(u_frost) * 2.0;
+          vec3 f = background(refr + fo) + background(refr - fo);
+          cc = mix(cc, (cc*2.0 + f) * 0.25, 0.6);
         }
-        c = acc / w;
-        c = mix(c, vec3(0.05,0.06,0.12), 0.20);             // tint down for text contrast
+        c = mix(cc, vec3(0.05,0.06,0.12), 0.20);             // tint down for text contrast
       }
 
       // specular glint on the bevel (light upper-left)
@@ -246,9 +248,10 @@ photo.onerror=()=>console.warn('photo failed to load');
 photo.src='/IMAGES/pexels-flowers-iso-107015608-31363617.jpg';
 
 // ---- size ----
-let W,H,DPR=Math.min(devicePixelRatio||1,2);
+let W,H,DPR=Math.min(devicePixelRatio||1,1.5);
+let dirty=true;                                   // re-measure component rects only when needed
 function resize(){W=cv.width=Math.round(innerWidth*DPR);H=cv.height=Math.round(innerHeight*DPR);
-  cv.style.width=innerWidth+'px';cv.style.height=innerHeight+'px';gl.viewport(0,0,W,H);}
+  cv.style.width=innerWidth+'px';cv.style.height=innerHeight+'px';gl.viewport(0,0,W,H);dirty=true;}
 addEventListener('resize',resize);resize();
 
 // ---- collect the component rects each frame -> feed the shader ----
@@ -270,6 +273,7 @@ addEventListener('pointermove',e=>{ if(!dragEl)return;
   dragEl._off=[base[0]+dx, base[1]+dy];
   dragEl.style.transform=(dragEl.classList.contains('dock')?'translateX(-50%) ':'')+
     `translate(${dragEl._off[0]}px,${dragEl._off[1]}px)`;
+  dirty=true;                                     // re-measure this frame while dragging
 });
 addEventListener('pointerup',()=>dragEl=null);
 
@@ -281,29 +285,35 @@ const ctrl={R:38,C:6,M:10,B:1.5};
 });
 
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(document.fonts&&document.fonts.ready) document.fonts.ready.then(()=>dirty=true);  // text reflow
+
+// measure component rects -> upload to the shader. Only runs when `dirty` (resize / drag / fonts).
+const n=els.length;
+const cen=new Float32Array(n*2), hlf=new Float32Array(n*2),
+      rad=new Float32Array(n),   acc=new Float32Array(n);
+function measure(){
+  els.forEach((el,i)=>{
+    const r=el.getBoundingClientRect();
+    cen[2*i]=(r.left+r.width/2)*DPR;
+    cen[2*i+1]=H-(r.top+r.height/2)*DPR;           // flip Y for gl_FragCoord
+    hlf[2*i]=r.width/2*DPR; hlf[2*i+1]=r.height/2*DPR;
+    rad[i]=Math.min(radiusOf(el)*DPR, r.width/2*DPR, r.height/2*DPR);
+    acc[i]=el.dataset.fill==='accent'?1:0;
+  });
+  gl.uniform1i(u.count,n);
+  gl.uniform2fv(u.center,cen); gl.uniform2fv(u.half,hlf);
+  gl.uniform1fv(u.radius,rad); gl.uniform1fv(u.accent,acc);
+}
+
 const t0=performance.now(); let last=t0, frames=0, fpsEl=document.getElementById('fps');
 (function loop(){
   const now=performance.now(), tm=reduce?8:((now-t0)/1000);
   frames++; if(now-last>500){ if(fpsEl)fpsEl.textContent=Math.round(frames*1000/(now-last)); frames=0; last=now; }
 
-  const cx=[],cy=[],hx=[],hy=[],rad=[],acc=[];
-  els.forEach(el=>{
-    const r=el.getBoundingClientRect();
-    cx.push((r.left+r.width/2)*DPR);
-    cy.push(H-(r.top+r.height/2)*DPR);           // flip Y for gl_FragCoord
-    hx.push(r.width/2*DPR); hy.push(r.height/2*DPR);
-    rad.push(Math.min(radiusOf(el)*DPR, r.width/2*DPR, r.height/2*DPR));
-    acc.push(el.dataset.fill==='accent'?1:0);
-  });
-  const n=els.length;
-  const cen=new Float32Array(n*2), hlf=new Float32Array(n*2);
-  for(let i=0;i<n;i++){cen[2*i]=cx[i];cen[2*i+1]=cy[i];hlf[2*i]=hx[i];hlf[2*i+1]=hy[i];}
+  if(dirty){ measure(); dirty=false; }            // no per-frame layout reflow
 
   gl.uniform2f(u.res,W,H); gl.uniform1f(u.time,tm);
   gl.uniform1f(u.imgReady,imgReady); gl.uniform2f(u.img,imgW,imgH); gl.uniform1i(u.tex,0);
-  gl.uniform1i(u.count,n);
-  gl.uniform2fv(u.center,cen); gl.uniform2fv(u.half,hlf);
-  gl.uniform1fv(u.radius,new Float32Array(rad)); gl.uniform1fv(u.accent,new Float32Array(acc));
   gl.uniform1f(u.strength,ctrl.R*DPR); gl.uniform1f(u.chroma,ctrl.C*DPR);
   gl.uniform1f(u.mag,ctrl.M); gl.uniform1f(u.frost,ctrl.B*DPR);
   gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D,tex);
