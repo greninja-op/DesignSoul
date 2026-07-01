@@ -2,7 +2,9 @@
   "mcpServers": {
     "playwright": {
       "command": "npx",
-      "args": ["@playwright/mcp@latest"],
+      "args": [
+        "@playwright/mcp@latest"
+      ],
       "disabled": false,
       "autoApprove": [
         "browser_navigate",
@@ -11,7 +13,8 @@
         "browser_resize",
         "browser_console_messages",
         "browser_click",
-        "browser_hover"
+        "browser_hover",
+        "browser_evaluate"
       ]
     }
   }

@@ -29,13 +29,13 @@ _(filled by `node analyze.mjs portal-dashboard` — do not edit by hand)_
 |---|---|---|---|---|
 | before | 51 | 6 | 118 | 55 |
 | control (no skill) | — | — | — | — |
-| **after (DesignSoul)** | 51 | 6 | 118 | 55 |
+| **after (DesignSoul)** | 51 | 6 | 120 | 55 |
 
 - before: **51 files** · AI-default signals **6** (transition_all ×2, inter_font_only ×1, outline_none ×2, scale_hover_1_05 ×1) · craft signals **118** (css_tokens_var ×99, focus_visible ×1, reduced_motion ×1, aria_attrs ×11, modern_css ×6) · 55 hardcoded hex, 1 @media
 - control: _(folder empty)_
-- after: **51 files** · AI-default signals **6** (transition_all ×2, inter_font_only ×1, outline_none ×2, scale_hover_1_05 ×1) · craft signals **118** (css_tokens_var ×99, focus_visible ×1, reduced_motion ×1, aria_attrs ×11, modern_css ×6) · 55 hardcoded hex, 1 @media
+- after: **51 files** · AI-default signals **6** (transition_all ×2, inter_font_only ×1, outline_none ×2, scale_hover_1_05 ×1) · craft signals **120** (css_tokens_var ×101, focus_visible ×1, reduced_motion ×1, aria_attrs ×11, modern_css ×6) · 55 hardcoded hex, 1 @media
 
-_Generated 2026-06-26T04:03:22.302Z. Signals are heuristic proxies, not a verdict — pair with the screenshots and the craft scores below._
+_Generated 2026-06-28T18:08:03.361Z. Signals are heuristic proxies, not a verdict — pair with the screenshots and the craft scores below._
 <!-- /AUTO:METRICS -->
 
 ---
@@ -43,8 +43,9 @@ _Generated 2026-06-26T04:03:22.302Z. Signals are heuristic proxies, not a verdic
 ## Auto: code diff (before → after)
 <!-- AUTO:DIFFSTAT -->
 ```
-.../src/index.css"                                 | 55 +++++++++++++---------
- 1 file changed, 33 insertions(+), 22 deletions(-)
+.../src/index.css"                                 | 67 +++++++++++++++-------
+ .../src/pages/Dashboard.jsx"                       |  4 +-
+ 2 files changed, 47 insertions(+), 24 deletions(-)
 ```
 _Full patch: `diff.patch` (gitignored by default)._
 <!-- /AUTO:DIFFSTAT -->
