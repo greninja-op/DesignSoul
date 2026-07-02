@@ -5,6 +5,10 @@ shapes, tonal elevation (color, not just shadow), and expressive, springy motion
 Done right: friendly, accessible, system-coherent. Done wrong: flat default Material that
 looks like an unstyled Android app.
 
+> **Ready-to-use code:** drop-in M3 components (filled/tonal/outlined buttons, card, text field, FAB,
+> switch, chip, nav bar, dialog…) live in `../recipes/material-you.md`. Use this file for the *why*;
+> use the recipe library for the exact code.
+
 ---
 
 ## Core Principles

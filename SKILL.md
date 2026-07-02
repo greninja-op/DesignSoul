@@ -423,7 +423,7 @@ If the user says any of these, load the corresponding style reference:
 |---|---|
 | glassmorphism, frosted glass, blur card | `references/styles/glassmorphism.md` (+ ready component code in `references/recipes/glassmorphism.md`) |
 | liquid glass, Apple glass, iOS 26, visionOS | `references/styles/liquid-glass.md` (+ ready component code in `references/recipes/liquid-glass.md`) |
-| material you, material design, material 3, android | `references/styles/material-you.md` |
+| material you, material design, material 3, android | `references/styles/material-you.md` (+ ready component code in `references/recipes/material-you.md`) |
 | aurora, mesh gradient, glow background, gradient hero | `references/styles/aurora.md` |
 | bento, bento grid, modular tiles, dashboard grid | `references/styles/bento.md` |
 | minimal, swiss, typographic, editorial minimal, clean | `references/styles/minimal-swiss.md` |
