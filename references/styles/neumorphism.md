@@ -3,6 +3,10 @@
 Soft. Embossed. The UI looks carved from the background.
 The entire surface shares one color — depth comes entirely from light and shadow.
 
+> **Ready-to-use code:** drop-in soft-UI components (card, button, icon button, input, toggle, tabs,
+> checkbox, modal…) live in `../recipes/neumorphism.md`. Use this file for the *why*; use the recipe
+> library for the exact code.
+
 ---
 
 ## Core Principle
