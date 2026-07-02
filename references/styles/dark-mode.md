@@ -6,6 +6,10 @@ This file is the method for producing a correct dark variant of ANY DesignSoul s
 > Trigger: "dark mode", "dark theme", or "dark mode + <style>". When a style is named,
 > apply that style's structure with this dark token strategy layered on top.
 
+> **Ready-to-use code:** a tuned dark token layer, a no-flash theme toggle, the dark elevation
+> pattern, and per-style dark overrides live in `../recipes/dark-mode.md`. Use this file for the
+> *why* (the seven rules); use the recipe library for the exact code.
+
 ---
 
 ## The Seven Rules
