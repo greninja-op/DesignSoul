@@ -7,6 +7,10 @@ playful energy. Hugely popular in 2026 for SaaS, indie products, and portfolios.
 > Distinct from `brutalism.md`: brutalism is austere (mostly black/white, one accent).
 > Neo-brutalism is loud and multi-color, but keeps the same structural rules.
 
+> **Ready-to-use code:** drop-in neubrutalist components (card, button, input, badge, navbar, toggle,
+> tabs, modal…) live in `../recipes/neo-brutalism.md`. Use this file for the *why*; use the recipe
+> library for the exact code.
+
 ---
 
 ## Core Principles
