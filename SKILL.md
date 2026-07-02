@@ -425,7 +425,7 @@ If the user says any of these, load the corresponding style reference:
 | liquid glass, Apple glass, iOS 26, visionOS | `references/styles/liquid-glass.md` (+ ready component code in `references/recipes/liquid-glass.md`) |
 | material you, material design, material 3, android | `references/styles/material-you.md` (+ ready component code in `references/recipes/material-you.md`) |
 | aurora, mesh gradient, glow background, gradient hero | `references/styles/aurora.md` |
-| bento, bento grid, modular tiles, dashboard grid | `references/styles/bento.md` |
+| bento, bento grid, modular tiles, dashboard grid | `references/styles/bento.md` (+ ready component code in `references/recipes/bento.md`) |
 | minimal, swiss, typographic, editorial minimal, clean | `references/styles/minimal-swiss.md` |
 | warm editorial, cream, terracotta, paper, book-like, anthropic-style | `references/styles/warm-editorial.md` |
 | neumorphism, soft UI, embossed | `references/styles/neumorphism.md` (+ ready component code in `references/recipes/neumorphism.md`) |

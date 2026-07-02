@@ -9,6 +9,9 @@ feature sections, and portfolios.
 > (glass, aurora, flat, etc.). This file governs the grid and tile behavior; pull
 > colors/surfaces from the chosen visual style or the design tokens.
 
+> **Ready-to-use code:** the grid + every tile variant (hero, stat, feature, media, chart, CTA) live
+> in `../recipes/bento.md`. Use this file for the *why*; use the recipe library for the exact code.
+
 ---
 
 ## Core Principles
