@@ -7,6 +7,10 @@ agencies, and any product that wants to signal confidence through what it leaves
 > The hardest style to do well because there's nothing to hide behind. Every spacing
 > value, every type choice, every alignment is visible.
 
+> **Ready-to-use code:** drop-in Swiss components (grid, type scale, buttons/links, field, rules,
+> table, navbar, quiet motion) live in `../recipes/minimal-swiss.md`. Use this file for the *why*;
+> use the recipe library for the exact code.
+
 ---
 
 ## Core Principles
