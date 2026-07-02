@@ -427,7 +427,7 @@ If the user says any of these, load the corresponding style reference:
 | aurora, mesh gradient, glow background, gradient hero | `references/styles/aurora.md` (+ ready component code in `references/recipes/aurora.md`) |
 | bento, bento grid, modular tiles, dashboard grid | `references/styles/bento.md` (+ ready component code in `references/recipes/bento.md`) |
 | minimal, swiss, typographic, editorial minimal, clean | `references/styles/minimal-swiss.md` (+ ready component code in `references/recipes/minimal-swiss.md`) |
-| warm editorial, cream, terracotta, paper, book-like, anthropic-style | `references/styles/warm-editorial.md` |
+| warm editorial, cream, terracotta, paper, book-like, anthropic-style | `references/styles/warm-editorial.md` (+ ready component code in `references/recipes/warm-editorial.md`) |
 | neumorphism, soft UI, embossed | `references/styles/neumorphism.md` (+ ready component code in `references/recipes/neumorphism.md`) |
 | claymorphism, clay, 3D soft, inflated | `references/styles/claymorphism.md` (+ ready component code in `references/recipes/claymorphism.md`) |
 | brutalism, brutal, raw, austere | `references/styles/brutalism.md` (+ ready component code in `references/recipes/brutalism.md`) |

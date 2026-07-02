@@ -4,6 +4,10 @@ Cream paper backgrounds, a warm terracotta accent, and a serif/sans pairing that
 well-set book or a thoughtful product essay. Calm, trustworthy, human, premium-without-shouting.
 A favorite for AI products, long-form reading, brand sites, and documentation that wants warmth.
 
+> **Ready-to-use code:** drop-in warm-editorial components (reading surface, card, buttons/links,
+> eyebrow, field, pull quote, tag, navbar, aside) live in `../recipes/warm-editorial.md`. Use this
+> file for the *why*; use the recipe library for the exact code.
+
 > The natural antidote to cold AI-default UI: instead of white + blue + Inter, it's warm
 > paper + terracotta + a real type pairing. Nearly 100% achievable in pure HTML/CSS, no assets.
 
