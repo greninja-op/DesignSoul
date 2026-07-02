@@ -3,6 +3,10 @@
 Soft. Inflated. Friendly 3D without being cartoonish.
 Elements look like they're made of soft clay — rounded, puffy, colorful.
 
+> **Ready-to-use code:** drop-in clay components (card, button, icon tile, navbar, input, toggle,
+> chip, modal, tabs…) live in `../recipes/claymorphism.md`. Use this file for the *why*; use the
+> recipe library for the exact code.
+
 ---
 
 ## Core Principle

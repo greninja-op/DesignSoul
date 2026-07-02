@@ -429,7 +429,7 @@ If the user says any of these, load the corresponding style reference:
 | minimal, swiss, typographic, editorial minimal, clean | `references/styles/minimal-swiss.md` |
 | warm editorial, cream, terracotta, paper, book-like, anthropic-style | `references/styles/warm-editorial.md` |
 | neumorphism, soft UI, embossed | `references/styles/neumorphism.md` |
-| claymorphism, clay, 3D soft, inflated | `references/styles/claymorphism.md` |
+| claymorphism, clay, 3D soft, inflated | `references/styles/claymorphism.md` (+ ready component code in `references/recipes/claymorphism.md`) |
 | brutalism, brutal, raw, austere | `references/styles/brutalism.md` |
 | neo-brutalism, neubrutalism, hard shadow, bold color blocks | `references/styles/neo-brutalism.md` |
 | skeuomorphism, realistic, material, tactile, physical | `references/styles/skeuomorphism.md` |
