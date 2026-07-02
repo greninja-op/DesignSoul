@@ -4,6 +4,10 @@ Raw. Unpolished. Aggressively intentional.
 No gradients. No shadows (or massive obvious shadows). No rounded corners.
 Heavy borders. Offset elements. Things that look like they'll break.
 
+> **Ready-to-use code:** drop-in brutalist components (card, button, input, badge, navbar, checkbox,
+> tabs, modal…) live in `../recipes/brutalism.md`. Use this file for the *why*; use the recipe library
+> for the exact code.
+
 ---
 
 ## Core Principle

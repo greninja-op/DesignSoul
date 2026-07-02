@@ -430,7 +430,7 @@ If the user says any of these, load the corresponding style reference:
 | warm editorial, cream, terracotta, paper, book-like, anthropic-style | `references/styles/warm-editorial.md` |
 | neumorphism, soft UI, embossed | `references/styles/neumorphism.md` (+ ready component code in `references/recipes/neumorphism.md`) |
 | claymorphism, clay, 3D soft, inflated | `references/styles/claymorphism.md` (+ ready component code in `references/recipes/claymorphism.md`) |
-| brutalism, brutal, raw, austere | `references/styles/brutalism.md` |
+| brutalism, brutal, raw, austere | `references/styles/brutalism.md` (+ ready component code in `references/recipes/brutalism.md`) |
 | neo-brutalism, neubrutalism, hard shadow, bold color blocks | `references/styles/neo-brutalism.md` (+ ready component code in `references/recipes/neo-brutalism.md`) |
 | skeuomorphism, realistic, material, tactile, physical | `references/styles/skeuomorphism.md` |
 | retro, y2k, vaporwave, chrome, holographic, neon | `references/styles/retro-y2k.md` |
