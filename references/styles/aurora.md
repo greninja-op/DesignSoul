@@ -4,6 +4,10 @@ Soft, glowing, multi-color gradient fields — like the northern lights behind t
 Used by Stripe, Linear, Vercel, and most modern AI/SaaS landing pages.
 Done wrong: a harsh rainbow. Done right: a calm, premium glow that gives depth without noise.
 
+> **Ready-to-use code:** drop-in aurora background (static + drift), calm cards, gradient buttons,
+> hero, stat, and navbar live in `../recipes/aurora.md`. Use this file for the *why* and the
+> lightest-tool ladder; use the recipe library for the exact code.
+
 ---
 
 ## Core Principles
