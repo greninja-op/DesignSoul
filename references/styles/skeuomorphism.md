@@ -7,6 +7,10 @@ tactile depth, real material cues, without the stitched-leather excess.
 > Use sparingly and intentionally. Skeuomorphism shines for products that benefit from
 > physical metaphor — audio apps, instruments, calculators, watches, toggles, games.
 
+> **Ready-to-use code:** drop-in skeuomorphic components (material panel, physical button, toggle,
+> inset screen, input, slider, knob, navbar) live in `../recipes/skeuomorphism.md`. Use this file for
+> the *why*; use the recipe library for the exact code.
+
 ---
 
 ## Core Principles

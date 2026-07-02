@@ -432,7 +432,7 @@ If the user says any of these, load the corresponding style reference:
 | claymorphism, clay, 3D soft, inflated | `references/styles/claymorphism.md` (+ ready component code in `references/recipes/claymorphism.md`) |
 | brutalism, brutal, raw, austere | `references/styles/brutalism.md` (+ ready component code in `references/recipes/brutalism.md`) |
 | neo-brutalism, neubrutalism, hard shadow, bold color blocks | `references/styles/neo-brutalism.md` (+ ready component code in `references/recipes/neo-brutalism.md`) |
-| skeuomorphism, realistic, material, tactile, physical | `references/styles/skeuomorphism.md` |
+| skeuomorphism, realistic, material, tactile, physical | `references/styles/skeuomorphism.md` (+ ready component code in `references/recipes/skeuomorphism.md`) |
 | retro, y2k, vaporwave, chrome, holographic, neon | `references/styles/retro-y2k.md` |
 | dark mode + any style | `references/styles/dark-mode.md` (layer onto the named style) |
 | a real company/brand ("like Apple/Stripe/Linear") | `brand-design-languages.md` → `brands/<brand>.md` (exact-brand mode) |
