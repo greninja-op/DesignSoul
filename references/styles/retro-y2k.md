@@ -7,6 +7,10 @@ Energetic and expressive. Use for music, gaming, fashion, events, creative portf
 > This is an expressive style. It still obeys structure and accessibility — loud is not
 > the same as unusable.
 
+> **Ready-to-use code:** drop-in Y2K components (atmosphere bg, chrome/holo text, glowing button,
+> holo card, input, badge, toggle, navbar) live in `../recipes/retro-y2k.md`. Use this file for the
+> *why*; use the recipe library for the exact code.
+
 ---
 
 ## Core Principles

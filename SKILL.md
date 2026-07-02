@@ -433,7 +433,7 @@ If the user says any of these, load the corresponding style reference:
 | brutalism, brutal, raw, austere | `references/styles/brutalism.md` (+ ready component code in `references/recipes/brutalism.md`) |
 | neo-brutalism, neubrutalism, hard shadow, bold color blocks | `references/styles/neo-brutalism.md` (+ ready component code in `references/recipes/neo-brutalism.md`) |
 | skeuomorphism, realistic, material, tactile, physical | `references/styles/skeuomorphism.md` (+ ready component code in `references/recipes/skeuomorphism.md`) |
-| retro, y2k, vaporwave, chrome, holographic, neon | `references/styles/retro-y2k.md` |
+| retro, y2k, vaporwave, chrome, holographic, neon | `references/styles/retro-y2k.md` (+ ready component code in `references/recipes/retro-y2k.md`) |
 | dark mode + any style | `references/styles/dark-mode.md` (layer onto the named style) |
 | a real company/brand ("like Apple/Stripe/Linear") | `brand-design-languages.md` → `brands/<brand>.md` (exact-brand mode) |
 | a product category ("car site", "music app", "fintech") | `brand-design-languages.md` category patterns → 2–4 `brands/` files (inspiration mode) |
