@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DesignSoul — Style Gallery</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#0b0c1a;color:#eef;font-family:Inter,system-ui,'Segoe UI',sans-serif;padding:28px 22px 60px}
+  header{max-width:1400px;margin:0 auto 26px}
+  h1{font-size:1.7rem;font-weight:800;letter-spacing:-.02em}
+  h1 span{background:linear-gradient(120deg,#a78bfa,#22d3ee);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{color:#9aa0c0;margin-top:6px;font-size:.95rem;max-width:70ch;line-height:1.5}
+  .grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:20px}
+  .cell{background:#12142a;border:1px solid rgba(255,255,255,.10);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 10px 30px rgba(0,0,0,.3)}
+  .bar{display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid rgba(255,255,255,.08)}
+  .dot{width:10px;height:10px;border-radius:50%;flex:none}
+  .bar b{font-size:.92rem;font-weight:700;margin-right:auto}
+  .bar a{font-size:.78rem;color:#a78bfa;text-decoration:none;border:1px solid rgba(167,139,250,.4);padding:4px 9px;border-radius:8px}
+  .bar a:hover{background:rgba(167,139,250,.14)}
+  .frame{position:relative;height:460px;background:#fff}
+  iframe{width:100%;height:100%;border:0;display:block}
+  .feat{grid-column:1/-1;display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:20px}
+  footer{max-width:1400px;margin:34px auto 0;color:#6b7096;font-size:.82rem}
+</style>
+</head>
+<body>
+<header>
+  <h1>DesignSoul — <span>Style Gallery</span></h1>
+  <p class="sub">Live samplers built straight from the component recipe libraries. Each frame is a real, self-contained page — click <b>open ↗</b> to view it full-screen. The liquid-glass tier below is the interactive WebGL build (drag the components / scroll).</p>
+</header>
+
+<div class="grid" id="grid"></div>
+
+<footer>DesignSoul · references/recipes/demos/gallery · rendered locally</footer>
+
+<script>
+const styles = [
+  ["Glassmorphism",   "glassmorphism.html",  "#8b5cf6"],
+  ["Liquid Glass (WebGL)", "../liquid-glass-components.html", "#22d3ee"],
+  ["Aurora / Mesh",   "aurora.html",         "#a78bfa"],
+  ["Material You",    "material-you.html",   "#7c6cff"],
+  ["Bento Grid",      "bento.html",          "#6d5efc"],
+  ["Claymorphism",    "claymorphism.html",   "#ff6584"],
+  ["Neumorphism",     "neumorphism.html",    "#9aa5c0"],
+  ["Neo-Brutalism",   "neo-brutalism.html",  "#ffd23f"],
+  ["Brutalism",       "brutalism.html",      "#ff0066"],
+  ["Minimal / Swiss", "minimal-swiss.html",  "#1a1aff"],
+  ["Warm Editorial",  "warm-editorial.html", "#cc785c"],
+  ["Skeuomorphism",   "skeuomorphism.html",  "#2f7de1"],
+  ["Retro / Y2K",     "retro-y2k.html",      "#2de2e6"],
+  ["Dark Mode",       "dark-mode.html",      "#334155"],
+];
+const grid = document.getElementById('grid');
+for (const [name, src, color] of styles) {
+  const cell = document.createElement('div');
+  cell.className = 'cell';
+  cell.innerHTML =
+    '<div class="bar"><span class="dot" style="background:'+color+'"></span>'+
+    '<b>'+name+'</b><a href="'+src+'" target="_blank" rel="noopener">open ↗</a></div>'+
+    '<div class="frame"><iframe loading="lazy" src="'+src+'" title="'+name+'"></iframe></div>';
+  grid.appendChild(cell);
+}
+</script>
+</body>
+</html>

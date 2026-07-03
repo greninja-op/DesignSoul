@@ -1,0 +1,30 @@
+<!doctype html><html lang="en" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dark Mode — sampler</title>
+<script>(function(){var s=localStorage.getItem('demo-theme');document.documentElement.dataset.theme=s||'dark';})();</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:hsl(225 30% 99%);--s1:#fff;--s2:#fff;--s3:#fff;--border:rgba(15,23,42,.10);--tp:hsl(225 25% 12%);--ts:hsl(225 12% 40%);--tm:hsl(225 10% 55%);--primary:hsl(255 70% 56%);--primary-h:hsl(255 70% 50%);--dur:180ms;--ease:cubic-bezier(.22,1,.36,1)}
+:root[data-theme=dark]{--bg:hsl(225 16% 8%);--s1:hsl(225 14% 14%);--s2:hsl(225 13% 17%);--s3:hsl(225 12% 21%);--border:rgba(255,255,255,.10);--tp:hsl(225 10% 92%);--ts:hsl(225 8% 68%);--tm:hsl(225 7% 50%);--primary:hsl(255 60% 68%);--primary-h:hsl(255 60% 74%)}
+body{min-height:100vh;background:var(--bg);color:var(--tp);font-family:Inter,system-ui,sans-serif;padding:22px;transition:background var(--dur) var(--ease),color var(--dur)}
+.wrap{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+.top{display:flex;align-items:center;gap:12px}.tag{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--tm);margin-right:auto}
+.toggle{width:44px;height:44px;border-radius:12px;cursor:pointer;background:var(--s1);border:1px solid var(--border);color:var(--tp);display:grid;place-items:center;font-size:1.1rem}
+:root[data-theme=dark] .toggle .sun,:root[data-theme=light] .toggle .moon{display:none}
+.card{background:var(--s1);border:1px solid var(--border);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:10px}.card.elev{background:var(--s3)}
+.card h3{font-weight:700}.card p{color:var(--ts);line-height:1.5}
+.nav{background:var(--s2);border:1px solid var(--border);border-radius:14px;padding:10px 16px;display:flex;align-items:center;gap:16px}
+.nav b{margin-right:auto;font-weight:700}.nav a{color:var(--ts);text-decoration:none;font-size:.9rem;padding:8px 12px;border-radius:10px}.nav a.active{color:var(--tp);background:color-mix(in oklab,var(--primary) 18%,transparent)}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.btn{background:var(--primary);color:#fff;border:none;border-radius:12px;min-height:44px;padding:0 20px;font-weight:600;cursor:pointer;transition:background var(--dur) var(--ease)}.btn:hover{background:var(--primary-h)}
+.input{min-height:44px;padding:0 14px;border-radius:12px;background:var(--bg);border:1px solid var(--border);color:var(--tp);font-size:1rem;flex:1;min-width:180px}
+.switch{width:46px;height:28px;padding:3px;border-radius:999px;background:var(--s2);border:1px solid var(--border);display:flex;cursor:pointer}.switch .k{width:22px;height:22px;border-radius:50%;background:#fff;transition:transform var(--dur) var(--ease)}.switch[aria-checked=true]{background:var(--primary)}.switch[aria-checked=true] .k{transform:translateX(18px)}
+</style></head><body>
+<div class="wrap">
+ <div class="top"><span class="tag">Dark Mode (token layer + toggle)</span>
+  <button class="toggle" id="tg" aria-label="Toggle theme"><span class="sun">☀️</span><span class="moon">🌙</span></button></div>
+ <header class="nav"><b>Aurora</b><a class="active" href="#">Home</a><a href="#">Docs</a><a href="#">Pricing</a></header>
+ <article class="card elev"><h3>Tinted dark surfaces</h3><p>Never pure black; higher elevation = lighter tone; accents desaturated; text off-white. Click the toggle ↑.</p>
+  <div class="row"><button class="btn">Continue</button><input class="input" placeholder="you@site.com"><button class="switch" role="switch" aria-checked="true" aria-label="Toggle"><span class="k"></span></button></div></article>
+</div>
+<script>
+document.getElementById('tg').addEventListener('click',function(){var d=document.documentElement.dataset.theme==='dark';document.documentElement.dataset.theme=d?'light':'dark';localStorage.setItem('demo-theme',document.documentElement.dataset.theme);});
+</script></body></html>

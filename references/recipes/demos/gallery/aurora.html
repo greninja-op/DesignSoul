@@ -1,0 +1,24 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Aurora — sampler</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--a1:hsl(265 80% 65%);--a2:hsl(220 85% 62%);--a3:hsl(190 80% 60%);--a4:hsl(320 70% 65%);--surface:rgba(255,255,255,.72);--border:rgba(15,23,42,.08);--ink:hsl(225 25% 12%);--muted:hsl(225 12% 40%);--radius:16px;--ease:cubic-bezier(.22,1,.36,1);--dur:200ms}
+body{min-height:100vh;position:relative;background-color:#fafafe;color:var(--ink);font-family:Inter,system-ui,sans-serif;padding:22px;overflow:hidden}
+body::before{content:"";position:absolute;inset:-20%;z-index:0;pointer-events:none;filter:blur(60px);opacity:.55;background:radial-gradient(40% 40% at 20% 25%,var(--a1)0,transparent 60%),radial-gradient(35% 35% at 80% 15%,var(--a2)0,transparent 60%),radial-gradient(45% 45% at 70% 80%,var(--a3)0,transparent 60%),radial-gradient(30% 30% at 30% 75%,var(--a4)0,transparent 60%)}
+.wrap{position:relative;z-index:1;max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+.tag{align-self:flex-start;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+.card{background:var(--surface);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 8px 32px rgba(15,23,42,.06);padding:24px;display:flex;flex-direction:column;gap:10px}
+.nav{background:var(--surface);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:16px;padding:10px 16px;display:flex;align-items:center;gap:16px}
+.nav b{margin-right:auto;font-weight:700}.nav a{color:var(--muted);text-decoration:none;font-size:.9rem;padding:8px 12px;border-radius:10px}.nav a.active{color:var(--ink);background:rgba(255,255,255,.8)}
+.hero h1{font-size:2rem;line-height:1.05;font-weight:700}.hero .g{background:linear-gradient(120deg,var(--a1),var(--a3));-webkit-background-clip:text;background-clip:text;color:transparent}.card p{color:var(--muted);line-height:1.5}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.btn{border:none;cursor:pointer;min-height:46px;padding:0 24px;border-radius:12px;font-weight:600;color:#fff;background:linear-gradient(135deg,var(--a1),var(--a2));box-shadow:0 6px 20px hsla(255 80% 60%/.3);transition:transform var(--dur) var(--ease)}.btn:hover{transform:translateY(-2px)}
+.btn-ghost{background:var(--surface);color:var(--ink);border:1px solid var(--border);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:none}
+.stat{background:var(--surface);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;display:flex;flex-direction:column;gap:6px}.stat .l{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}.stat .v{font-size:2.2rem;font-weight:800;line-height:1}
+</style></head><body>
+<div class="wrap">
+ <span class="tag">Aurora / Mesh Gradient</span>
+ <header class="nav"><b>Aurora</b><a class="active" href="#">Product</a><a href="#">Docs</a><a href="#">Pricing</a></header>
+ <article class="card hero"><h1>Build calmer, <span class="g">brighter</span> products.</h1><p>The glow lives behind the UI; content sits on calm near-neutral surfaces.</p>
+  <div class="row"><button class="btn">Get started</button><button class="btn btn-ghost">Learn more</button></div></article>
+ <div class="stat"><span class="l">Uptime</span><span class="v">99.98%</span></div>
+</div></body></html>

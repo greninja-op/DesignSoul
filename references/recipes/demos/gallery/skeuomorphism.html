@@ -1,0 +1,29 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Skeuomorphism — sampler</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#e8e6e1;--m1:#f5f5f7;--m2:#c8c8cc;--hl:rgba(255,255,255,.85);--sh:rgba(0,0,0,.25);--shd:rgba(0,0,0,.4);--text:#2b2b2e;--muted:#6a6a70;--accent:#2f7de1;--ease:cubic-bezier(.22,1,.36,1);--spring:cubic-bezier(.34,1.56,.64,1);--dur:140ms}
+body{min-height:100vh;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;padding:22px}
+.surface{background-color:var(--bg);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");border-radius:18px;box-shadow:inset 0 1px 0 var(--hl),0 8px 24px rgba(0,0,0,.12)}
+.wrap{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+.tag{align-self:flex-start;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+.nav{display:flex;align-items:center;gap:14px;padding:12px 18px;background:linear-gradient(180deg,#f2f2f4,#d6d6da);border-bottom:1px solid rgba(0,0,0,.2);border-radius:14px;box-shadow:inset 0 1px 0 var(--hl),0 2px 4px rgba(0,0,0,.15)}
+.nav b{margin-right:auto;font-weight:700;text-shadow:0 1px 0 var(--hl)}.nav a{padding:8px 14px;border-radius:10px;text-decoration:none;color:var(--text);font-weight:600;text-shadow:0 1px 0 var(--hl)}.nav a.active{box-shadow:inset 0 2px 4px rgba(0,0,0,.25),inset 0 -1px 0 var(--hl);color:var(--accent)}
+.card{padding:22px;display:flex;flex-direction:column;gap:10px}.card h3{font-weight:700}.card p{color:var(--muted);line-height:1.5}
+.row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.btn{background:linear-gradient(180deg,var(--m1),var(--m2));border:1px solid rgba(0,0,0,.15);border-radius:14px;cursor:pointer;min-height:46px;padding:0 26px;color:var(--text);font-weight:600;box-shadow:inset 0 1px 0 var(--hl),inset 0 -2px 4px rgba(0,0,0,.1),0 2px 3px var(--sh),0 6px 12px rgba(0,0,0,.12);transition:box-shadow var(--dur) var(--ease),transform var(--dur) var(--ease)}
+.btn:active{transform:translateY(1px);box-shadow:inset 0 2px 4px var(--shd),0 1px 1px var(--sh)}
+.btn-accent{color:#fff;background:linear-gradient(180deg,#5aa0f0,#2f7de1)}
+.input{min-height:46px;padding:0 14px;border:1px solid rgba(0,0,0,.12);border-radius:10px;background:#fbfbfd;color:var(--text);font-size:1rem;box-shadow:inset 0 2px 4px rgba(0,0,0,.14),inset 0 -1px 0 var(--hl);flex:1;min-width:180px}
+.switch{width:58px;height:32px;border:none;cursor:pointer;border-radius:999px;position:relative;background:linear-gradient(180deg,#c4c4c8,#e0e0e4);box-shadow:inset 0 2px 4px rgba(0,0,0,.3),inset 0 -1px 0 var(--hl)}
+.switch .k{position:absolute;top:2px;left:2px;width:28px;height:28px;border-radius:50%;background:linear-gradient(180deg,#fff,#d8d8dc);box-shadow:0 2px 3px rgba(0,0,0,.35),inset 0 1px 0 #fff;transition:transform var(--dur) var(--spring)}
+.switch[aria-checked=true]{background:linear-gradient(180deg,#2f7de1,#5aa0f0)}.switch[aria-checked=true] .k{transform:translateX(26px)}
+.display{background:#1c1f1a;border-radius:10px;padding:14px;color:#b6ff6b;box-shadow:inset 0 2px 6px rgba(0,0,0,.7),inset 0 -1px 0 rgba(255,255,255,.06);font-family:'Courier New',monospace;font-size:1.8rem;letter-spacing:.06em}
+</style></head><body>
+<div class="wrap">
+ <span class="tag">Skeuomorphism</span>
+ <header class="nav"><b>Studio</b><a class="active" href="#">Mix</a><a href="#">Library</a><a href="#">Settings</a></header>
+ <section class="surface card"><h3>Now Playing</h3><p>Restrained realism — a hint of grain, a soft top highlight, a grounded shadow.</p>
+  <div class="display">128.50</div>
+  <div class="row"><button class="btn btn-accent">Record</button><button class="btn">Play</button><button class="switch" role="switch" aria-checked="true" aria-label="Toggle"><span class="k"></span></button></div></section>
+ <div class="row"><input class="input" placeholder="Track name"></div>
+</div></body></html>

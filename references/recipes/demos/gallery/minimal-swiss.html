@@ -1,0 +1,29 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Minimal / Swiss — sampler</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#fff;--ink:#0a0a0a;--g1:#6b6b6b;--g2:#d4d4d4;--accent:#1a1aff;--rule:1px solid #d4d4d4;--ease:cubic-bezier(.22,1,.36,1);--dur:220ms}
+body{min-height:100vh;background:var(--bg);color:var(--ink);font-family:Inter,'Helvetica Neue',Arial,sans-serif;padding:0}
+.nav{display:flex;align-items:baseline;gap:40px;padding:24px 40px;border-bottom:var(--rule);max-width:820px;margin-inline:auto}
+.nav b{font-weight:600;margin-right:auto}.nav a{text-decoration:none;color:var(--g1);font-size:.95rem}.nav a.active{color:var(--ink)}
+.wrap{max-width:820px;margin:0 auto;padding:40px}
+.tag{font-size:.75rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--g1)}
+.display{font-size:clamp(2.4rem,7vw,4.5rem);font-weight:600;line-height:.98;letter-spacing:-.03em;margin:12px 0 24px;max-width:14ch}
+.body{font-size:1.0625rem;line-height:1.6;max-width:62ch;color:var(--ink)}
+.rule{border:none;border-top:var(--rule);margin:40px 0}
+.row{display:flex;gap:24px;flex-wrap:wrap;align-items:center}
+.btn{background:var(--ink);color:#fff;border:none;border-radius:0;cursor:pointer;min-height:48px;padding:0 28px;font-weight:500;transition:opacity var(--dur) var(--ease)}.btn:hover{opacity:.82}
+.link{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ink)}.link:hover{color:var(--accent);border-color:var(--accent)}
+.field{display:flex;flex-direction:column;gap:8px;flex:1;min-width:220px}.field span{font-size:.75rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--g1)}.field input{border:none;border-bottom:var(--rule);border-radius:0;background:transparent;padding:10px 0;font-size:1.0625rem;color:var(--ink)}.field input:focus{outline:none;border-bottom:1px solid var(--ink)}
+table{width:100%;border-collapse:collapse;font-size:.98rem;margin-top:8px}th{text-align:left;font-size:.75rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--g1);padding:0 0 8px;border-bottom:1px solid var(--ink)}td{padding:16px 0;border-bottom:var(--rule)}
+</style></head><body>
+<header class="nav"><b>Studio</b><a class="active" href="#">Work</a><a href="#">About</a><a href="#">Contact</a></header>
+<div class="wrap">
+ <span class="tag">Case study</span>
+ <h1 class="display">Restraint is the design.</h1>
+ <p class="body">Hierarchy comes from size, weight, and spacing — not color or boxes. Whitespace is the primary material.</p>
+ <div class="row" style="margin-top:24px"><button class="btn">Read the report</button><a class="link" href="#">View the archive</a></div>
+ <hr class="rule">
+ <div class="row"><label class="field"><span>Email</span><input type="email" placeholder="you@studio.com"></label></div>
+ <hr class="rule">
+ <table><thead><tr><th>Project</th><th>Year</th><th>Role</th></tr></thead><tbody><tr><td>Atlas</td><td>2026</td><td>Design</td></tr><tr><td>Meridian</td><td>2025</td><td>Brand</td></tr></tbody></table>
+</div></body></html>
