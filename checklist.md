@@ -368,6 +368,12 @@ If the answer is **no** — ship it.
 - [ ] Chunky pixel font for headers; tiled/dithered bg; small high-contrast palette
 - [ ] Block cursor / RPG pointer on active items; text ≥ 4.5:1; blink respects reduced-motion
 
+### Manga Panel Grid
+- [ ] Asymmetrical/skewed panels + thick ink gutters; contents un-skewed so text is straight
+- [ ] Screentone shading for greys (not flat fill); mostly B/W + one spot color
+- [ ] Action/speed lines behind a focal element; skewed buttons; bubble inputs thicken on focus
+- [ ] Text ≥ 4.5:1 (not over dense tone); `:focus-visible`; transitions respect reduced-motion
+
 ### Dark Mode (any style)
 - [ ] No pure-black surfaces; elevation goes lighter not darker
 - [ ] Accents desaturated/lifted; text off-white not pure `#fff`

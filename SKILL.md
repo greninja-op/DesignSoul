@@ -439,6 +439,7 @@ If the user says any of these, load the corresponding style reference:
 | kawaii, cute, pastel, mascot, soft, cozy | `references/styles/kawaii.md` (+ ready component code in `references/recipes/kawaii.md`) |
 | windows 95, xp, retro os, desktop, dialog box, taskbar, y2k desktop | `references/styles/cyber-retro.md` (+ ready component code in `references/recipes/cyber-retro.md`) |
 | 8-bit, pixel art, nes, game boy, retro gaming | `references/styles/pixel-art.md` (+ ready component code in `references/recipes/pixel-art.md`) |
+| manga, manga panel, comic panel layout, screentone, action lines | `references/styles/manga-panel.md` (+ ready component code in `references/recipes/manga-panel.md`) |
 | dark mode + any style | `references/styles/dark-mode.md` (layer onto the named style) (+ ready token layer + toggle in `references/recipes/dark-mode.md`) |
 | a real company/brand ("like Apple/Stripe/Linear") | `brand-design-languages.md` → `brands/<brand>.md` (exact-brand mode) |
 | a product category ("car site", "music app", "fintech") | `brand-design-languages.md` category patterns → 2–4 `brands/` files (inspiration mode) |

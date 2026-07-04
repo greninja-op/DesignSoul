@@ -206,6 +206,7 @@ DesignSoul/
         ├── kawaii.md
         ├── cyber-retro.md
         ├── pixel-art.md
+        ├── manga-panel.md
         └── dark-mode.md
 ```
 
