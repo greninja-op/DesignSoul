@@ -350,6 +350,12 @@ If the answer is **no** — ship it.
 - [ ] Speech bubbles / bursts used as real UI; comic display for headings, clean sans body
 - [ ] One clear focal point; text ≥ 4.5:1; `:focus-visible`; reduced-motion respected
 
+### Kawaii / Pastel
+- [ ] Pastel surfaces/accents; body text near-solid warm charcoal (≥ 4.5:1) — NOT pastel
+- [ ] Very rounded pillowy shapes; a friendly face/mascot present
+- [ ] Gentle low-contrast shadows + soft border; rounded warm typeface
+- [ ] Bouncy-but-soft motion; `:focus-visible` visible; reduced-motion respected
+
 ### Dark Mode (any style)
 - [ ] No pure-black surfaces; elevation goes lighter not darker
 - [ ] Accents desaturated/lifted; text off-white not pure `#fff`

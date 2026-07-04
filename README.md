@@ -203,6 +203,7 @@ DesignSoul/
         ├── retro-y2k.md
         ├── cyber-hud.md
         ├── pop-art.md
+        ├── kawaii.md
         └── dark-mode.md
 ```
 

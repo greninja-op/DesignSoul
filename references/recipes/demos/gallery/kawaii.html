@@ -1,0 +1,33 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Kawaii / Pastel — sampler</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#fff5fb;--surface:#fff;--pink:#ffb7d5;--lav:#c9b6ff;--mint:#a7ecd0;--accent:#ff8fc0;--accent-ink:#7a2e52;--ink:#4a3b46;--soft:#8a7a84;--border:#ffd9ea;--shadow:0 8px 20px rgba(255,150,195,.28);--radius:22px;--bounce:cubic-bezier(.34,1.56,.64,1);--font:'Baloo 2',system-ui,sans-serif}
+body{min-height:100vh;background:var(--bg);color:var(--ink);font-family:var(--font);padding:22px}
+.wrap{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+.tag{align-self:flex-start;font-weight:700;color:var(--soft);letter-spacing:.06em;text-transform:uppercase;font-size:.72rem}
+.nav{display:flex;align-items:center;gap:16px;padding:12px 18px;background:var(--surface);border:2px solid var(--border);border-radius:999px;box-shadow:var(--shadow)}
+.nav .brand{font-weight:800;font-size:1.15rem;margin-right:auto;text-decoration:none;color:var(--ink)}
+.links{display:flex;gap:4px}.links a{font-weight:700;text-decoration:none;color:var(--soft);padding:8px 14px;border-radius:999px}.links a.active{background:var(--pink);color:var(--accent-ink)}
+.card{background:var(--surface);border:2px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;gap:10px}
+.card h3{font-weight:800}.card p{color:var(--soft);line-height:1.55}
+.mascot{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;background:var(--mint);color:var(--ink);border-radius:999px;padding:6px 14px 6px 8px;font-weight:700}.mascot .face{width:26px;height:26px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:.75rem}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.btn{background:var(--accent);color:var(--accent-ink);border:none;border-radius:999px;cursor:pointer;min-height:48px;padding:0 26px;font-family:var(--font);font-weight:800;box-shadow:0 6px 0 rgba(255,120,175,.55);transition:transform 160ms var(--bounce),box-shadow 160ms var(--bounce)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 9px 0 rgba(255,120,175,.55)}.btn:active{transform:translateY(3px);box-shadow:0 3px 0 rgba(255,120,175,.55)}
+.btn-soft{background:var(--lav);color:#4a2e6e;box-shadow:0 6px 0 rgba(150,120,220,.45)}
+.input{background:var(--surface);border:2px solid var(--border);border-radius:16px;min-height:48px;padding:0 16px;font-family:var(--font);color:var(--ink);flex:1;min-width:180px}
+.input::placeholder{color:var(--soft)}
+.switch{width:58px;height:32px;padding:3px;cursor:pointer;border:none;border-radius:999px;background:var(--accent);display:flex}.switch .k{width:26px;height:26px;border-radius:50%;background:#fff;box-shadow:0 2px 4px rgba(255,150,195,.5);transform:translateX(26px)}
+.stat .l{font-weight:700;color:var(--soft)}.stat .v{font-size:2rem;font-weight:800}
+.bar{height:14px;border-radius:999px;background:var(--border);overflow:hidden;margin-top:6px}.bar i{display:block;height:100%;width:75%;border-radius:999px;background:linear-gradient(90deg,var(--pink),var(--accent))}
+</style></head><body>
+<div class="wrap">
+ <span class="tag">Kawaii / Pastel</span>
+ <header class="nav"><a class="brand" href="#">🍡 Mochi</a><nav class="links"><a class="active" href="#">Home</a><a href="#">Garden</a><a href="#">Shop</a></nav></header>
+ <article class="card"><span class="mascot"><span class="face">◕‿◕</span> Hi there!</span><h3>Cozy little card</h3><p>Pillowy corners, a soft shadow, and a friendly face. Warm charcoal text keeps it readable.</p>
+  <div class="row"><button class="btn">Yay! ✿</button><button class="btn btn-soft">Maybe later</button></div></article>
+ <div class="row"><input class="input" placeholder="type something sweet…"><button class="switch" role="switch" aria-checked="true" aria-label="Toggle"><span class="k"></span></button></div>
+ <div class="card stat"><span class="l">Water today 💧</span><span class="v">6 / 8</span><div class="bar"><i></i></div></div>
+</div></body></html>
