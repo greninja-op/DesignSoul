@@ -442,6 +442,7 @@ If the user says any of these, load the corresponding style reference:
 | manga, manga panel, comic panel layout, screentone, action lines | `references/styles/manga-panel.md` (+ ready component code in `references/recipes/manga-panel.md`) |
 | acid, psychedelic, rave, chrome blob, distorted, starburst | `references/styles/acid-graphics.md` (+ ready component code in `references/recipes/acid-graphics.md`) |
 | glitch, crt, scanlines, datamosh, anaglyph, terminal, cyber-vapor | `references/styles/glitch.md` (+ ready component code in `references/recipes/glitch.md`) |
+| doodle, sketch, hand-drawn, wireframe, notebook, crayon | `references/styles/doodle-sketch.md` (+ ready component code in `references/recipes/doodle-sketch.md`) |
 | dark mode + any style | `references/styles/dark-mode.md` (layer onto the named style) (+ ready token layer + toggle in `references/recipes/dark-mode.md`) |
 | a real company/brand ("like Apple/Stripe/Linear") | `brand-design-languages.md` → `brands/<brand>.md` (exact-brand mode) |
 | a product category ("car site", "music app", "fintech") | `brand-design-languages.md` category patterns → 2–4 `brands/` files (inspiration mode) |

@@ -209,6 +209,7 @@ DesignSoul/
         ├── manga-panel.md
         ├── acid-graphics.md
         ├── glitch.md
+        ├── doodle-sketch.md
         └── dark-mode.md
 ```
 

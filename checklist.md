@@ -386,6 +386,12 @@ If the answer is **no** — ship it.
 - [ ] Glitch bursts are hover/moment accents, not constant
 - [ ] Base content readable (≥ 4.5:1); `:focus-visible`; reduced-motion disables glitch; no rapid flashing
 
+### Doodle / Sketch
+- [ ] Wobbly/uneven borders (asymmetric radius or rough stroke)
+- [ ] Handwritten headings; legible body (hand or clean sans); paper/cardboard texture
+- [ ] Sketchy marks (underline/arrows/hatch); slight imperfection + soft inked shadow
+- [ ] Text ≥ 4.5:1 (no long/small body in a hard script); `:focus-visible` (dashed); reduced-motion respected
+
 ### Dark Mode (any style)
 - [ ] No pure-black surfaces; elevation goes lighter not darker
 - [ ] Accents desaturated/lifted; text off-white not pure `#fff`
