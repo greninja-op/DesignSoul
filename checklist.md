@@ -356,6 +356,12 @@ If the answer is **no** — ship it.
 - [ ] Gentle low-contrast shadows + soft border; rounded warm typeface
 - [ ] Bouncy-but-soft motion; `:focus-visible` visible; reduced-motion respected
 
+### Cyber-Retro / Windows Desktop (Y2K OS)
+- [ ] Two-tone bevels (raised light-TL/dark-BR; inset inverted) on every element
+- [ ] Window chrome: gradient title bar + min/max/close + thick frame; sharp corners
+- [ ] System gray + one desktop accent; buttons flip bevel inward on press
+- [ ] Pixel type for titles only, UI sans for body; text ≥ 4.5:1; `:focus-visible` present
+
 ### Dark Mode (any style)
 - [ ] No pure-black surfaces; elevation goes lighter not darker
 - [ ] Accents desaturated/lifted; text off-white not pure `#fff`

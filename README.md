@@ -204,6 +204,7 @@ DesignSoul/
         ├── cyber-hud.md
         ├── pop-art.md
         ├── kawaii.md
+        ├── cyber-retro.md
         └── dark-mode.md
 ```
 
