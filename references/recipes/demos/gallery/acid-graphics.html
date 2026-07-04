@@ -1,0 +1,34 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Acid Graphics — sampler</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0410;--purple:#a020ff;--green:#b6ff1a;--magenta:#ff1fa2;--cyan:#23f0ff;--ink:#f3e9ff;--chrome:conic-gradient(from 210deg,#e9e9ff,#9aa7d8,#f0f0ff,#6b7bb0,#e9e9ff);--display:'Anton',Impact,system-ui,sans-serif;--body:'Inter',system-ui,sans-serif}
+body{min-height:100vh;background:var(--bg);color:var(--ink);font-family:var(--body);padding:22px;background-image:radial-gradient(40% 40% at 80% 10%,rgba(160,32,255,.35),transparent 60%),radial-gradient(40% 40% at 10% 80%,rgba(182,255,26,.2),transparent 60%)}
+.wrap{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+.tag{align-self:flex-start;font-family:var(--display);letter-spacing:.06em;color:var(--green);font-size:1.1rem}
+.nav{display:flex;align-items:center;gap:16px;padding:12px 18px;background:rgba(160,32,255,.1);border:1px solid rgba(182,255,26,.4);border-radius:18px;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.nav .brand{font-family:var(--display);font-size:1.3rem;color:var(--green);margin-right:auto;text-decoration:none}
+.links{display:flex;gap:6px}.links a{font-weight:700;text-decoration:none;color:rgba(243,233,255,.8);padding:8px 12px;border-radius:999px}.links a.active{background:var(--magenta);color:#0a0410}
+.hero{display:flex;align-items:center;gap:16px}
+.blob{width:96px;height:96px;flex:none;background:var(--chrome);border-radius:42% 58% 63% 37% / 41% 44% 56% 59%;filter:drop-shadow(0 0 24px rgba(160,32,255,.55));animation:morph 12s ease-in-out infinite}
+@keyframes morph{0%,100%{border-radius:42% 58% 63% 37% / 41% 44% 56% 59%}50%{border-radius:60% 40% 38% 62% / 57% 36% 64% 43%}}
+.title{font-family:var(--display);font-size:clamp(2.4rem,10vw,4rem);line-height:.9;text-transform:uppercase;color:var(--green);transform:scaleY(1.2) skewX(-6deg);transform-origin:left;text-shadow:0 0 18px rgba(182,255,26,.6)}
+.card{position:relative;background:rgba(160,32,255,.1);color:var(--ink);border:1px solid rgba(182,255,26,.45);border-radius:26px 26px 26px 4px;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);padding:22px;box-shadow:0 0 30px rgba(160,32,255,.3);display:flex;flex-direction:column;gap:10px}
+.card h3{font-family:var(--display);text-transform:uppercase;color:var(--green)}.card p{color:rgba(243,233,255,.85);line-height:1.55}
+.burst{display:inline-grid;place-items:center;width:64px;height:64px;background:var(--green);color:#0a0410;font-family:var(--display);transform:rotate(-6deg);position:absolute;top:-16px;right:-8px;clip-path:polygon(50% 0,60% 26%,90% 12%,76% 42%,100% 50%,76% 58%,90% 88%,60% 74%,50% 100%,40% 74%,10% 88%,24% 58%,0 50%,24% 42%,10% 12%,40% 26%)}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.btn{background:var(--chrome);color:#12061f;cursor:pointer;border:2px solid var(--green);border-radius:999px;min-height:48px;padding:0 26px;font-family:var(--display);text-transform:uppercase;letter-spacing:.04em;box-shadow:0 0 18px rgba(182,255,26,.6);transition:transform 140ms,box-shadow 140ms}
+.btn:hover{transform:scale(1.04) rotate(-1deg);box-shadow:0 0 28px rgba(255,31,162,.7)}
+.btn-ghost{background:transparent;color:var(--green);box-shadow:none}
+.input{background:rgba(255,255,255,.04);border:2px solid rgba(160,32,255,.5);border-radius:14px;min-height:46px;padding:0 14px;color:var(--ink);font-size:1rem;flex:1;min-width:180px}
+.input::placeholder{color:rgba(243,233,255,.45)}
+</style></head><body>
+<div class="wrap">
+ <span class="tag">ACID GRAPHICS / PSYCHEDELIC</span>
+ <header class="nav"><a class="brand" href="#">◑ ACID</a><nav class="links"><a class="active" href="#">Events</a><a href="#">Drops</a><a href="#">Crew</a></nav></header>
+ <div class="hero"><div class="blob"></div><h1 class="title">Acid<br>Rave</h1></div>
+ <article class="card"><span class="burst">HOT</span><h3>Liquid metal card</h3><p>Toxic neon on near-black, a gooey corner, a chrome starburst badge, and a morphing blob.</p>
+  <div class="row"><button class="btn">RSVP</button><button class="btn btn-ghost">Info</button></div></article>
+ <div class="row"><input class="input" placeholder="raver@night.club"></div>
+</div></body></html>

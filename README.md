@@ -207,6 +207,7 @@ DesignSoul/
         ├── cyber-retro.md
         ├── pixel-art.md
         ├── manga-panel.md
+        ├── acid-graphics.md
         └── dark-mode.md
 ```
 

@@ -374,6 +374,12 @@ If the answer is **no** — ship it.
 - [ ] Action/speed lines behind a focal element; skewed buttons; bubble inputs thicken on focus
 - [ ] Text ≥ 4.5:1 (not over dense tone); `:focus-visible`; transitions respect reduced-motion
 
+### Acid Graphics / Psychedelic Tech
+- [ ] Molten chrome/metallic gradient on gooey blob shapes; toxic neon on near-black
+- [ ] Distorted display for accents only; clean sans body; spiky starbursts as accents
+- [ ] One clear focal point anchors the chaos
+- [ ] Body text ≥ 4.5:1; `:focus-visible` visible; morph/rotate respects reduced-motion
+
 ### Dark Mode (any style)
 - [ ] No pure-black surfaces; elevation goes lighter not darker
 - [ ] Accents desaturated/lifted; text off-white not pure `#fff`
