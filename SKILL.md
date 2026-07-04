@@ -435,6 +435,7 @@ If the user says any of these, load the corresponding style reference:
 | skeuomorphism, realistic, material, tactile, physical | `references/styles/skeuomorphism.md` (+ ready component code in `references/recipes/skeuomorphism.md`) |
 | retro, y2k, vaporwave, chrome, holographic, neon | `references/styles/retro-y2k.md` (+ ready component code in `references/recipes/retro-y2k.md`) |
 | cyberpunk, mech, hud, sci-fi interface, ghost in the shell, edgerunners | `references/styles/cyber-hud.md` (+ ready component code in `references/recipes/cyber-hud.md`) |
+| pop art, comic book, halftone, ben-day dots, speech bubble | `references/styles/pop-art.md` (+ ready component code in `references/recipes/pop-art.md`) |
 | dark mode + any style | `references/styles/dark-mode.md` (layer onto the named style) (+ ready token layer + toggle in `references/recipes/dark-mode.md`) |
 | a real company/brand ("like Apple/Stripe/Linear") | `brand-design-languages.md` → `brands/<brand>.md` (exact-brand mode) |
 | a product category ("car site", "music app", "fintech") | `brand-design-languages.md` category patterns → 2–4 `brands/` files (inspiration mode) |

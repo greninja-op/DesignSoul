@@ -1,0 +1,32 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pop Art / Comic — sampler</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--ink:#111;--paper:#fff8e7;--red:#ff2b56;--yellow:#ffd000;--blue:#2b8cff;--border:3px solid #111;--shadow:5px 5px 0 #111;--radius:10px;--dot:rgba(17,17,17,.28);--display:'Bangers',Impact,system-ui,sans-serif;--body:'Inter',system-ui,sans-serif}
+body{min-height:100vh;color:var(--ink);font-family:var(--body);padding:22px;background-color:var(--paper);background-image:radial-gradient(var(--dot) 12%,transparent 13%);background-size:16px 16px}
+.wrap{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+.tag{align-self:flex-start;font-family:var(--display);font-size:1.1rem;letter-spacing:.04em;background:var(--red);color:#fff;border:var(--border);border-radius:6px;padding:2px 12px;transform:rotate(-2deg)}
+.nav{display:flex;align-items:center;gap:16px;padding:12px 18px;background:var(--yellow);border:var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
+.nav .brand{font-family:var(--display);font-size:1.5rem;-webkit-text-stroke:1px var(--ink);color:var(--red);margin-right:auto;text-decoration:none}
+.links{display:flex;gap:4px}.links a{font-weight:700;text-decoration:none;color:var(--ink);padding:8px 12px;border:2px solid transparent;border-radius:6px}.links a.active{background:#fff;border-color:var(--ink)}
+.card{background:var(--paper);border:var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;gap:10px;position:relative}
+.card h3{font-family:var(--display);font-size:1.7rem}.card p{font-weight:500;line-height:1.5}
+.burst{display:inline-grid;place-items:center;width:66px;height:66px;background:var(--yellow);color:var(--ink);border:var(--border);font-family:var(--display);font-size:1rem;transform:rotate(-8deg);position:absolute;top:-20px;right:-10px;clip-path:polygon(50% 0,61% 22%,86% 12%,79% 38%,100% 50%,79% 62%,86% 88%,61% 78%,50% 100%,39% 78%,14% 88%,21% 62%,0 50%,21% 38%,14% 12%,39% 22%)}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.btn{background:var(--red);color:#fff;border:var(--border);border-radius:999px;box-shadow:var(--shadow);cursor:pointer;min-height:48px;padding:0 26px;font-family:var(--display);font-size:1.1rem;-webkit-text-stroke:1px var(--ink);transition:transform 100ms,box-shadow 100ms}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink)}.btn:active{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink)}
+.btn-blue{background:var(--blue)}
+.bubble{position:relative;background:#fff;border:var(--border);border-radius:18px;padding:14px 18px;font-weight:600;max-width:36ch}
+.bubble::after{content:"";position:absolute;left:28px;bottom:-16px;border:9px solid transparent;border-top-color:var(--ink)}.bubble::before{content:"";position:absolute;left:29px;bottom:-11px;border:8px solid transparent;border-top-color:#fff;z-index:1}
+.input{background:#fff;border:var(--border);border-radius:10px;min-height:46px;padding:0 14px;font-weight:600;color:var(--ink);flex:1;min-width:180px}
+.switch{width:64px;height:34px;padding:3px;cursor:pointer;border:var(--border);border-radius:999px;background:var(--blue);display:flex;box-shadow:3px 3px 0 var(--ink)}.switch .k{width:26px;height:26px;border:var(--border);border-radius:50%;background:var(--red);transform:translateX(30px)}
+</style></head><body>
+<div class="wrap">
+ <span class="tag">POP ART / COMIC</span>
+ <header class="nav"><a class="brand" href="#">KA-POW!</a><nav class="links"><a class="active" href="#">Home</a><a href="#">Comics</a><a href="#">Shop</a></nav></header>
+ <article class="card"><span class="burst">NEW!</span><h3>Comic panel card</h3><p>Inked outline, hard shadow, halftone paper. Bold primaries and a starburst badge.</p>
+  <div class="row"><button class="btn">POW!</button><button class="btn btn-blue">Read on</button></div></article>
+ <div class="bubble">This is a callout — perfect for tooltips, toasts, and hints!</div>
+ <div class="row"><input class="input" placeholder="Type here…"><button class="switch" role="switch" aria-checked="true" aria-label="Toggle"><span class="k"></span></button></div>
+</div></body></html>

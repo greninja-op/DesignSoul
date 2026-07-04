@@ -20,6 +20,7 @@ DesignSoul ships these visual styles. Load ONLY the file for the style the user 
 | Skeuomorphism | `skeuomorphism.md` | Instruments, calculators, watches, games | Material, tactile realism |
 | Retro / Y2K | `retro-y2k.md` | Music, gaming, fashion, events, creative | Nostalgic, neon, expressive |
 | Cyberpunk / Mech-HUD | `cyber-hud.md` | Gaming, hardware monitors, crypto, futuristic portfolios | Angular neon instrumentation |
+| Pop Art / Comic | `pop-art.md` | EdTech, storytelling apps, webcomic/manga hosts, campaigns | Inked outlines, halftone, fun |
 | Dark Mode | `dark-mode.md` | Cross-cutting — apply to ANY style above | Tuned dark variant |
 
 ---

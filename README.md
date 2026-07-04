@@ -202,6 +202,7 @@ DesignSoul/
         ├── skeuomorphism.md
         ├── retro-y2k.md
         ├── cyber-hud.md
+        ├── pop-art.md
         └── dark-mode.md
 ```
 

@@ -344,6 +344,12 @@ If the answer is **no** — ship it.
 - [ ] Mono uppercase labels + tabular readouts; glow only on key lines/text
 - [ ] Text ≥ 4.5:1 on the base; `:focus-visible` visible; reduced-motion freezes scan/flicker
 
+### Pop Art / Comic
+- [ ] Thick black ink outlines (3–4px) everywhere; hard offset shadows (no blur)
+- [ ] Halftone/Ben-Day dot texture present; loud primaries (not pastel)
+- [ ] Speech bubbles / bursts used as real UI; comic display for headings, clean sans body
+- [ ] One clear focal point; text ≥ 4.5:1; `:focus-visible`; reduced-motion respected
+
 ### Dark Mode (any style)
 - [ ] No pure-black surfaces; elevation goes lighter not darker
 - [ ] Accents desaturated/lifted; text off-white not pure `#fff`
