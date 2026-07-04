@@ -205,6 +205,7 @@ DesignSoul/
         ├── pop-art.md
         ├── kawaii.md
         ├── cyber-retro.md
+        ├── pixel-art.md
         └── dark-mode.md
 ```
 

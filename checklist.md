@@ -362,6 +362,12 @@ If the answer is **no** — ship it.
 - [ ] System gray + one desktop accent; buttons flip bevel inward on press
 - [ ] Pixel type for titles only, UI sans for body; text ≥ 4.5:1; `:focus-visible` present
 
+### 8-Bit / Pixel Art
+- [ ] No curves; instant state changes (no easing)
+- [ ] Rigid block borders (box-shadow); raised bevel swaps to pressed on `:active`
+- [ ] Chunky pixel font for headers; tiled/dithered bg; small high-contrast palette
+- [ ] Block cursor / RPG pointer on active items; text ≥ 4.5:1; blink respects reduced-motion
+
 ### Dark Mode (any style)
 - [ ] No pure-black surfaces; elevation goes lighter not darker
 - [ ] Accents desaturated/lifted; text off-white not pure `#fff`
