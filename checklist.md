@@ -380,6 +380,12 @@ If the answer is **no** — ship it.
 - [ ] One clear focal point anchors the chaos
 - [ ] Body text ≥ 4.5:1; `:focus-visible` visible; morph/rotate respects reduced-motion
 
+### Glitch Art / Cyber-Vapor
+- [ ] RGB channel split on key text/edges only (never body); faint scanlines + subtle static
+- [ ] Terminal monospace; phosphor/anaglyph palette on near-black
+- [ ] Glitch bursts are hover/moment accents, not constant
+- [ ] Base content readable (≥ 4.5:1); `:focus-visible`; reduced-motion disables glitch; no rapid flashing
+
 ### Dark Mode (any style)
 - [ ] No pure-black surfaces; elevation goes lighter not darker
 - [ ] Accents desaturated/lifted; text off-white not pure `#fff`

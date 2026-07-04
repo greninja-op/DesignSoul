@@ -208,6 +208,7 @@ DesignSoul/
         ├── pixel-art.md
         ├── manga-panel.md
         ├── acid-graphics.md
+        ├── glitch.md
         └── dark-mode.md
 ```
 

@@ -26,6 +26,7 @@ DesignSoul ships these visual styles. Load ONLY the file for the style the user 
 | 8-Bit / Pixel Art | `pixel-art.md` | Web3 games, emulation sites, indie dev portfolios, tech events | Chunky pixels, RPG boxes |
 | Manga Panel Grid | `manga-panel.md` | Writing spaces, illustration agencies, publishing, fashion | Skewed ink panels, screentone |
 | Acid Graphics | `acid-graphics.md` | Music events, street fashion, record stores, arts mags | Chrome blobs, toxic neon, spiky |
+| Glitch / Cyber-Vapor | `glitch.md` | Cybersecurity dashboards, sci-fi ARGs, underground music tools | Broken CRT, RGB split, terminal |
 | Dark Mode | `dark-mode.md` | Cross-cutting — apply to ANY style above | Tuned dark variant |
 
 ---
