@@ -338,6 +338,12 @@ If the answer is **no** — ship it.
 - [ ] Pixel/retro fonts for accents only; body stays clean sans
 - [ ] Despite loudness, body text passes 4.5:1; motion respects reduced-motion
 
+### Cyberpunk / Mech-HUD
+- [ ] Angular framing (clip-path/brackets), radius ≈ 0; thin neon lines + grid do the drawing
+- [ ] One or two neon accents on a deep tinted base (not pure black/rainbow)
+- [ ] Mono uppercase labels + tabular readouts; glow only on key lines/text
+- [ ] Text ≥ 4.5:1 on the base; `:focus-visible` visible; reduced-motion freezes scan/flicker
+
 ### Dark Mode (any style)
 - [ ] No pure-black surfaces; elevation goes lighter not darker
 - [ ] Accents desaturated/lifted; text off-white not pure `#fff`

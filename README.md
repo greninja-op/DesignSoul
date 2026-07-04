@@ -201,6 +201,7 @@ DesignSoul/
         ├── neo-brutalism.md
         ├── skeuomorphism.md
         ├── retro-y2k.md
+        ├── cyber-hud.md
         └── dark-mode.md
 ```
 
