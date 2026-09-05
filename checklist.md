@@ -396,3 +396,15 @@ If the answer is **no** — ship it.
 - [ ] No pure-black surfaces; elevation goes lighter not darker
 - [ ] Accents desaturated/lifted; text off-white not pure `#fff`
 - [ ] All contrast re-verified; system preference + manual toggle
+
+### Pixel-Art AI-Agent Mascot & Character Animation (see `references/pixel-agent-mascot-animation.md`)
+- [ ] Character uniqueness enforced — choreography is specific to character anatomy/theme (not generic bouncing, not copied)
+- [ ] Complete frame reconstruction — every animation frame is a solid, self-contained pixel-art image
+- [ ] Complete eye replacement — dark visor faceplate cleanly restored before drawing new eye expression (zero leftover pixels)
+- [ ] Attached components remain solidly fused — dynamic seams track movement without cracks, gaps, or detachment
+- [ ] Zero enclosed transparent holes — interior silhouette is 100% solid; genuine alpha transparency outside
+- [ ] All 5 states implemented — Idle (living loop), Listening (specific cue), Thinking (cognitive focus), Speaking (vocal rhythm), Reaction (anticipation -> peak -> recovery)
+- [ ] Multi-resolution verification — tested and clearly readable at 120px normal, 64px chat avatar, and 24px–36px micro badges
+- [ ] Hard discrete compositing — exactly one frame rendered at a time; zero frame ghosting, stacking, or crossfading
+- [ ] Preloaded assets & reduced motion — `@media (prefers-reduced-motion: reduce)` freezes playback on stable neutral pose
+

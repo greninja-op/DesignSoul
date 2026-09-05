@@ -81,6 +81,15 @@ Fill every section. Empty sections mean the system is incomplete.
 ## Signature / Texture (optional)
 - <Any distinctive material touch — grain, noise, glow, etc. — that prevents generic-template sameness>
 
+## Mascot / AI-Agent Avatar System (optional)
+- Character archetype: <name + physical/elemental theme + personality>
+- Visual language: <polished 2D pixel art, 8/16-bit chunky clusters, crisp edges, no anti-aliasing>
+- Palette: <5–8 strict colors: outline, visor base, body base, shadow, highlight, eye glow>
+- Eye expression language: <vertical bars, horizontal beam, heart shapes, arches, sensor meter>
+- Five universal states: <idle, listening, thinking, speaking, reaction choreography & FPS>
+- Delivery: <discrete PNG frames, nearest-neighbor canvas rendering, reduced-motion freeze>
+- See: references/pixel-agent-mascot-animation.md
+
 ## Decisions Log
 | Date | Decision | Rationale |
 |------|----------|-----------|

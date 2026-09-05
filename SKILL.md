@@ -7,11 +7,10 @@ description: >
   "fix the UX of this component", "make this feel like a real product", "apply liquid glass
   style", "this looks generic", "redesign the frontend", "make the animations consistent",
   "fix the navbar/card/form/tracker/chatbot UI", or any request to apply a named visual style
-  (glassmorphism, neumorphism, brutalism, claymorphism, liquid glass). Also use when the user
-  describes a UI component problem — a tracker, progress card, order status, calendar, dropdown,
-  checkbox, chat interface — and wants it fixed or improved professionally. Always use this skill
-  before touching any frontend styling, animation, or component redesign task. Do NOT skip this
-  skill just because the task seems simple — even small UI fixes benefit from the DesignSoul system.
+  (glassmorphism, neumorphism, brutalism, claymorphism, liquid glass). Also use for designing,
+  animating, integrating, and visually auditing pixel-art AI-agent mascot characters, game avatars,
+  and sprite animation systems across idle/listening/thinking/speaking/reaction states. Always
+  use this skill before touching any frontend styling, animation, or component redesign task.
 ---
 
 # DesignSoul
@@ -111,6 +110,7 @@ Then, conditionally:
 - When writing real CSS → `references/modern-css.md` (the craft touches that read as hand-made)
 - Polishing components / final craft pass → `references/polish.md` (the micro-details that beat slop)
 - If any component loads async / needs loading states → `references/skeleton.md`
+- If the task involves a pixel-art mascot, game mascot, AI-agent character, sprite sheet, or 5-state character animation (idle/listening/thinking/speaking/reaction) → `references/pixel-agent-mascot-animation.md`
 - If a style is named → the matching file (see Trigger table); if unsure which style,
   read `references/styles/_index.md` and recommend one
 - If a browser tool is or can be available → `references/verification.md`
@@ -456,6 +456,7 @@ If the user says any of these, load the corresponding style reference:
 | "fix the copy", "the wording", "error messages", "empty state text", "button labels", "tone" | `references/microcopy.md` |
 | "multiple languages", "translate", "RTL", "Arabic/Hebrew", "localize", "internationalize" | `references/i18n.md` |
 | "the UX feels off", "too cluttered", "confusing", "hard to use", "which pattern (tabs/accordion/…)" | `references/ux-laws.md` (+ disclosure table in `components.md`) |
+| "pixel-art mascot", "pixel-art character", "game mascot", "AI-agent character", "sprite", "sprite sheet", "sprite animation", "character animation", "animated avatar", "pixel-art avatar", "idle/listening/thinking/speaking/reaction", "animated agent personality", "game-style AI assistant" | `references/pixel-agent-mascot-animation.md` |
 
 ---
 
