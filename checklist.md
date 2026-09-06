@@ -399,12 +399,49 @@ If the answer is **no** — ship it.
 
 ### Pixel-Art AI-Agent Mascot & Character Animation (see `references/pixel-agent-mascot-animation.md`)
 - [ ] Character uniqueness enforced — choreography is specific to character anatomy/theme (not generic bouncing, not copied)
-- [ ] Complete frame reconstruction — every animation frame is a solid, self-contained pixel-art image
-- [ ] Complete eye replacement — dark visor faceplate cleanly restored before drawing new eye expression (zero leftover pixels)
-- [ ] Attached components remain solidly fused — dynamic seams track movement without cracks, gaps, or detachment
-- [ ] Zero enclosed transparent holes — interior silhouette is 100% solid; genuine alpha transparency outside
-- [ ] All 5 states implemented — Idle (living loop), Listening (specific cue), Thinking (cognitive focus), Speaking (vocal rhythm), Reaction (anticipation -> peak -> recovery)
-- [ ] Multi-resolution verification — tested and clearly readable at 120px normal, 64px chat avatar, and 24px–36px micro badges
+- [ ] Universal baseline hover present — continuous subtle floating motion ($\pm 2\dots 3\text{px}$) ensures character never feels dead or static
+- [ ] Complete frame reconstruction — every animation frame is an independent, complete integer pixel-art image
+- [ ] Zero raster transforms — strictly 0 CSS rotate/scale, 0 raster rotation, 0 affine warps, and 0 anti-aliased interpolation
+- [ ] Continuous row segment bending — flexing tapering/crooked tips shifts unified horizontal rows to eliminate 1px cracks/gaps
+- [ ] Complete eye replacement protocol — old eye bounding box cleared and restored with solid dark face color before drawing new eyes
+- [ ] Zero unintended visor artifacts — no accidental yellow/white rings, circles, or halos drawn around the eyes
+- [ ] Distinct listening posture — listening is immediately identifiable (hover stabilizes, feature perks upright, particles gather inward)
+- [ ] Attached components remain solidly fused — dynamic seams track movement with 0 cracks, gaps, or detachment
+- [ ] Zero enclosed transparent holes — interior silhouette and visor cavity are 100% solid (alpha = 255); genuine alpha transparency outside
+- [ ] All 5 states implemented — Idle (living loop), Listening (attentive cue), Thinking (cognitive focus), Speaking (vocal rhythm), Reaction (anticipation -> peak -> recovery)
+- [ ] Multi-resolution verification — tested and clearly readable at 128px UI, 64px chat avatar, and 32px mini badge
 - [ ] Hard discrete compositing — exactly one frame rendered at a time; zero frame ghosting, stacking, or crossfading
+- [ ] Discrete branch attachment & integrity — branch base, midsection, and tip remain physically connected to the body with 0 cracks, 0 tears, and 0 background leakage
+- [ ] Zero forward-mapping dropout cracks — multi-pass 2D morphological gap closure verified on all moving limbs and branches
+- [ ] Rigid satellite particle translation — small secondary particles translated as solid integer blocks without slicing or ghost pixels
+- [ ] Chrome headless visual QA passed — all 5 states captured at 1280x1200 via Chrome and audited visually before declaring completion
 - [ ] Preloaded assets & reduced motion — `@media (prefers-reduced-motion: reduce)` freezes playback on stable neutral pose
+- [ ] Topological connected component masking — all particles and appendages extracted using 8-connected BFS, never brittle bounding boxes or color thresholds
+- [ ] Complete clean visor plate — body mask excludes eyes; eye cavity flooded with solid visor background color so zero old-eye remnants or ghost stripes can occur
+- [ ] Zero partial-body raster scaling — chassis, visor, and cap hover as one unified structure; zero boundary seam tearing
+- [ ] Rigid anchor base rows — bottom 2 rows of attached stems/antennae have zero displacement ($dy=0, dx=0$), ensuring permanent seamless attachment
+- [ ] Component-isolated gap closure — morphological hole filling executes only on isolated scratch layers, never bleeding across the frame
+- [ ] Non-zero integer displacement guarantee — every consecutive frame in an animated sequence incorporates at least one explicit integer offset ($\Delta y \ge 1$ or $\Delta x \ge 1$), preventing duplicate resting frames
+- [ ] Coherent full-structure energy propagation — orbital/dimensional bands parameterize along continuous arc length ($t \in [0.0, 1.0]$) with 0 coordinate splits, 0 modulo dithering holes, continuous wave travel, and 100% connected full-band peak states
+- [ ] Topological component boundary enforcement — attached multi-part structures (flowers, horns, accessories) are 100% isolated from body mantle logic; energy illumination respects biological boundaries with zero color bleed (e.g. 0 green in flower)
+- [ ] Solid visor cavity plate invariant — entire facial cavity extracted topologically and flooded with solid dark visor color; zero old-eye remnants, ghost pixels, or stray outline lines across all state transitions
+- [ ] 6-pass 8-neighborhood morphological crack closure — forward raster deformations execute 4-axis opposite-sandwich gap closure so non-linear coordinate stretching never leaves 1-2px unmapped cracks
+- [ ] Absolute eye region replacement rule — every eye-expression frame generated as a complete replacement (CLEAR EYE REGION -> RESTORE DARK VISOR -> DRAW NEW EXPRESSION); never overlay new eyes on top of old eyes or transform previous eye rasters
+- [ ] Deterministic geometric visor masking — visor cavity delineated via explicit row-span tables and eye box guarantees; never rely on color-threshold BFS that risks skipping anti-aliased perimeter pixels ($45 \le R \le 160$) and stamping old eye borders into body base
+- [ ] Mandatory 5-direction eye boundary audit — programmatic scan ABOVE, BELOW, LEFT, RIGHT, and BETWEEN BOTH EYES asserts 0 non-visor pixels outside designated eye bounds across all 45 frames
+- [ ] In-place multi-axis morphological dilation — iterative in-place gap closure with 2-pixel lookahead checks eliminates multi-pixel gaps that batch-collected hole queues fail to bridge
+- [ ] Inner visor flank boundary anchoring — lateral mantle/cloak deformations anchor $x\_frac = 0.0$ at the inner visor cavity boundary, eliminating boundary seam separation
+- [ ] Traveling cloak fold & crystal anchor coherence — wave propagation travels coherently across mantle layers and modulates the bottom crystal anchor without raster detachment
+- [ ] Unified attached structure segmentation & additive base anchor — attached structures (top crystal, headset, crest, crown) segmented as ONE complete continuous structure with zero arbitrary vertical/horizontal bounding box partitions; articulating kinematics apply global core displacement additively ($dx_{attached} = dx_{core} + dx_{articulation}$), pinning seam factor strictly to 0.0 at the base to eliminate vertical cracking seams and displacement jumps
+- [ ] Discrete master-derived eye reproduction — default/idle eyes sampled directly from authentic master pixel art rather than parametric mathematical formulas, eliminating 1px spikes, middle gap splits, and stray interior pixels
+- [ ] 100% full-radius visor pre-stamp flooding — entire eye cavity ($r \le 61\text{px}$) flooded with pure dark visor background color immediately prior to stamping any state eye expression; zero master residual pixels and zero dilation bleed
+- [ ] Independent asynchronous particle kinematics — surrounding satellite particles (stars, cross sparks) animate with distinct, non-identical trajectories following a DRIFT -> PAUSE -> DRIFT -> RETURN cycle with perceptible amplitudes ($\ge 4\text{px}$ in idle, inward pull in listening/thinking, rhythmic pulse in speaking, $\pm 12\text{px}$ in reaction)
+- [ ] State-adaptive readability cadence — frame rates tailored to character identity (Idle 12 FPS, Listening 12 FPS, Thinking 11 FPS, Speaking 13 FPS, Reaction 15 FPS) for immediate visual readability at avatar scale
+- [ ] Complete color-range anatomical plume/crest masking — segmented mask encompasses 100% of the physical envelope including all dark crimson crease/shadow pixels, cleanly wiping all moving pixels from the static chassis plate to eliminate stationary stripe artifacts
+- [ ] True wind-waving traveling flag physics — flexible flags, plumes, and fabric crests parameterize along geodesic distance $s \in [0.0, 1.0]$ from the base socket outward to tip with progressive delay ($k \cdot s - \phi$) and non-linear tip displacement growth ($s^{1.5}$), creating authentic traveling folds and flutter instead of rigid tilting
+- [ ] Multi-pass morphological scratch canvas gap closure — deformed cloth/plume layers execute 3-pass sandwich morphological closure (horizontal, vertical, diagonal) on an isolated scratch layer before stamping, eliminating 100% of 1px dropouts, black cracks, and raster stepping holes
+- [ ] Pre-filled slit cavity plates for mechanical scanner shutters — cage bars articulate across pre-filled dark navy slit cavities (`SLIT_BG_COLOR`), allowing left-to-right sweeps, diagnostic compression, and wide alert apertures without helmet rim tearing
+- [ ] Pristine clean chassis invariant — never clear intact body anatomy (cage bars, side ear sockets, visor borders) into background colors; only remove the moving cloth pixels from `clean_chassis` so the entire robot body remains 100% solid and crack-free
+- [ ] 2-fold traveling wind wave kinematics — flag parameterization uses $k \ge 3.0\pi$ with non-linear envelope ($s^{1.3}$) and 5-pass gap closure to produce authentic multi-fold cloth flutter rather than a stiff wiggling stick
+- [ ] Mandatory localhost asset cache busting — always append fresh version query strings (`?v=YYYYMMDD_revX`) to `getFrameUrl` and HTML `<script>` / `<link>` tags to prevent browser from serving stale cached frames or outdated scripts
 
