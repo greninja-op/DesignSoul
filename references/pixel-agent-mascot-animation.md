@@ -654,3 +654,28 @@ Whenever error-fixing prompts are received across past character iterations (e.g
   4. **Mandatory Cache-Busting Protocol for Localhost Web Labs**:
      - Always append explicit version query strings to `getFrameUrl` in `character-config.js` (e.g. `?v=YYYYMMDD_revX`).
      - Always bump `<script>` and `<link>` version query strings in `index.html` on any rebuild to prevent browser caching.
+
+### 11.18 Living Wooden Rhythm / Tree Bot — Top Leaves & Flexible Structures: Complete Topological Partitioning, Inverse-Mapped Row Scaling, and Elimination of Artificial Bounding Box Slicing
+
+- **Defects Encountered**:
+  1. *Thin Black / Dark Seam Lines Along Leaf Edges*: Thin black/background lines appeared along the outer and inner edges of the top-left and top-right leaves during movement.
+  2. *Severed Floating Vertical Pixel Bars*: The outer tips of the top leaves became detached, leaving a floating 1-to-3 pixel vertical strip of green separated from the moving leaf by an empty chasm.
+  3. *Horizontal Skipped Rows / Staircase Gaps*: Slices across the leaf and stem had missing rows of pixels where the dark webpage stage background showed through.
+  4. *Stem Splitting & Horizontal Detachment*: Hard-slicing the stem down the middle at $X=168$ or at $Y=118$ tore the stems apart from each other and severed the stem-to-wooden-body connection.
+- **Root Causes**:
+  1. *Arbitrary Bounding Box Slicing of Connected Anatomy*: Defining `top_left_leaf = ... & (X >= 90)` and `top_right_leaf = ... & (X <= 245)` severed the true top leaf canopy (which naturally extends to $X=86$ and $X=258$). The chopped-off outer pixels were either abandoned or assigned to side branches, opening transparent slits that looked like black lines.
+  2. *Forward Splatting with Spatially-Varying Vertical Displacements*: Using forward mapping $(y, x) \to (y + dy(y), x + dx(y))$ where $dy(y)$ steps by 1 pixel between rows leaves unmapped destination rows ($sy$) completely empty (alpha = 0), creating horizontal black lines across the leaf width.
+  3. *Rigid Step Slicing of Merged Stems*: Cutting the central stem at $X=168$ and $Y=118$ caused adjacent pixels to move in opposite directions, ripping the stem seam open.
+- **Mandatory Prevention Protocol**:
+  1. **Topological Extraction of Connected Flexible Structures (Zero Coordinate Chopping)**:
+     - Always extract the entire connected anatomical structure (e.g. Component 1: complete top canopy, leaves, stems, base) via topological flood-fill (BFS) or color-connected component analysis from the master asset.
+     - NEVER impose arbitrary geometric clipping bounds ($X \ge 90, X \le 245, Y \le 118$) that dissect connected pixel art.
+     - Every pixel of the flexible structure must move with that structure as a single unified entity.
+  2. **Continuous Inverse-Mapped Row Scaling for Vertical Perk / Stretch**:
+     - Never use forward splatting with spatially variable $dy$ to stretch flexible structures.
+     - Use destination-driven inverse mapping: loop over every destination row $sy \in [y_{top} - stretch, y_{base}]$, mapping smoothly to source row $y_{src} = \text{round}(y_{base} - w \cdot H_{src})$. Because every integer destination row is visited, mathematically NO destination row can EVER be skipped (zero horizontal black lines).
+  3. **Continuous Smooth-Blend Seam Kinematics for Joined Stems**:
+     - In central zones where two flexible structures (e.g. twin stems or ears) converge into a shared base, blend the horizontal displacement $dx$ smoothly across the junction: $dx = (1 - t) \cdot dx_l + t \cdot dx_r$.
+     - Enforce zero relative displacement at the root anchor ($y \ge y_{base} \implies dx=0, dy=0$) to guarantee 100% airtight continuity with the character body.
+  4. **Dedicated Sub-Component Crack & Gap Validation**:
+     - In the audit script, inspect each moving sub-component independently across all frames to ensure zero 1px or 2px transparent gaps exist within any row or column.
