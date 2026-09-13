@@ -672,6 +672,201 @@ Whenever error-fixing prompts are received across past character iterations (e.g
      - NEVER impose arbitrary geometric clipping bounds ($X \ge 90, X \le 245, Y \le 118$) that dissect connected pixel art.
      - Every pixel of the flexible structure must move with that structure as a single unified entity.
   2. **Continuous Inverse-Mapped Row Scaling for Vertical Perk / Stretch**:
+     - Active illumination states must use brighter values of the exact same color family:
+       - Normal: authentic white/lavender (`[215..230, 180..215, 250..255]`)
+       - Active: bright cyan-lavender (`[220..245, 235..252, 255]`)
+       - Peak: radiant pure white core (`[255, 255, 255]`) and radiant cyan-white borders (`[232..248, 246..255, 255]`)
+     - Strictly forbidden: out-of-family colors (yellow, green, pink, red, rainbow) and soft blur/bloom/gradients. The pixel art must remain 100% crisp.
+  5. **Complete Discrete Frame Reconstruction & Depth Occlusion**:
+     - Every frame is rendered from a clean base: clear previous band state, compute complete continuous illumination state, and composite with strict depth hierarchy (occluding body parts properly cover rear band sections without light leaking through).
+
+### Rule 11: Topological Component Boundary Enforcement vs Color-Threshold Dropout & Cavity Infiltration (Photosynthesis Bot Lessons)
+- **Defects Encountered**:
+  1. *Visor Eye Ghosting & Leftover Outlines*: Arched eye outlines and stray green pixels remained stamped onto the visor when transitioning to other eye states (e.g. Thinking horizontal bars), creating malformed double-eyes and thin green residual lines.
+  2. *Flower Center & Boundary Green Light Leak*: When internal photosynthesis energy/sap reached the flower, bright green illumination leaked through the boundary between the pink petals and yellow center, and bled onto petal borders, destroying the flower's natural anatomy.
+- **Root Causes**:
+  1. *Under-inclusive Eye Segmentation & Mantle Fallback*: Defining eyes with a naive bright color threshold ($G > 165$) missed 271 darker green/lime transition and outline pixels ($G \le 165$). Because the body mantle was defined as `~is_visor & ~is_eyes`, those 271 dark eye outline pixels were categorized as mantle and stamped back onto every frame.
+  2. *Incomplete Flower Masking & Sap Color Bleed*: Defining flower petals with a blue threshold ($B > 115$) missed 2,244 dark magenta shading and petal outline pixels ($B \le 115$). The green crown/mantle energy logic claimed these pixels and elevated them to vivid green, causing the petal borders and the contour around the yellow center to turn bright green.
+- **Mandatory Prevention Protocol**:
+  1. **Topological Visor Cavity Segmentation & Clean Plate Invariant**:
+     - Never rely on color thresholds to find eyes or visor bounds.
+     - Extract the entire enclosed facial visor cavity (e.g. via 8-connected BFS from a known seed inside the visor).
+     - In the master frame buffer, initialize the visor cavity to a solid, pristine face color plate (`clean_master_body[is_visor_cavity] = VISOR_COLOR`).
+     - Strictly exclude the entire visor cavity from body mantle logic (`is_body_mantle &= ~is_visor_cavity`).
+     - Every new eye expression must be drawn onto this clean visor plate from scratch:
+       $$\text{CLEAR OLD EYE REGION} \longrightarrow \text{RESTORE CLEAN VISOR} \longrightarrow \text{DRAW NEW EYES FROM SCRATCH}$$
+     - Zero pixels from previous expressions or body layers may persist inside the visor cavity.
+  2. **Comprehensive Topological Flower Isolation & Zero Color Bleed**:
+     - Segment the entire multi-part attached structure (petals, shading, outlines, and core) using robust relational color logic (e.g. for pink flower above crown: $Y < 140 \land R > G$).
+     - Strictly exclude the flower structure from all body mantle, foliage, and green energy propagation logic (`is_green_crown &= ~is_flower`, `is_body_mantle &= ~is_flower`).
+     - Green energy MUST terminate cleanly at the structural biological boundary.
+     - When energy reaches an attached structure of a different palette, that structure responds ONLY with its native color family (e.g. flower center blazes with amber-gold highlights: `[255, 248, 140]`, `[255, 235, 95]`, `[255, 215, 75]`, NEVER green).
+  3. **Automated Structural & Palette Boundary Auditing**:
+     - Automated test loops must verify:
+       - 0 pixels with $G > 50$ inside the visor cavity outside the strictly defined active eye bounding box.
+       - 0 pixels with $G > R$ inside the flower boundary.
+       - 0 transparent holes inside the character silhouette.
+       - 100% complete frame replacement between consecutive frames (zero ghosting).
+
+### Rule 12: Multi-Pass Morphological Gap & Crack Closure vs Non-Linear Forward-Mapping Integer Divergence (Mushroom / Spore Bot Lessons)
+- **Defects Encountered**:
+  1. *Internal Body Cracks in Deformed Anatomy*: Forward mapping during mushroom cap expansion, eaves lateral flex, and vertical lift produced 1-2px unmapped alpha=0 holes inside the character body (e.g. at coordinate (101, 99) in frame 15).
+  2. *Single-Pass Closure Termination*: A naive scanline gap check (`if left > 50 and right > 50: fill`) failed because when two adjacent destination pixels were both skipped due to integer rounding ($x_{i+1} - x_i \ge 2$), the right neighbor was also unpopulated during the first pass, causing the algorithm to exit with the hole intact.
+- **Root Causes**:
+  1. *Forward Mapping Grid Divergence*: In raster transformations where target coordinates $(y', x')$ are computed from source $(y, x)$ via non-linear elastic formulas (`cur_dx = int(round(cap_dx * x_frac * y_frac))`), local gradient stretching causes adjacent source pixels to land $\ge 2\text{px}$ apart on the target canvas.
+  2. *Insufficient Morphological Connectivity*: Checking only strict orthogonal 1px horizontal or vertical sandwiches misses diagonal step cracks and multi-pixel dilation boundaries.
+- **Mandatory Prevention Protocol**:
+  1. **6-Pass 8-Neighborhood Morphological Crack Closure**:
+     - During all raster grid deformations (cap flex, eaves warp, organic breathing), execute a dedicated multi-pass morphological hole filler:
+     - Check the 8-neighborhood (orthogonal and diagonal).
+     - Fill an empty pixel if it forms an opposite sandwich across ANY of the 4 axes (horizontal, vertical, diagonal 1, diagonal 2) OR has $\ge 5$ solid 8-neighbors.
+     - Repeat until zero holes remain or maximum 6 passes complete.
+  2. **Strict Internal Silhouette Convexity Audit**:
+     - The mathematical test suite must assert: zero pixels with alpha == 0 within the character core envelope that have solid pixels on both sides.
+  3. **Clean Visor Plate Invariant Across Facial Deformations**:
+     - Even when upper canopy structures flex, the facial visor plate must be continuously flooded with the solid visor color, guaranteeing zero ghost eyes, zero alpha seams, and zero facial cracks.
+
+### Rule 13: Absolute Eye Region Replacement & Geometric Visor Masking vs Threshold BFS Leakage (Mushroom Bot Eye Corruption Lessons)
+- **Defects Encountered**:
+  1. *Residual Vertical Line Remnants & Box Outlines*: When transitioning from vertical normal eyes to horizontal thinking eyes, thin dark vertical lines remained below/around the eyes, accompanied by faint rectangular shadow boxes.
+  2. *Top-Left Visor Notch*: A 45-degree angled notch/crack artifact cut into the top-left curve of the dark visor plate ($y=171..178$).
+  3. *Stray Pixels & Old Eye Borders*: Anti-aliased transition pixels and shadow borders from previous eye states persisted across frames.
+- **Root Causes**:
+  1. *Color-Threshold BFS Failure*: Using color thresholds ($R < 45$ for dark visor, $R > 160$ for pink eyes) to segment the visor cavity skipped shaded border pixels where $45 \le R \le 160$. The BFS treated these transition pixels as obstacles and routed around them, leaving 252 eye outline pixels and the shaded top-left visor notch unclassified.
+  2. *Fallback Stamping into Body Base*: The unclassified 252 pixels defaulted to `is_lower_body` and were stamped onto the base canvas of every single frame from `clean_master_body`, permanently baking old eye borders and shadow rectangles into the background.
+  3. *Incomplete Eye Region Reset*: Attempting to draw new eye expressions on top of previous frames or relying on partial pixel patching rather than completely re-flooding the visor cavity.
+- **Mandatory Prevention Protocol**:
+  1. **Deterministic Geometric Visor Masking**:
+     - Never rely on fragile color-threshold flood-fills to delineate the facial visor.
+     - Delineate the visor cavity using deterministic geometric row spans (`VISOR_SPANS`) and explicit eye cavity guarantees (`is_visor_cavity[Y_EYES, X_EYES] = True`).
+     - In `clean_master_body`, 100% of pixels in the visor cavity must be reset to the authentic dark visor color (`VISOR_COLOR = [23, 13, 16, 255]`), guaranteeing that zero master eye borders, shadows, or notches survive into the body base.
+  2. **Absolute Eye Region Replacement Rule**:
+     $$\text{CLEAR ENTIRE EYE REGION} \longrightarrow \text{RESTORE ORIGINAL DARK VISOR} \longrightarrow \text{DRAW COMPLETE NEW EYE EXPRESSION}$$
+     - Every eye frame must be generated as a 100% independent, complete replacement.
+     - NEVER modify an existing eye raster or draw new eyes on top of old eyes.
+     - For BOTH eyes independently, flood the entire extended eye bounding box ($Y \in [cy - 26, cy + 26]$, $X \in [lx - 24, lx + 24]$ and $X \in [rx - 24, rx + 24]$) with `VISOR_COLOR` before drawing the new expression.
+  3. **Zero Transformation on Raster Eye Artwork**:
+     - Never apply CSS transforms, scaling, rotation, translation, or fractional resampling to eye art.
+     - Every expression (normal vertical pills, thinking horizontal beams, listening sensory expansion, speaking rhythmic pulses, reaction burst flares) must be rendered as clean, discrete pixel art.
+  4. **Mandatory 5-Direction Eye Boundary Audit**:
+     - For every frame across all states, inspect:
+       - ABOVE eye
+       - BELOW eye
+       - LEFT of eye
+       - RIGHT of eye
+       - BETWEEN BOTH EYES
+     - Fail immediately if any non-visor pixel ($R > 45$, $G > 45$, or $B > 45$) exists outside the mathematically designated active eye bounding box.
+     - Zero vertical remnants, zero rectangular outlines, zero bottom lines, and zero ghost pixels permitted.
+
+### Rule 14: In-Place Multi-Axis Dilation & Visor Boundary Flank Anchoring (Shadow Cloak Bot Lessons)
+- **Defects Encountered**:
+  1. *Batch-Collector Gap-Closure Bottleneck*: Collecting empty pixels into a deferred batch list `holes.append((y, x, color))` misses 2-pixel wide divergence gaps (`[solid, hole1, hole2, solid]`), because during pass 1 neither hole has an immediate solid orthogonal neighbor on both sides.
+  2. *Lateral Mantle-to-Visor Seam Separation*: Applying non-zero displacement to the inner edges of lateral cloak flanks separates the mantle from the rigid visor plate, causing 1px tears along the facial perimeter.
+- **Mandatory Prevention Protocol**:
+  1. **Immediate In-Place Morphological Dilation Closure**:
+     - During gap closure, assign newly bridged pixels immediately to the canvas (`out_canvas[y, x] = neighbor_color`) so subsequent pixels in the same scanline immediately recognize the filled structure.
+     - Include 2-pixel lookahead checks (`l and r2` where `r2 = out_canvas[y, x+2] > 40`, `u and d2`) across orthogonal and diagonal axes.
+  2. **Inner Visor Flank Boundary Anchoring**:
+     - When calculating lateral deformation factors (`x_frac = (x - x_inner) / (x_outer - x_inner)`), strictly pin $x\_frac = 0.0$ at the inner visor boundary so zero displacement occurs at the seam where the cloak meets the faceplate.
+  3. **Bottom Anchor Crystal System Coherence**:
+      - The bottom diamond anchor must react dynamically to the traveling wave (lifting on idle arrival F10, contracting on thinking F23, surging upward on reaction F43) while retaining solid attachment to the cloak apex.
+
+### Rule 15: Unified Attached Structure Segmentation & Additive Base Anchor vs Arbitrary Partition Seams (Unstable Ice Bot Lessons)
+- **Defects Encountered**:
+  1. *Vertical Dark/Black Cracking Seams Beside Attached Structures*: Thin vertical cracks ($y \in [108..140], x \approx 215$ and $x \approx 125$) cut into the top-right and top-left flanks of the top ice crystal and headset during movement, tremor, and tilt.
+  2. *Base Attachment Displacement Jump*: When the top structure sheared, the base connection suffered displacement mismatches against the underlying body shell, exposing background or dark navy visor pixels.
+- **Root Causes**:
+  1. *Fragmented Anatomy Partitioning*: The top crystal/headset was segmented using an arbitrary narrow bounding box (`y <= 140 and 125 <= x <= 215`). The actual physical structure spanned $x \in [110..229]$. Slicing at $x=125$ and $x=215$ severed the left and right flanks of the crystal/headset and dumped them into `is_outer_shell`.
+  2. *Discontinuous Displacement Gradient*: Pixels inside $x \le 215$ moved with the top crystal shear, while adjacent pixels at $x > 215$ moved with the core body displacement. The relative velocity differential pulled adjacent pixels apart by 1 to 4 pixels along the artificial partition lines, tearing open vertical rifts that exposed the dark background/visor plate.
+  3. *Base Anchor Multiplier Zeroing*: `body_tilt_x` was incorrectly multiplied by the vertical shear factor `shear_factor = (145 - y) / 120`. At the base $y=145$, `shear_factor = 0`, causing the global body displacement to be zeroed out at the base while the adjacent body shell moved with the full core displacement.
+- **Mandatory Prevention Protocol**:
+  1. **Unified Attached Structure Segmentation (Zero Partition Rule)**:
+     - Attached structures (top crest, sensor, headset, cap, crown) must be segmented as ONE complete continuous pixel-art structure without arbitrary horizontal or vertical bounding boxes cutting through the anatomy.
+     - Include the top formation, side facets, side edges, base, and body headset mantle in a single unified component (`y <= 145` across all $x$ in the upper body).
+  2. **Additive Base Anchor Kinematics**:
+     - Never multiply global body displacement by local shear factors.
+     - All articulating components must inherit the global core displacement additively:
+       $$dx_{attached}(y) = \text{body\_tilt\_x} + \text{tremor\_core\_x} + \text{round}(\text{tilt\_offset} \cdot \text{shear\_factor}(y)) + \text{round}(\text{tremor\_relative} \cdot \text{shear\_factor}(y))$$
+     - Ensure $\text{shear\_factor}(y_{base}) = 0.0$ strictly, guaranteeing that at the attachment seam, $dx_{attached} \equiv dx_{body}$.
+     - Across any horizontal row $y$, all pixels in the attached structure shift by the exact same integer $dx$, making horizontal tearing mathematically impossible.
+  3. **Mandatory Anatomical Seam Audit**:
+     - Automated test suites must explicitly scan the boundary boxes around attached structures ($y \in [80..140], x \in [105..235]$) across all 45 frames.
+     - Fail immediately if any dark, empty, or background pixel ($R < 25, G < 35, B < 65$ with $\alpha > 100$) appears within the continuous shell/crystal envelope.
+
+### 11.16 Solar Corona Bot — Eye Corruption, Static Stars, and Cadence Readability Protocol
+
+- **Defects Encountered**:
+  1. *Eye Corruption & Malformed Geometry*: Idle curved eyes generated via parametric ellipse approximations exhibited 1px vertical spikes, middle gap rifts, and stray interior pixels. In subsequent states (e.g. thinking horizontal slit), residual eye pixels from master character artwork survived at the outer perimeter ($x \approx 114$ and $x \approx 227$) because visor cavity clearing had an overly conservative radius threshold ($r \le 58\text{px}$ instead of full $r \le 61\text{px}$).
+  2. *Static Surrounding Particles*: Floating golden cross/star particles had negligible ($\pm 1\text{px}$) mirrored shifts, appearing virtually frozen and static at standard avatar scale ($120\text{px}$–$160\text{px}$).
+  3. *Perceived Playback Sluggishness*: Low frame rates (10 FPS) across all states made character responsiveness feel sluggish and unresponsive.
+- **Root Causes**:
+  1. *Continuous Formula vs. Authentic Pixel Art*: Replacing hand-drawn pixel-art eye curves with naive analytic formulas ($((dx/a)^2 + (dy/b)^2 \le 1.0)$) causes raster stepping flaws, thin 1px orphan poles, and hollow-center noise.
+  2. *Incomplete Visor Flooding*: Merging dilated body shells without clearing the full visor envelope allowed previous master pixels and dilation bleed to linger beneath newly drawn eyes.
+  3. *Symmetric/Under-Scaled Particle Kinematics*: Star offsets were mirrored and under-scaled ($\pm 1\text{px}$), disappearing upon browser downsampling.
+- **Mandatory Prevention Protocol**:
+  1. **Discrete Master-Derived Eye Reproduction**:
+     - For default/idle arched eyes, extract the authentic master eye pixel bitmap directly from the approved master image (`master-character.png`) rather than synthesizing with mathematical formulas.
+     - For all modulated eye states (attentive, thinking, speaking, excited, blink), design clean, handcrafted discrete pixel matrices with solid borders and chamfered tips (zero 1px spikes).
+  2. **100% Visor Flooding Pre-Stamp Gate**:
+     - In `render_frame()`, immediately prior to drawing ANY state eye, thoroughly flood the entire eye socket cavity across the complete radius ($r \le 61\text{px}$ covering all $(y, x)$ where eyes can ever appear) with pure visor background (`#1E110C`).
+     - Never draw over existing eye pixels; never transform existing raster eyes.
+  3. **Independent Asynchronous Particle Kinematics**:
+     - Decorative surrounding particles (stars, embers, crystals, spores) must NEVER remain static.
+     - Each particle must execute an independent trajectory (e.g., TL drifts up-left, TR drifts right, BL shifts left-then-down, BR drifts down-right).
+     - Use a structured motion curve: **DRIFT $\to$ PAUSE $\to$ DRIFT $\to$ RETURN**.
+     - Amplitudes must be at least $\pm 4\text{px}$ to $\pm 6\text{px}$ in Idle, clearly contracting inward in Listening/Thinking, rhythmically pulsing in Speaking, and bursting $\pm 10\text{px}$ to $\pm 12\text{px}$ in Reaction to remain visible at normal avatar sizes ($120\text{px}$).
+  4. **State-Adaptive Readability Cadence**:
+     - Playback FPS must reflect character personality and perception: Idle (12 FPS), Listening (12 FPS), Thinking (11 FPS), Speaking (13 FPS), Reaction (15 FPS).
+
+### 11.17 Signal Beacon / Scanning Relay Bot — True Wind-Waving Traveling Flag Physics, Pristine Chassis Preservation, and Mandatory Browser Cache Busting
+
+- **Defects Encountered**:
+  1. *Over-Clearing "More Regions" Corruption*: Attempting to clear scanner cage slits, ear sockets, or the entire visor into background colors wiped out the authentic metallic visor frame borders, helmet forehead rim, and ear module seams, causing artificial black cracks across multiple robot body regions.
+  2. *Flat / Rigid Flag Motion*: Under-frequency wave equations ($k = 2.2\pi$) with small amplitudes appeared as a stiff, flat wiggling stick or paddle rather than a flexible fabric cloth flag fluttering in the wind.
+  3. *Browser Cache Invalidation / "Not Loading" Failure*: The single HTML lab served scripts (`character-config.js`, `animator.js`) and frame URLs without fresh version query strings, causing the browser to serve stale cached frames from before the fix.
+- **Root Causes**:
+  1. *Artificial Background Flooding of Intact Anatomy*: The robot body is ONE continuous, solid piece of pixel art. Clearing sub-regions (like cage interiors or ears) creates artificial holes and cracks whenever overlays shift.
+  2. *Insufficient Traveling Wave Cycles*: Flexible cloth flags require at least 1.5 to 2.0 full wave cycles ($k = 3.2\pi$) along their geodesic length, paired with a non-linear amplitude envelope ($s^{1.3}$) and 5-pass morphological gap closure.
+  3. *Un-versioned Script and Image URLs*: Browsers aggressively cache static `.png` frame sequences and `.js` files.
+- **Mandatory Prevention Protocol**:
+  1. **Pristine Clean Chassis Invariant (Zero Body Over-Clearing)**:
+     - In `clean_chassis`, remove ONLY the exact moving cloth plume pixels (5,880 pure red flag pixels).
+     - NEVER clear scanner cage interiors, side ear sockets, or the visor frame on `clean_chassis`. The authentic helmet, cage bars, ear modules, and metallic borders must remain 100% solid and intact.
+     - Move the entire chassis as one unified physical entity via integer `hover_dy`.
+  2. **True Traveling Wind-Wave Flag Kinematics**:
+     - Wave number: $k = 3.2\pi$ ($\approx 1.6$ wave cycles along the crest) to produce: $\text{Base Solid} \to \text{First Cloth Fold} \to \text{Second Cloth Fold} \to \text{Tip Flutter} \to \text{Recovery}$.
+     - Dynamic Amplitudes:
+       - Idle: $A_x = 13.0, A_y = 6.5, \text{envelope} = s^{1.3}$, $hover\_dy \in [-2..2]$
+       - Listening: $A_x = 9.0, A_y = 4.5, \text{lift\_bias} = -3.0$
+       - Thinking: $A_x = 7.0, A_y = 3.5, \text{lean\_bias} = -2.0$
+       - Speaking: $A_x = 14.0, A_y = 7.0, \text{lean\_bias} = 1.0$
+       - Reaction: $A_x$ surging up to $18.0, A_y = 9.0, \text{lean\_bias} = 10.0$ at peak alert!
+     - 5-Pass Morphological Scratch Canvas Gap Closure: executes 5 iterative passes filling orthogonal and diagonal 1px voids before compositing onto the canvas.
+     - Strict Base Anchor: $y \ge 82, x \ge 148$ or $s < 0.06 \implies \Delta x = 0, \Delta y = 0$ (Zero detachment / Zero socket crack invariant).
+  3. **Strict Bounded Eye Aperture Clearance**:
+     - When changing eye expressions or blinking, clear ONLY the precise eye apertures ($Y \in [205..230] + hover\_dy, X \in [110..151]$ and $X \in [189..230]$) with `VISOR_BG`.
+     - NEVER touch the surrounding visor rim ($X < 110$, $X \in [152..188]$, $X > 230$, $Y < 205$, $Y > 230$).
+  4. **Mandatory Cache-Busting Protocol for Localhost Web Labs**:
+     - Always append explicit version query strings to `getFrameUrl` in `character-config.js` (e.g. `?v=YYYYMMDD_revX`).
+     - Always bump `<script>` and `<link>` version query strings in `index.html` on any rebuild to prevent browser caching.
+
+### 11.18 Living Wooden Rhythm / Tree Bot — Top Leaves & Flexible Structures: Complete Topological Partitioning, Inverse-Mapped Row Scaling, and Elimination of Artificial Bounding Box Slicing
+
+- **Defects Encountered**:
+  1. *Thin Black / Dark Seam Lines Along Leaf Edges*: Thin black/background lines appeared along the outer and inner edges of the top-left and top-right leaves during movement.
+  2. *Severed Floating Vertical Pixel Bars*: The outer tips of the top leaves became detached, leaving a floating 1-to-3 pixel vertical strip of green separated from the moving leaf by an empty chasm.
+  3. *Horizontal Skipped Rows / Staircase Gaps*: Slices across the leaf and stem had missing rows of pixels where the dark webpage stage background showed through.
+  4. *Stem Splitting & Horizontal Detachment*: Hard-slicing the stem down the middle at $X=168$ or at $Y=118$ tore the stems apart from each other and severed the stem-to-wooden-body connection.
+- **Root Causes**:
+  1. *Arbitrary Bounding Box Slicing of Connected Anatomy*: Defining `top_left_leaf = ... & (X >= 90)` and `top_right_leaf = ... & (X <= 245)` severed the true top leaf canopy (which naturally extends to $X=86$ and $X=258$). The chopped-off outer pixels were either abandoned or assigned to side branches, opening transparent slits that looked like black lines.
+  2. *Forward Splatting with Spatially-Varying Vertical Displacements*: Using forward mapping $(y, x) \to (y + dy(y), x + dx(y))$ where $dy(y)$ steps by 1 pixel between rows leaves unmapped destination rows ($sy$) completely empty (alpha = 0), creating horizontal black lines across the leaf width.
+  3. *Rigid Step Slicing of Merged Stems*: Cutting the central stem at $X=168$ and $Y=118$ caused adjacent pixels to move in opposite directions, ripping the stem seam open.
+- **Mandatory Prevention Protocol**:
+  1. **Topological Extraction of Connected Flexible Structures (Zero Coordinate Chopping)**:
+     - Always extract the entire connected anatomical structure (e.g. Component 1: complete top canopy, leaves, stems, base) via topological flood-fill (BFS) or color-connected component analysis from the master asset.
+     - NEVER impose arbitrary geometric clipping bounds ($X \ge 90, X \le 245, Y \le 118$) that dissect connected pixel art.
+     - Every pixel of the flexible structure must move with that structure as a single unified entity.
+  2. **Continuous Inverse-Mapped Row Scaling for Vertical Perk / Stretch**:
      - Never use forward splatting with spatially variable $dy$ to stretch flexible structures.
      - Use destination-driven inverse mapping: loop over every destination row $sy \in [y_{top} - stretch, y_{base}]$, mapping smoothly to source row $y_{src} = \text{round}(y_{base} - w \cdot H_{src})$. Because every integer destination row is visited, mathematically NO destination row can EVER be skipped (zero horizontal black lines).
   3. **Continuous Smooth-Blend Seam Kinematics for Joined Stems**:
@@ -679,3 +874,24 @@ Whenever error-fixing prompts are received across past character iterations (e.g
      - Enforce zero relative displacement at the root anchor ($y \ge y_{base} \implies dx=0, dy=0$) to guarantee 100% airtight continuity with the character body.
   4. **Dedicated Sub-Component Crack & Gap Validation**:
      - In the audit script, inspect each moving sub-component independently across all frames to ensure zero 1px or 2px transparent gaps exist within any row or column.
+
+### 11.19 Free-Floating Avatar Badges, Resolution Mismatch Prevention, and 2-Second Idle Rest Hold Protocol
+
+- **Defects Encountered**:
+  1. *Container Box Background Around Character Avatars*: Character sprites / bot avatars were enclosed in rectangular surface boxes with borders (`var(--bg-elevated)`, `var(--border-subtle)`), causing the bot to appear trapped inside an artificial box rather than free-floating seamlessly against the background.
+  2. *Pixel Blur & Scale Distortion on High-DPI Screens*: When displayed at small or non-integer resolutions without crisp edge rendering directives, pixel art mascots suffered severe antialiasing and blurriness, degrading visual fidelity.
+  3. *Hyperactive Non-Stop Loop Without Idle Rest Hold*: Idle animation loops without an established 2-second hold on the neutral resting frame felt jittery and rushed, failing to give characters weight and natural breathing presence.
+- **Root Causes**:
+  1. *Legacy Badge Background Styling*: Reusing generic list card or tag container CSS with filled backgrounds and rectangular borders for mascot avatars instead of transparent free-floating canvases.
+  2. *Missing Pixel-Art CSS / Canvas Scaling Flags*: Omitting `image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;` and under-sizing avatar containers below legible sprite thresholds ($\ge 44\text{px}$ in lists, $\ge 56\text{px}$ in mobile carousel, $\ge 64\text{px} - 120\text{px}$ in detail headers).
+  3. *Missing Rest-Cycle Delay in State Cadence*: Continuous looping of the idle sequence without a 2.0s hold on Frame 01 causes constant nervous motion instead of a calm natural presence.
+- **Mandatory Prevention Protocol**:
+  1. **Zero-Box Free-Floating Mascot Invariant**:
+     - Avatar containers (`.agent-avatar-badge`, `.avatar-glyph-container`, Compose `AgentAvatar`) MUST have `background: transparent !important; border: none !important; box-shadow: none !important;`.
+     - Visual states (listening, thinking, speaking, reaction) must be indicated via direct sprite drop-shadow glows (`filter: drop-shadow(...)`), NEVER via rectangular border rings or box highlights.
+  2. **High-DPI Integer Scaling & Crisp-Edge Invariant**:
+     - All character renderers and img elements must enforce:
+       `image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;`
+     - Avatars must be sized generously: minimum 44px–48px for dense lists, 56px for carousels, and 64px–120px for chat headers and inspection cards so pixel artwork detail is immediately recognizable without blur.
+  3. **2-Second Idle Rest Hold Cadence**:
+     - Every idle state loop must incorporate a distinct resting hold of 2.0 seconds on the primary neutral frame (Frame 01) between subtle breathing / blink cycles, creating an authentic, living rhythm.
