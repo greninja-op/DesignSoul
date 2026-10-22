@@ -295,6 +295,22 @@ The small things that read as "off" even when the system is right (full guide in
 - ❌ Rounded card + left-colored-border accent (unless the brand genuinely uses it).
 - ❌ A signature/watermark on a cover.
 
+## Icon & Decoration Anti-Patterns
+
+### ❌ Slop Emojis & Improvised Canvas Caricatures
+```
+/* AI defaults — STRICTLY PROHIBITED */
+"📍 Current Location"
+"💬 Comments"
+"🎧 Audio Guide"
+"🧭 North"
+"⭐ 4.9"
+```
+- ❌ Using raw Unicode emojis (`📍`, `💬`, `🎧`, `🧭`, `🚀`, `⭐`, `★`, `🔔`, `⚠️`, etc.) in buttons, chips, titles, notifications, toasts, or copy.
+- ❌ Drawing makeshift beveled cartoon shapes or emoji needles on `<canvas>` (e.g. fake emoji compasses, hand-drawn polygon stars).
+**Why it's wrong:** Raw emojis render with clownish, OS-inconsistent colors, clash wildly with dark/light themes, break optical alignment, and are the single most identifiable hallmark of careless AI-generated slop. Improvised canvas shapes look like unfinished toys.
+**Fix:** **MANDATORY ZERO-EMOJI RULE**. Never insert Unicode emojis anywhere. Always deploy authentic vector icons (Lucide, Android VectorDrawables, SVGs) styled cleanly with design token colors.
+
 ---
 
 ## Dark Patterns (Never Build These — Even If Asked Casually)

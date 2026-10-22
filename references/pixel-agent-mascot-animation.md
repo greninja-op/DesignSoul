@@ -1,4 +1,4 @@
-# Pixel-Art AI-Agent Mascot Design & Animation System
+﻿# Pixel-Art AI-Agent Mascot Design & Animation System
 
 A comprehensive, production-grade guide for designing, generating, organizing, animating, integrating, and visually verifying a family of fictional AI-agent mascot characters.
 
@@ -401,7 +401,7 @@ Whenever error-fixing prompts are received across past character iterations (e.g
      Every non-particle pixel of the character must belong to exactly ONE mutually exclusive mask:
      - Left branch: vertically bounded to the branch span (`y in [100..232], x <= 97`).
      - Right branch: vertically bounded to the branch span (`y in [100..232], x >= 242`).
-     - Central body: 100% of all remaining character anatomy (`~is_left_branch & ~is_right_branch & ~is_particle`).
+     - Central body: 100% of all remaining character anatomy (`☰is_left_branch & ☰is_right_branch & ☰is_particle`).
      Never leave anatomical regions unassigned or ambiguously overlapping.
   2. **Continuous Deformation Functions Without Sign Flips**:
      Vertical curling and wave deflection must be continuous without step functions or sign discontinuities:
@@ -432,7 +432,7 @@ Whenever error-fixing prompts are received across past character iterations (e.g
      - Always use 8-connected component flood-fill (BFS) to isolate the exact, complete, multi-tonal component with 100% of its shaded and highlight pixels intact.
      - Verify that $\sum \text{pixels}(\text{body}) + \sum \text{pixels}(\text{appendages}) + \sum \text{pixels}(\text{particles}) = \text{total master non-empty pixels}$ with zero overlap and zero dropouts.
   2. **Clean Visor Background Plate Rule**:
-     - The body mask MUST completely exclude all eye pixels (`is_body = master & ~is_sprout & ~is_spark & ~is_eye`).
+     - The body mask MUST completely exclude all eye pixels (`is_body = master & ☰is_sprout & ☰is_spark & ☰is_eye`).
      - In `clean_master_body`, replace the eye cavity with the authentic solid visor background color (`[1, 17, 28, 255]`).
      - When `clean_master_body` is drawn onto any frame, the visor is ALREADY 100% clean, dark navy, and solid.
      - Expressions are drawn onto this clean plate, making old-frame eye ghosting, horizontal slices, and vertical green bars mathematically impossible.
@@ -490,20 +490,20 @@ Whenever error-fixing prompts are received across past character iterations (e.g
   1. *Visor Eye Ghosting & Leftover Outlines*: Arched eye outlines and stray green pixels remained stamped onto the visor when transitioning to other eye states (e.g. Thinking horizontal bars), creating malformed double-eyes and thin green residual lines.
   2. *Flower Center & Boundary Green Light Leak*: When internal photosynthesis energy/sap reached the flower, bright green illumination leaked through the boundary between the pink petals and yellow center, and bled onto petal borders, destroying the flower's natural anatomy.
 - **Root Causes**:
-  1. *Under-inclusive Eye Segmentation & Mantle Fallback*: Defining eyes with a naive bright color threshold ($G > 165$) missed 271 darker green/lime transition and outline pixels ($G \le 165$). Because the body mantle was defined as `~is_visor & ~is_eyes`, those 271 dark eye outline pixels were categorized as mantle and stamped back onto every frame.
+  1. *Under-inclusive Eye Segmentation & Mantle Fallback*: Defining eyes with a naive bright color threshold ($G > 165$) missed 271 darker green/lime transition and outline pixels ($G \le 165$). Because the body mantle was defined as `☰is_visor & ☰is_eyes`, those 271 dark eye outline pixels were categorized as mantle and stamped back onto every frame.
   2. *Incomplete Flower Masking & Sap Color Bleed*: Defining flower petals with a blue threshold ($B > 115$) missed 2,244 dark magenta shading and petal outline pixels ($B \le 115$). The green crown/mantle energy logic claimed these pixels and elevated them to vivid green, causing the petal borders and the contour around the yellow center to turn bright green.
 - **Mandatory Prevention Protocol**:
   1. **Topological Visor Cavity Segmentation & Clean Plate Invariant**:
      - Never rely on color thresholds to find eyes or visor bounds.
      - Extract the entire enclosed facial visor cavity (e.g. via 8-connected BFS from a known seed inside the visor).
      - In the master frame buffer, initialize the visor cavity to a solid, pristine face color plate (`clean_master_body[is_visor_cavity] = VISOR_COLOR`).
-     - Strictly exclude the entire visor cavity from body mantle logic (`is_body_mantle &= ~is_visor_cavity`).
+     - Strictly exclude the entire visor cavity from body mantle logic (`is_body_mantle &= ☰is_visor_cavity`).
      - Every new eye expression must be drawn onto this clean visor plate from scratch:
        $$\text{CLEAR OLD EYE REGION} \longrightarrow \text{RESTORE CLEAN VISOR} \longrightarrow \text{DRAW NEW EYES FROM SCRATCH}$$
      - Zero pixels from previous expressions or body layers may persist inside the visor cavity.
   2. **Comprehensive Topological Flower Isolation & Zero Color Bleed**:
      - Segment the entire multi-part attached structure (petals, shading, outlines, and core) using robust relational color logic (e.g. for pink flower above crown: $Y < 140 \land R > G$).
-     - Strictly exclude the flower structure from all body mantle, foliage, and green energy propagation logic (`is_green_crown &= ~is_flower`, `is_body_mantle &= ~is_flower`).
+     - Strictly exclude the flower structure from all body mantle, foliage, and green energy propagation logic (`is_green_crown &= ☰is_flower`, `is_body_mantle &= ☰is_flower`).
      - Green energy MUST terminate cleanly at the structural biological boundary.
      - When energy reaches an attached structure of a different palette, that structure responds ONLY with its native color family (e.g. flower center blazes with amber-gold highlights: `[255, 248, 140]`, `[255, 235, 95]`, `[255, 215, 75]`, NEVER green).
   3. **Automated Structural & Palette Boundary Auditing**:
@@ -685,20 +685,20 @@ Whenever error-fixing prompts are received across past character iterations (e.g
   1. *Visor Eye Ghosting & Leftover Outlines*: Arched eye outlines and stray green pixels remained stamped onto the visor when transitioning to other eye states (e.g. Thinking horizontal bars), creating malformed double-eyes and thin green residual lines.
   2. *Flower Center & Boundary Green Light Leak*: When internal photosynthesis energy/sap reached the flower, bright green illumination leaked through the boundary between the pink petals and yellow center, and bled onto petal borders, destroying the flower's natural anatomy.
 - **Root Causes**:
-  1. *Under-inclusive Eye Segmentation & Mantle Fallback*: Defining eyes with a naive bright color threshold ($G > 165$) missed 271 darker green/lime transition and outline pixels ($G \le 165$). Because the body mantle was defined as `~is_visor & ~is_eyes`, those 271 dark eye outline pixels were categorized as mantle and stamped back onto every frame.
+  1. *Under-inclusive Eye Segmentation & Mantle Fallback*: Defining eyes with a naive bright color threshold ($G > 165$) missed 271 darker green/lime transition and outline pixels ($G \le 165$). Because the body mantle was defined as `☰is_visor & ☰is_eyes`, those 271 dark eye outline pixels were categorized as mantle and stamped back onto every frame.
   2. *Incomplete Flower Masking & Sap Color Bleed*: Defining flower petals with a blue threshold ($B > 115$) missed 2,244 dark magenta shading and petal outline pixels ($B \le 115$). The green crown/mantle energy logic claimed these pixels and elevated them to vivid green, causing the petal borders and the contour around the yellow center to turn bright green.
 - **Mandatory Prevention Protocol**:
   1. **Topological Visor Cavity Segmentation & Clean Plate Invariant**:
      - Never rely on color thresholds to find eyes or visor bounds.
      - Extract the entire enclosed facial visor cavity (e.g. via 8-connected BFS from a known seed inside the visor).
      - In the master frame buffer, initialize the visor cavity to a solid, pristine face color plate (`clean_master_body[is_visor_cavity] = VISOR_COLOR`).
-     - Strictly exclude the entire visor cavity from body mantle logic (`is_body_mantle &= ~is_visor_cavity`).
+     - Strictly exclude the entire visor cavity from body mantle logic (`is_body_mantle &= ☰is_visor_cavity`).
      - Every new eye expression must be drawn onto this clean visor plate from scratch:
        $$\text{CLEAR OLD EYE REGION} \longrightarrow \text{RESTORE CLEAN VISOR} \longrightarrow \text{DRAW NEW EYES FROM SCRATCH}$$
      - Zero pixels from previous expressions or body layers may persist inside the visor cavity.
   2. **Comprehensive Topological Flower Isolation & Zero Color Bleed**:
      - Segment the entire multi-part attached structure (petals, shading, outlines, and core) using robust relational color logic (e.g. for pink flower above crown: $Y < 140 \land R > G$).
-     - Strictly exclude the flower structure from all body mantle, foliage, and green energy propagation logic (`is_green_crown &= ~is_flower`, `is_body_mantle &= ~is_flower`).
+     - Strictly exclude the flower structure from all body mantle, foliage, and green energy propagation logic (`is_green_crown &= ☰is_flower`, `is_body_mantle &= ☰is_flower`).
      - Green energy MUST terminate cleanly at the structural biological boundary.
      - When energy reaches an attached structure of a different palette, that structure responds ONLY with its native color family (e.g. flower center blazes with amber-gold highlights: `[255, 248, 140]`, `[255, 235, 95]`, `[255, 215, 75]`, NEVER green).
   3. **Automated Structural & Palette Boundary Auditing**:
@@ -895,3 +895,102 @@ Whenever error-fixing prompts are received across past character iterations (e.g
      - Avatars must be sized generously: minimum 44px–48px for dense lists, 56px for carousels, and 64px–120px for chat headers and inspection cards so pixel artwork detail is immediately recognizable without blur.
   3. **2-Second Idle Rest Hold Cadence**:
      - Every idle state loop must incorporate a distinct resting hold of 2.0 seconds on the primary neutral frame (Frame 01) between subtle breathing / blink cycles, creating an authentic, living rhythm.
+
+### 11.21 Strict Universal Zero-Emoji Standard & Authentic Outline SVG Vector Invariant
+
+- **Defects Encountered**:
+  1. *OS/Platform Emoji Intrusion*: Using raw Unicode emojis (e.g. laptop, speech balloon, envelope, microphone, books, shield, warning sign) in sidebar recent session lists, turn headers, buttons, chips, or modal items. On different operating systems, these render as mismatched, multi-colored Apple/Windows/Android bitmap glyphs that clash with professional dark-mode design systems and feel like amateur placeholder widgets.
+- **Root Causes**:
+  1. *Shortcut Emoji Littering in Mock Data*: Populating dummy sessions or status rows with strings like laptop or chat balloon emojis and splitting strings to extract the glyph directly into the DOM instead of embedding authentic vector outline SVG icons.
+  2. *Lack of Explicit Vector Icon Mapping*: Omitting dedicated inline SVG icons or `dashboard-icons/` references for application sources, system alerts, actions, and status badges.
+- **Mandatory Prevention Protocol**:
+  1. **Zero-Emoji Enforcement Invariant**:
+     - Absolutely NEVER embed raw Unicode pictograph or emoji characters (0x1F300-0x1FAFF, 0x2600-0x27BF)  in HTML or JavaScript rendering templates.
+  2. **Monochrome SVG Outline Standard**:
+     - All application icons, tools, sources, notifications, and interactive controls must strictly use clean monochrome SVG outline vectors:
+       `fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"`
+     - Colors must be bound to semantic design tokens (`var(--text-tertiary)`, jvar(--text-secondary)`, `var(--text-primary)`, jvar(--accent-coral)`, `var(--color-success)`).
+  3. **Sidebar Recent Session Schema**:
+     - All session/history lists must store explicit `icon` SVG markup or asset paths alongside `title` and `app` metadata rather than parsing emoji prefixes from string titles.
+
+### 11.22 Authentic AI Harness Vector Identity & Third-Party Asset Collision Avoidance (OpenAI Codex Lessons)
+
+- **Defects Encountered**:
+  1. *Third-Party Name Collision Substituting Fake/Unrelated Icon for Official AI Harness*:
+     OpenAI Codex rendered with an orange "snail eye" icon instead of the authentic OpenAI spiral emblem.
+- **Root Causes**:
+  1. *Unvetted Asset Query on Shared Tool Names*: `dashboard-icons/svg/codex.svg` contained the logo of an unrelated open-source document reader called "Codex", which depicts a stylized orange snail eye in a cog. Developers blindly queried by file name `codex.svg` without verifying if it mapped to OpenAI Codex (`@openai/codex`).
+- **Mandatory Prevention Protocol**:
+  1. **Cross-Provider Brand Verification**:
+     - Whenever fetching an asset for an AI harness or platform tool (Codex, Claude, Cursor, Antigravity, Gemini, OpenCode, DeepSeek, Grok), ALWAYS verify the authentic parent organization emblem.
+     - OpenAI Codex must strictly use the official OpenAI spiral vector (`dashboard-icons/svg/openai.svg` / `static/assets/icons/codex.svg`).
+     - Never use third-party tools sharing common dictionary names (e.g. general "codex" document viewers, snail eyes, book graphics) as stand-ins for AI platforms.
+  2. **Vector Brand Cleanliness Invariant**:
+     - Vector harness icons must render crisp in `#FFFFFF` on dark backgrounds (`fill="#FFFFFF"` or `fill="currentColor"`), with zero pixelation and authentic geometry.
+
+### 11.23 Pure 100% Transparent Avatar Invariant & Zombie Streaming Chunk Suppression
+
+- **Defects Encountered**:
+  1. *Reddish/Brownish Blur Box from CSS Drop-Shadow Filter on Pixel Mascots*: Mascot avatar sprites rendered inside a dark reddish/brownish square halo box (`#221D19`) on dark chat backgrounds.
+  2. *Stuck "streaming..." Ghost Placeholders & Missing User Messages*: Streamed message tokens appended temporary DOM nodes that lingered indefinitely after message completion, while user messages failed to render or sync.
+- **Root Causes**:
+  1. *Unscoped drop-shadow Filters*: Applying `filter: drop-shadow(0 0 8px rgba(217, 119, 87, 0.75))` or `filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.45))` on `.agent-avatar-img` and `.anim-speaking` creates an unsightly diffuse rectangular haze around 68px transparent sprite bounding boxes on dark charcoal backgrounds.
+  2. *DOM Chunk Cleansing Failure*: Temporary chunk elements (`chunk-${data.message_id}`) appended during token streaming were not cleanly scrubbed when final messages completed or when switching agents.
+- **Mandatory Prevention Protocol**:
+  1. **100% Transparent Avatar Standard**:
+     - Avatar container and image elements (`.msg-agent-avatar-slot`, `.agent-avatar-badge`, `.agent-avatar-img`, `#chatHeaderAvatarSlot`) must strictly enforce:
+       `background: transparent !important; background-color: transparent !important; border: none !important; box-shadow: none !important; filter: none !important;`
+     - Never simulate speech or activity states with colored drop-shadow filters on transparent pixel sprites. Mascot avatars must float seamlessly on 100% transparent backdrops.
+  2. **Atomic Streaming Chunk Lifecycle**:
+     - Whenever a message completes or an agent thread is switched, all temporary streaming nodes (`[id^='chunk-']`) must be immediately scrubbed from the DOM before rendering finalized timeline history.
+  3. **Bidirectional Timeline Sync Invariant**:
+     - Chat timeline renderers must support both `sender_type === "user"` and `role === "user"`, rendering right-aligned user bubbles and left-aligned agent replies consistently across mobile and desktop.
+
+### 11.24 Software Keyboard Viewport Shrink Scroll Invariant & Local Mascot Asset Guarantees
+
+- **Defects Encountered**:
+  1. *Chat Viewport Shrink Message Occlusion*: When mobile software keyboard (IME) opened, the bottom text input dock rose smoothly, but the message list stayed anchored to top offsets, pushing the latest received messages off-screen or trapping them behind the rising text box.
+  2. *Off-by-One LazyColumn Scroll Target*: Calling `animateScrollToItem(messages.size - 1)` in lists containing prepended items (such as timestamp headers or empty-state slots at index 0) scrolled to the second-to-last message, leaving the final incoming reply obscured.
+  3. *Network Asset Latency & Redundant Over-the-Air Fetching*: Fetching bot character animation assets over remote cellular/Tailscale links caused sluggish UI loads and high latency during agent creation.
+- **Root Causes**:
+  1. In declarative UI frameworks (Jetpack Compose / Compose Multiplatform), `LazyColumn` preserves `firstVisibleItemIndex` from the top of the viewport when `WindowInsets.ime` shrinks the available height. Without an active IME-insets-reactive scroll animation targeting the true tail index, the bottom content is occluded.
+  2. Forgetting that prepended list headers (e.g. index 0 timestamp) shift message items to indices 1..N. Targeting N - 1 stops 1 item short of the latest message bubble.
+- **Mandatory Prevention Protocol**:
+  1. **Strict Tail Index Accounting**:
+     - Always calculate the exact index of the terminal item in lists containing headers:
+       `targetIndex = headerCount + messages.size` (or `messages.size` when indexing is 0-based with a single header).
+     - Include a trailing spacer item (`Spacer(Modifier.height(8.dp))`) at the end of the scrollable list to provide breathing room between the last chat bubble and the floating input bar.
+  2. **Reactive IME Insets Lift Animation**:
+     - Dynamically track `WindowInsets.ime.getBottom(LocalDensity.current)` and `WindowInsets.isImeVisible`.
+     - When the IME lifts, execute an easing-curved scroll animation (`listState.animateScrollToItem(targetIndex)`) synchronized with the keyboard rise so the latest message smoothly glides upward directly above the text box.
+  3. **100% Local-First Bundled Mascot Assets**:
+     - All bot mascot GIFs and sprite sheets must be bundled natively in local client assets (`androidApp/src/main/assets/mascots/`) and decoded via native renderers (`AnimatedImageDrawable` / `ImageDecoder`).
+     - Agent creation and browsing in mobile clients must operate completely offline / zero-network for graphical assets.
+  4. **Haptic-Feedback Suit Carousel Invariant**:
+     - Suit and character selector carousels must support both horizontal drag gestures and discrete chevron buttons, triggering subtle tactile feedback (`HapticFeedbackType.TextHandleMove`) on each suit change and solid confirmation feedback (`HapticFeedbackType.LongPress`) on deployment and pin actions.
+
+### 11.25 Dynamic Connecting Splines, Unclipped Boundary Ports & Mobile Row-to-Card Alignment Protocol (BridgeMind Accounts Router Lessons)
+
+- **Defects Encountered**:
+  1. *Spline Disconnect Gap & "Behind-the-Box" Occlusion*: The dynamic SVG spline wire terminated before reaching the account card or terminal box. Because the SVG bridge was confined to an intermediate grid column (80px) and had a lower z-index than the left rail (z-index: 2 under z-index: 3), the rail's opaque background padding (16px) visually occluded the start of the line, creating an artificial gap and the illusion that the wire was connecting from behind the box.
+  2. *Clipped Semi-Circle Port Dots*: Port connector balls placed on element boundaries (e.g. left: -7px; width: 14px) were sliced in half by parent containers with overflow: hidden;, rendering them as broken semi-circles instead of pristine 360° circular dots.
+  3. *Coordinate Clamping Bugs*: Clamping SVG spline start coordinates with Math.max(0, ...) truncated negative relative offsets whenever port dots sat inside a padded parent container, preventing the spline from reaching the actual center of the port dot.
+  4. *Mobile View Clutter & Missing Responsive Router Strip*: Small mobile viewports retained cluttered desktop action buttons, while account routing cards collapsed into tall stacked boxes rather than a compact horizontal strip with bottom ports and vertical descending splines matching the BridgeMind mobile design.
+- **Root Causes**:
+  - Confining dynamic spline SVG canvases to intermediate grid cells rather than overlaying the entire workspace container.
+  - Applying overflow: hidden; to container wrappers that have boundary-straddling indicator balls instead of scoping overflow containment strictly to internal content wrappers (.acs-thread-body, .acs-thread-chrome).
+  - Hardcoding zero-bounds clamping on coordinates derived from sub-containers.
+- **Mandatory Prevention Rules**:
+  1. **Full-Workspace Absolute SVG Canvas Overlay**:
+     - Always position the connector spline bridge canvas as an absolute overlay spanning the entire workspace (position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 8; overflow: visible;).
+     - Calculate spline start and end points directly from the mathematical center of port dots relative to the entire workspace (pRect.left + pRect.width / 2 - wsRect.left, pRect.top + pRect.height / 2 - wsRect.top). Never clamp with Math.max(0) or Math.min(width).
+  2. **Boundary Port Dot Z-Index & Overflow Invariant**:
+     - Parent containers with border-straddling port dots must have overflow: visible; and lower z-index (z-index: 2) than the SVG bridge (z-index: 8).
+     - Port dots must have higher z-index (z-index: 12) and full circular dimensions (width: 14px; height: 14px; border-radius: 50%) so the glowing dot sits flawlessly on top of the spline termination with zero gap.
+     - Confine border-radius clipping strictly to inner content panes (.chrome { border-radius: 15px 15px 0 0; }, .body { border-radius: 0 0 15px 15px; overflow: hidden; }).
+  3. **BridgeMind Mobile Row & Vertical S-Curve Protocol**:
+     - Under mobile media queries (max-width: 860px), arrange account cards in a compact horizontal grid/strip (epeat(4, 1fr)) with provider icons, card names, and status badges.
+     - Move card ports to the bottom center (ottom: -7px; left: 50%; transform: translateX(-50%)) and thread receiving ports to the top center (top: -7px; left: 50%; transform: translateX(-50%)).
+     - Calculate a smooth vertical S-curve cubic bezier spline dropping gracefully from the active card's bottom port down into the thread's top port.
+  4. **Minimalist Mobile Topbar Navigation**:
+     - Under @media (max-width: 768px), hide desktop buttons and action groups from the topbar; display only the authentic brand mark and a circular hamburger button (☰) that opens a frosted glass slide-down drawer.
